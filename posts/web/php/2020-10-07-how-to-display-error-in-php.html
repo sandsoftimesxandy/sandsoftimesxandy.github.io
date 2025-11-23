@@ -1,42 +1,83 @@
----
-layout: post
-title: How to Display Error in PHP
-date: 2020-10-07 20:52:55.000000000 +05:00
-type: post
-parent_id: '0'
-published: true
-password: ''
-status: publish
-categories:
-- Web
-- PHP
-tags: []
-meta:
-  _wpas_done_all: '1'
-author:
-  login: SandsOfTime
-  email: janeebee1092@gmail.com
-  display_name: SandsOfTime
-  first_name: Muhammad
-  last_name: Sharjeel Akhtar
-permalink: "/2020/10/07/how-to-display-error-in-php"
----
-Generally by default, php doesnot show error on the browser. It simply says **page isn't working** instead. Inorder to visualize the error in code in browser. You've to do some basic changes. Initially create a new file with name `display-error.php`. In this file write this php function.
+<html>
+<head>
+<style>
+body {
+	!font-family: sans-serif;
+}
+.wrapper {
+    display: flex;
+    justify-content: space-between; /* one goes left, another to the right*/
+    gap: 0px; /* space in between */
+  }
+.myDiv{
+	background-color: #E7CF9E;
+	!margin-right: 50%;
+	!float: left;
+	width: 30%;
+	word-wrap: break-word;
+	padding-left: 5px;
+	!padding-top: 69px;
+	!font-size: small;
+}
+.myKiv{
+	background-color: #FFE7B7;
+	!margin-left: 50%;
+	!float: right;
+	width: 70%;
+	word-wrap: break-word;
+	padding-left: 5px;
+}
+</style>
+</head>
+<body>
+<div class="wrapper">
+<div class="myDiv">
 
-```
-echo phpinfo();
-```
-It will display all the information related to php.
-![1](/assets/images/clt/display-error-in-php/1.png)
+<h2>	Muhammad Sharjeel Akhtar (SandsOfTimes)	</h2>
+	Master's Student of Informatik (Artificial Intelligence)
+	<br>	
+	<b><a href="https://www.b-tu.de/">Brandenburg Technische Universität</a></b>
+	<br>
+	Platz der Deutschen Einheit 1, Konrad-Wachsmann-Allee 13.
+	<br>
+	Cottbus, Brandenburg
+	<p><b>Email: </b>janeebee1092@gmail.com</p>
+	<h2>INFORMATION</h2>
+	<a href="ml-yearning-2018-05-30.pdf" target="_blank">......Resume</a>
+	<br>
+	<a href="https://github.com/sandsoftimes">......Github</a>
+	<br>
+	<a href="https://www.linkedin.com/in/muhammad-sharjeel-akhtar-sandsoftimes-sandy-52b1bb317/">......Linkedin</a>
+	<br>
+	<a href="https://www.kaggle.com/sandsoftimessandy">......Kaggle</a>
+	<hr>
 
-Now, find the `Loaded Configuration File` and its **path**. In this case, it is `/opt/lampp/etc/php.ini`. Open this file on your terminal and find the keyword **display_errors** it will be set **off** initially. Write **on** infront of it. Then simply restart your apache-server. After the restart, write a php code in any of your file with some syntax error. Go to browser and this time, you'll see the actual error being displayed. I've a code below:
-```
-<?php
-// echo phpinfo();
-// echo "Hello";
-$num=50K
-echo $num*50
-?>
-```
-The above code has a syntax error and will display error on the browser like,
-![2](/assets/images/clt/display-error-in-php/2.png)
+</div>
+<div class="myKiv">
+<h2 id="how-to-display-error-in-php">How to Display Error in PHP</h2>
+<p>date: 2020-10-07<br>Tags:</p>
+<ul>
+<li>Web</li>
+<li>PHP</li>
+</ul>
+<p>author: SandsOfTime<br>email: janeebee1092@gmail.com<br>display_name: SandsOfTime<br>first_name: Muhammad Sharjeel<br>last_name:  Akhtar</p>
+<hr>
+<p>Generally by default, php doesnot show error on the browser. It simply says <strong>page isn&#39;t working</strong> instead. Inorder to visualize the error in code in browser. You&#39;ve to do some basic changes. Initially create a new file with name <code>display-error.php</code>. In this file write this php function.</p>
+<pre><code>echo phpinfo()<span class="hljs-comment">;</span>
+</code></pre><p>It will display all the information related to php.
+<img src="/assets/images/clt/display-error-in-php/1.png" alt="1"></p>
+<p>Now, find the <code>Loaded Configuration File</code> and its <strong>path</strong>. In this case, it is <code>/opt/lampp/etc/php.ini</code>. Open this file on your terminal and find the keyword <strong>display_errors</strong> it will be set <strong>off</strong> initially. Write <strong>on</strong> infront of it. Then simply restart your apache-server. After the restart, write a php code in any of your file with some syntax error. Go to browser and this time, you&#39;ll see the actual error being displayed. I&#39;ve a code below:</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-comment">// echo phpinfo();</span>
+<span class="hljs-comment">// echo "Hello";</span>
+$num=<span class="hljs-number">50</span>K
+<span class="hljs-keyword">echo</span> $num*<span class="hljs-number">50</span>
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p>The above code has a syntax error and will display error on the browser like,
+<img src="/assets/images/clt/display-error-in-php/2.png" alt="2"></p>
+
+</div>
+</div>
+</body>
+
+</html>
