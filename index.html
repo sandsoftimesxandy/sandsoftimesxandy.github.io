@@ -51,10 +51,13 @@ body {
 /* Style the collapsible content. Note: hidden by default */
 .content {
   padding-left: 3px;
-  display: none;
+  !display: none;
   overflow: hidden;
   background-color: #E7CF9E;
+  !background-color: cyan;
   !word-wrap: break-word;
+  transition: max-height 0.2s ease-out;
+  max-height: 0;
 }
 </style>
 
@@ -63,7 +66,7 @@ body {
 <body>
 <div class="wrapper">
 <div class="myDiv">	
-	<h2>	Muhammad Sharjeel Akhtar (SandsOfTimes)	</h2>
+	<h2>	Muhammad Sharjeel Akhtar <br>SandsOfTimes[SANDY]	</h2>
 	Master's Student of Informatik (Artificial Intelligence)
 	<br>	
 	<b><a href="https://www.b-tu.de/">Brandenburg Technische Universität</a></b>
@@ -85,6 +88,48 @@ body {
 <div class="myKiv">
 	<h2>BLOGS</h2>
 	<br>
+
+
+<button type="button" class="collapsible"></button>
+<div class="content">
+</div>
+
+<button type="button" class="collapsible">Python Dummy Code</button>
+<div class="content">
+Below is the dummy code i picked from a site to test the purpose of hr tag. Let's see how it works.
+<hr>
+<pre>
+import numpy as np
+import pandas as pd
+import statsmodels.api as sm
+
+my_data = np.array([[5, 'a', 1],
+                    [3, 'b', 3],
+                    [1, 'b', 2],
+                    [3, 'a', 1],
+                    [4, 'b', 2],
+                    [7, 'c', 1],
+                    [7, 'c', 1]])                
+
+
+df = pd.DataFrame(data=my_data, columns=['y', 'dummy', 'x'])
+just_dummies = pd.get_dummies(df['dummy'])
+
+
+step_1 = pd.concat([df, just_dummies], axis=1)      
+step_1.drop(['dummy', 'c'], inplace=True, axis=1)
+# to run the regression we want to get rid of the strings 'a', 'b', 'c' (obviously)
+# and we want to get rid of one dummy variable to avoid the dummy variable trap
+# arbitrarily chose "c", coefficients on "a" an "b" would show effect of "a" and "b"
+# relative to "c"
+step_1 = step_1.applymap(np.int) 
+
+result = sm.OLS(step_1['y'], sm.add_constant(step_1[['x', 'a', 'b']])).fit()
+print result.summary()
+</pre>
+<hr>
+
+</div>
 
 <button type="button" class="collapsible">LSTM | Text Generation using Supervised Learning</button>
 <div class="content">
@@ -3642,14 +3687,13 @@ for (i = 0; i < coll.length; i++) {
   coll[i].addEventListener("click", function() {
     this.classList.toggle("active");
     var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
     } else {
-      content.style.display = "block";
+      content.style.maxHeight = content.scrollHeight + "px";
     }
   });
 }
-
 </script>
 
 </body>
