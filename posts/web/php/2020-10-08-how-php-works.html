@@ -1,41 +1,83 @@
----
-layout: post
-title: How PHP works??
-date: 2020-10-08 20:52:55.000000000 +05:00
-type: post
-parent_id: '0'
-published: true
-password: ''
-status: publish
-categories:
-- Web
-- PHP
-tags: []
-meta:
-  _wpas_done_all: '1'
-author:
-  login: SandsOfTime
-  email: janeebee1092@gmail.com
-  display_name: SandsOfTime
-  first_name: Muhammad
-  last_name: Sharjeel Akhtar
-permalink: "/2020/10/08/how-php-works"
----
-I've already written a complete blog on php working. You can check it out by clicking on this link: [PHP Complete Hello World](/2020/10/06/php-basic-hello-world). Today i'll show you the basic working of a php. As we all know that php is a server-side-scripting language. It means that your browser cannot directly understand the php. 
+<html>
+<head>
+<style>
+body {
+	!font-family: sans-serif;
+}
+!.wrapper {
+    display: flex;
+    justify-content: space-between; /* one goes left, another to the right*/
+    gap: 0px; /* space in between */
+  }
+!.myDiv{
+	background-color: #E7CF9E;
+	!margin-right: 50%;
+	!float: left;
+	width: 30%;
+	word-wrap: break-word;
+	padding-left: 5px;
+	!padding-top: 69px;
+	!font-size: small;
+}
+!.myKiv{
+	background-color: #FFE7B7;
+	!margin-left: 50%;
+	!float: right;
+	width: 70%;
+	word-wrap: break-word;
+	padding-left: 5px;
+}
+</style>
+</head>
+<body>
+<div class="wrapper">
+<div class="myDiv">
 
-![1](/assets/images/clt/how-php-works/1.png)
+<h2>	Muhammad Sharjeel Akhtar (SandsOfTimes)	</h2>
+	Master's Student of Informatik (Artificial Intelligence)
+	<br>	
+	<b><a href="https://www.b-tu.de/">Brandenburg Technische Universität</a></b>
+	<br>
+	Platz der Deutschen Einheit 1, Konrad-Wachsmann-Allee 13.
+	<br>
+	Cottbus, Brandenburg
+	<p><b>Email: </b>janeebee1092@gmail.com</p>
+	<h2>INFORMATION</h2>
+	<a href="ml-yearning-2018-05-30.pdf" target="_blank">......Resume</a>
+	<br>
+	<a href="https://github.com/sandsoftimes">......Github</a>
+	<br>
+	<a href="https://www.linkedin.com/in/muhammad-sharjeel-akhtar-sandsoftimes-sandy-52b1bb317/">......Linkedin</a>
+	<br>
+	<a href="https://www.kaggle.com/sandsoftimessandy">......Kaggle</a>
+	<hr>
 
+</div>
+<div class="myKiv">
+<h2 id="how-php-works-">How PHP works??</h2>
+<p>date: 2020-10-08<br>Tags:</p>
+<ul>
+<li>Web</li>
+<li>PHP</li>
+</ul>
+<p>author: SandsOfTime<br>email: janeebee1092@gmail.com<br>display_name: SandsOfTime<br>first_name: Muhammad Sharjeel<br>last_name:  Akhtar</p>
+<hr>
+<p>I&#39;ve already written a complete blog on php working. You can check it out by clicking on this link: <a href="/2020/10/06/php-basic-hello-world">PHP Complete Hello World</a>. Today i&#39;ll show you the basic working of a php. As we all know that php is a server-side-scripting language. It means that your browser cannot directly understand the php. </p>
+<p><img src="/assets/images/clt/how-php-works/1.png" alt="1"></p>
+<p>The browser can only understand/work with:</p>
+<ul>
+<li>HTML</li>
+<li>CSS</li>
+<li>Javascript</li>
+</ul>
+<p>By the above image you can see that your browser performs a http request to the server. The server will have php-code, it will call the <strong>php-interpretor</strong>. The interpretor solve the request and give output in the form of HTML to server. The server then sends back the HTML response to the web-browser/client.</p>
+<h2 id="what-about-database-">What about Database?</h2>
+<p>The databases are also present on web server. Just like the previous requests. This time the web-server request the database for the data. The database returns the result to interpretor. The interpretor convert it into <strong>HTML format</strong> and give it back to web-server. The web-server send the response to the client-browser and we get the results on the browser tab.</p>
+<p>You can visualize this request and response procedure by going into the <strong>inspect</strong> section of the browser. Then there is a small sub-section of <strong>network</strong>. Go there, refresh your tab (in this case we&#39;ve the comments.php file) and you see the requests to the web-server. Here is the demonstration snippet.</p>
+<p><img src="/assets/images/clt/how-php-works/2.png" alt="2"></p>
 
-The browser can only understand/work with:
-* HTML
-* CSS
-* Javascript
+</div>
+</div>
+</body>
 
-By the above image you can see that your browser performs a http request to the server. The server will have php-code, it will call the **php-interpretor**. The interpretor solve the request and give output in the form of HTML to server. The server then sends back the HTML response to the web-browser/client.
-
-## What about Database?
-The databases are also present on web server. Just like the previous requests. This time the web-server request the database for the data. The database returns the result to interpretor. The interpretor convert it into **HTML format** and give it back to web-server. The web-server send the response to the client-browser and we get the results on the browser tab.
-
-You can visualize this request and response procedure by going into the **inspect** section of the browser. Then there is a small sub-section of **network**. Go there, refresh your tab (in this case we've the comments.php file) and you see the requests to the web-server. Here is the demonstration snippet.
-
-![2](/assets/images/clt/how-php-works/2.png)
+</html>
