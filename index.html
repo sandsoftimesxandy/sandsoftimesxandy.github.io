@@ -1653,61 +1653,644 @@ $f=(object) $f;
 <p><img src="/assets/images/clt/type-casting-in-php/1.png" alt="1"></p>
 </div>
 
-	
-	
-	
-	
-	
-	
-	
-	<a href="posts/web/react/2021-01-16-react-tea.html">Setting up React using Vite and a Basic Demonstration</a>
-	<br>
-	React is one of the readily used framework when it comes to `web` or `mobile`  application developmenmt. So far, i've seen two ways of working in react. The first one is the basic one with 
-node pakage execute `npx` which will give you the all react framework files and the second one
-is with `vite`. Vite provide you the light files structure by excluding all the un-necessary react 
-files at the start.
-	<br>
-	
-	<a href="posts/misc/2019-05-17-compound-and-complex-sentences.html">Setting up React using Vite and a Basic Demonstration</a>
-	<br>
-	Here is an old blog of mine from wordpress site. I did write some types of sentences with examples in it. It was an assignment for my friend. As i left the wordpress so i though to keep this blog as a memory here. It was quite useful at that time, it might be for some people now. Anyways, hope you'll get to know something from it.
-	<br>
-
-	<a href="posts/misc/2020-06-21-the-computers-hardware-and-software.html">The Computer Hardware and Software</a>
-	<br>
-	Transferring an old blog from wordpress to here. When i was a "Freshie" in my university. We used to write some blogs on basic topics. One day i was sitting in COLAB(A sort of working environment not the literal LAB) and i was not getting any idea about what to write so i choose the simplest topic haha Computers, Hardwares and Softwares and wrote a whole blog on it. I found it on the other site which i don't use so i thought to put it here more like a memory. 
-	<br>
-
-	<a href="posts/misc/2020-06-22-queue-data-structure-implementation-in-c-plus-plus.html">The Computer Hardware and Software</a>
-	<br>
-	Queue is also one of the famous data structure. Although it is pretty similar to stack but it has its own applications. You might know the working law of Queue **"THE-FIFO-Principal"**. Here i've defined some rules of queue alongside with its implementaion in `c++`/	
-	<br>
-	
-	<a href="posts/misc/2020-06-23-post-fix-evaluation-using-stack-in-c-plus-plus.html">Post Fix Evaluation using Stack in C Plus Plus</a>
-	<br>
-	Just like the other data structures, **STACK** has multiple applications. Here is one of them for the evaluation of **post-fix** Expression. The code is mentioned in the separate portions for better understanding. Better is you put the complete code in a single file with a `cpp` extension and run it then. Here is the code, take a look at it,
-	
-	<br>
-	
-	<a href="/posts/misc/2020-06-24-bubble-sort-algorithm-in-nasm-16-bit.html">Bubble Sort Algorithm in NASM-16 bit</a>
-	<br>
-	Bubble sort is a very famous algorithm for sorting numbers. It is commonly used to sort numbers in ascending order. It works totally same here just like the other high level programming languages. Althought coding in 16-bit seems quite difficult but witha a little practice and understanding you can write any code in it. Here is the code,
-	<br>
-
-	<a href="posts/misc/2020-09-02-adobe-photoshop copy.html">Adobe Photoshop Basics</a>
-	<br>
-	Adobe Photoshop is one of the finest graphical editors that is widely being used in the world. It is being developed by the well-known software development company Adobe. The Adobe 7.0 was the version of Photoshop that had boosted this franchise to another level. Now the company has developed a much more reliable and advanced version of Photoshop.	
-	<br>
-
-	<a href="posts/misc/2024-09-26-windows-storage-sense.html">Windows Storage Sense</a>	
-	<br>
-	I use the Windows operating system mainly for playing video games. Recently i faced this issue of disk space auto filling up whenever the os got updates resulting in lower remaining space in the os drive. Eventually i've to replace the windows with a new one every 2 or 3 years which was a headache.
+<button type="button" class="collapsible">Setting up React using Vite and a Basic Demonstration</button>
+<div class="content">
+<p>React is one of the readily used framework when it comes to <code>web</code> or <code>mobile</code>  application developmenmt. So far, i&#39;ve seen two ways of working in react. The first one is the basic one with 
+node pakage execute <code>npx</code> which will give you the all react framework files and the second one
+is with <code>vite</code>. Vite provide you the light files structure by excluding all the un-necessary react 
+files at the start.</p>
+<p>First of all, we&#39;ve to install nodejs but there is one problem here if you install it using <code>apt</code> manager it will install node version 12 point something which will cause some issues in setting up the project so you&#39;ll need a higher version of nodesjs. Here is how you can do that. First of all check the node version,</p>
+<pre><code><span class="hljs-keyword">node</span> <span class="hljs-title">-v</span>
+</code></pre><p>if it is not installed then first install the nvm,</p>
+<pre><code>curl -<span class="hljs-keyword">o</span>- http<span class="hljs-variable">s:</span>//raw.githubusercontent.<span class="hljs-keyword">com</span>/nvm-<span class="hljs-keyword">sh</span>/nvm/v0.<span class="hljs-number">39.3</span>/install.<span class="hljs-keyword">sh</span> | bash
+</code></pre><p>close and reopen your terminal or write this command,</p>
+<pre><code><span class="hljs-built_in">source</span> ~/.bashrc
+</code></pre><p>now install the latest nodejs version by writing these two commands,</p>
+<pre><code>nvm install <span class="hljs-keyword">node</span>
+<span class="hljs-title">nvm</span> use <span class="hljs-keyword">node</span><span class="hljs-title"></span>
+</code></pre><p>check the node version,</p>
+<pre><code><span class="hljs-keyword">node</span> <span class="hljs-title">-v</span>
+</code></pre><p>node is installed follow the rest of the blog to create the react project using vite. We&#39;ll focus on react via using the vite. It is much more reliable and easy to download as all the files are downloaded in few minutes. Initially write this on terminal to create the vite project.</p>
+<pre><code><span class="hljs-built_in">npm</span> create vite@latest
+</code></pre><p>It will ask you to select b/w multiple frameworks. You&#39;ve to select <code>react</code> among them. Then you&#39;ve to select from the programming languages. There will be multiple options e.g Javascript, Typescript. We will go with the Javascript. Then, mention the project name and you are good to go. You now have the vite react project in your computer. It have multiple files. Initially you have the 3 main files:</p>
+<ul>
+<li>index.html</li>
+<li>App.jsx</li>
+<li>main.jsx</li>
+</ul>
+<p>In <code>index.html</code> you have your starting root (starting of the DOM). This root will be called from <code>main.jsx</code> component. 
+The <code>index.html</code> looks like this:</p>
+<pre><code><span class="hljs-meta">&lt;!doctype html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"icon"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"image/svg+xml"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"/vite.svg"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1.0"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Vite + React<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"root"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"module"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"/src/main.jsx"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre><p>In the body, you&#39;ve the main <code>&lt;div id=&quot;root&quot;&gt;</code> starting root of the DOM. The div tag is then called in the <code>main.jsx</code> file 
+so that to make it the root of the DOM (before the call we&#39;ve just declared it, was not root before). The <code>main.jsx</code> file look
+like this:</p>
+<pre><code><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
+<span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom/client'</span>
+<span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">'./App.jsx'</span>
 
 
+ReactDOM.createRoot(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'root'</span>)).render(
+
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span>
+
+)</span>
+</code></pre><p>Here, you can see that we are creating the root by getting the element root from the <code>index.html</code> file. And then we are giving 
+a <code>App.jsx</code> component/function call from this main.jsx component. The <code>App.jsx</code> will be returning a basic <code>h1</code> tag with the text <strong>What is up?</strong> written in it.
+This text will be printed on the screen in the form of h1-heading. <code>App.jsx</code> code is as follow:</p>
+<pre><code><span class="hljs-keyword">import</span> Chai <span class="hljs-keyword">from</span> <span class="hljs-string">"./chai"</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>{
+
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Chai</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>What is up??<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;/&gt;</span>
+  )
+
+}
+
+export default App</span>
+</code></pre><p>Now to run the project, use this command on your terminal:</p>
+<pre><code>npm <span class="hljs-keyword">run</span><span class="bash"> dev</span>
+</code></pre><p>This will be appear in front of you.</p>
+<p><img src="/assets/images/clt/react-tea/1.png" alt="A test image"></p>
+</div>
+
+<button type="button" class="collapsible">Compound and Complex Sentences</button>
+<div class="content">
+<p>Here is an old blog of mine from wordpress site. I did write some types of sentences with examples in it. It was an assignment for my friend. As i left the wordpress so i though to keep this blog as a memory here. It was quite useful at that time, it might be for some people now. Anyways, hope you&#39;ll get to know something from it.</p>
+<h2 id="compound-sentences-">Compound Sentences:</h2>
+<p>A compound sentence is a sentence that connects two independent clauses generally by using coordinating conjunctions.</p>
+<h2 id="complex-sentences-">Complex Sentences:</h2>
+<p>A complex sentence is a sentence with one independent clause and at least one dependent clause.</p>
+<h2 id="consider-a-paragraph-">Consider a Paragraph:</h2>
+<p>Susan was dining alone. She was uncomfortable, and she hid her face in a book. When she looked up, she saw the most handsome man she had ever seen. After he joined her, she knew it was love at first sight, and it was not long before they were married.</p>
+<h2 id="types-of-sentences-in-the-upper-paragraph-">Types of sentences in the upper paragraph:</h2>
+<ul>
+<li><p>Susan was dining alone: <code>Simple sentence</code></p>
+</li>
+<li><p>She was uncomfortable, and she hid her face in a book: <code>Compound sentence</code></p>
+</li>
+<li><p>When she looked up, she saw the most handsome man she had ever seen: <code>Complex sentence</code></p>
+</li>
+<li><p>After he joined her, she knew it was love at first sight and it was not long before they were married: <code>Complex sentence</code></p>
+</li>
+</ul>
+<h2 id="consider-another-paragraph-">Consider another paragraph:</h2>
+<p>Sunset is the time of day when our sky meets the outer space solar winds. There are blue, pink, and purple swirls, spinning and twisting, like clouds of balloons caught in a whirlwind. The sun moves slowly to hide behind the line of the horizon, while the moon races to take its place in prominence atop the night sky. People slow to a crawl, entranced, fully forgetting the deeds that must still be done. There is a coolness, a calmness when the sun does set.</p>
+<h2 id="types-of-sentences-in-the-upper-paragraph-">Types of sentences in the upper paragraph:</h2>
+<ul>
+<li><p>Sunset is the time of day when our sky meets the outer space solar winds: <code>Compound sentence</code></p>
+</li>
+<li><p>There are blue, pink, and purple swirls, spinning and twisting, like clouds of balloons caught in a whirlwind: <code>Complex sentence</code></p>
+</li>
+<li><p>The sun moves slowly to hide behind the line of the horizon while the moon races to take its place in prominence atop the night sky: <code>Compound sentence</code></p>
+</li>
+<li><p>People slow to a crawl, entranced, fully forgetting the deeds that must still be done: <code>Complex sentence</code></p>
+</li>
+<li><p>There is a coolness, a calmness when the sun does set: <code>Complex sentence</code>.</p>
+</li>
+</ul>
+<h2 id="consider-another-paragraph-">Consider another paragraph:</h2>
+<p>On July 16, 1969, the Apollo 11 spacecraft launched from the Kennedy Space Center in Florida. Its mission was to go where no human being had gone before—the moon! The crew consisted of Neil Armstrong, Michael Collins, and Buzz Aldrin. The spacecraft landed on the moon in the Sea of Tranquility, a basaltic flood plain, on July 20, 1969. The moonwalk took place the following day. On July 21, 1969, at precisely 10:56 EDT, Commander Neil Armstrong emerged from the Lunar Module and took his famous first step onto the moon’s surface. He declared, “That’s one small step for man, one giant leap for mankind.” It was a monumental moment in human history!</p>
+<h2 id="types-of-sentences-in-the-upper-paragraph-">Types of sentences in the upper paragraph:</h2>
+<ul>
+<li><p>On July 16, 1969, the Apollo 11 spacecraft launched from the Kennedy Space Center in Florida: <code>Simple sentence</code></p>
+</li>
+<li><p>Its mission was to go where no human being had gone before the moon!: <code>Complex sentence</code></p>
+</li>
+<li><p>The crew consisted of Neil Armstrong, Michael Collins, and Buzz Aldrin: <code>Simple sentence</code></p>
+</li>
+<li><p>The spacecraft landed on the moon in the Sea of Tranquility, a basaltic flood plain, on July 20, 1969: <code>Complex Sentence</code></p>
+</li>
+<li><p>The moonwalk took place the following day: <code>Simple Sentence</code></p>
+</li>
+<li><p>On July 21, 1969, at precisely 10:56 EDT, Commander Neil Armstrong emerged from Lunar Module and took his famous first step onto the moon’s surface: <code>Complex Sentence</code></p>
+</li>
+<li><p>He declared, “That’s one small step for man, one giant leap for mankind.”: <code>Complex Sentence</code></p>
+</li>
+<li><p>It was a monumental moment in human history!: <code>Simple sentence</code></p>
+</li>
+</ul>
+<h2 id="have-a-look-at-another-paragraph-">Have a look at another paragraph:</h2>
+<p>Oceans and lakes have much in common, but they are also quite different. Both are bodies of water, but oceans are very large bodies of saltwater, while lakes are much smaller bodies of freshwater. Lakes are usually surrounded by land, while oceans are what surround continents. Both have plants and animals living in them. The ocean is home to the largest animals on the planet, whereas lakes support much smaller forms of life. When it is time for a vacation, both will make a great place to visit and enjoy.</p>
+<h2 id="types-of-sentences-used-in-the-upper-paragraph-">Types of sentences used in the upper paragraph:</h2>
+<ul>
+<li><p>Oceans and lakes have much in common but they are also quite different: <code>Compound sentence</code></p>
+</li>
+<li><p>Both are bodies of water, but oceans are very large bodies of saltwater while lakes are much smaller bodies of freshwater: <code>Compound sentence</code></p>
+</li>
+<li><p>Both have plants and animals living in them: <code>Simple sentence</code></p>
+</li>
+<li><p>The ocean is home to the largest animals on the planet, whereas lakes support much smaller forms of life: <code>Compound sentence</code></p>
+</li>
+<li><p>When it is time for a vacation, both will make a great place to visit and enjoy: <code>Complex sentence</code></p>
+</li>
+</ul>
+<h2 id="consider-another-paragraph-">Consider another paragraph:</h2>
+<p>The school fair is right around the corner, and tickets have just gone on sale. We are selling a limited number of tickets at a discount, so move fast and get yours while they are still available. This is going to be an event you will not want to miss! First off, the school fair is of great value when compared with other forms of entertainment. Also, your ticket purchase will help our school, and when you help the school, it helps the entire community. But that’s not all! Every ticket you purchase enters you in a drawing to win fabulous prizes. And don’t forget, you will have mountains of fun because there are acres and acres of great rides, fun games, and entertaining attractions! Spend time with your family and friends at our school fair. Buy your tickets now!</p>
+<h2 id="types-of-sentences-used-in-the-upper-paragraph-">Types of sentences used in the upper paragraph:</h2>
+<ul>
+<li><p>The school fair is right around the corner, and tickets have just gone on sale: <code>Compound sentence</code></p>
+</li>
+<li><p>We are selling a limited number of tickets at a discount so move fast and get yours while they are still available: <code>Compound sentence</code></p>
+</li>
+<li><p>This is going to be an event you will not want to miss!: <code>Simple sentence</code></p>
+</li>
+<li><p>First off, the school fair is of great value when compared with other forms of entertainment: <code>Compound sentence</code></p>
+</li>
+<li><p>Also, your ticket purchase will help our school and when you help the school, it helps the entire community: <code>Complex sentence</code></p>
+</li>
+<li><p>But that’s not all! Every ticket you purchase enters you in a drawing to win fabulous prizes: <code>Complex sentence</code></p>
+</li>
+<li><p>And don’t forget, you will have mountains of fun because there are acres and acres of great rides, fun games, and entertaining attractions!: <code>Complex sentence</code></p>
+</li>
+<li><p>Spend time with your family and friends at our school fair: <code>Simple sentence</code></p>
+</li>
+<li><p>Buy your tickets now!: <code>Simple sentence</code></p>
+</li>
+<li><p>We will go to the market and we will buy a lot of video games: <code>Compound sentence</code></p>
+</li>
+</ul>
+<p><img src="/assets/images/clt/compound-and-complex-sentences/1.png" alt="1"></p>
+</div>
+	
+<button type="button" class="collapsible">The Computer Hardware and Software</button>
+<div class="content">
+<p>Transferring an old blog from wordpress to here. When i was a &quot;Freshie&quot; in my university. We used to write some blogs on basic topics. One day i was sitting in COLAB(A sort of working environment not the literal LAB) and i was not getting any idea about what to write so i choose the simplest topic haha Computers, Hardwares and Softwares and wrote a whole blog on it. I found it on the other site which i don&#39;t use so i thought to put it here more like a memory. </p>
+<h2 id="what-is-a-computer-">What is a computer?</h2>
+<p>A computer is an electronic device for storing and processing data. It has an ability to retrieve, process, store and edit data.</p>
+<p><img src="/assets/images/clt/the-computers-hardware-and-software/1.png" alt="1"></p>
+<h2 id="commands-or-functions-that-a-computer-performs">Commands Or Functions That A Computer Performs</h2>
+<p>A computer is being widely used now a days. Infact in every sector, every aspect of life. They have made the working of human too easy. Now a days almost 90 percent of the human tasks are completed by computers and only 10 percents are being done by humans themselves. This is showing that how much the computer has become important in the life of human. A computer performs many functions but i’m going to point out few here. These are,</p>
+<ul>
+<li>Outputs(displaying results)</li>
+<li>Inputs(getting data)</li>
+<li>Storing</li>
+<li>Performance of logical operations</li>
+<li>Performance of arithematical operations</li>
+</ul>
+<h2 id="basic-distribution-of-a-computer">Basic Distribution Of A Computer</h2>
+<p>In simple words, a computer mainly consist of two things.</p>
+<ul>
+<li>Hardware</li>
+<li>Software</li>
+</ul>
+<p>&quot;<em><strong>Hardware:</strong> Physical exist. We can touch it.</em>&quot;</p>
+<p>&quot;<em><strong>Software</strong>: No physical existance. We can work with it or in it using Graphical User Interface(GUI) or Command Line Interface(CMD).</em>&quot;</p>
+<h2 id="hardware">Hardware</h2>
+<p>The hardware of a computer is divided into many small and large components or you can say elements. Just like all other things, a computer is also made up of elements. Infact with alot of elements. There are even micro-level elements present in a computer that are performing their function in proper running of a computer. I’m going to discuss the few main of the components here.</p>
+<p><img src="/assets/images/clt/the-computers-hardware-and-software/2.png" alt="2"></p>
+<ul>
+<li>CPU</li>
+<li>RAM(main memory)</li>
+<li>Secondary storage</li>
+<li>Input/Output Devices</li>
+</ul>
+<p>We will go in the detail of each of these later on.</p>
+<h2 id="_-have-you-ever-interacted-with-a-computer-hardware-_"><em>“Have you ever interacted with a computer hardware?”</em></h2>
+<h2 id="software">Software</h2>
+<p>A software is a set of instructions which donot have any physical existence but still they are responsible for the working of a computer. Just like the hardware, software is also very important part of computer.</p>
+<p><img src="/assets/images/clt/the-computers-hardware-and-software/3.png" alt="3"></p>
+<h2 id="examples-of-a-software">Examples Of A Software</h2>
+<p>There are countless softwares in the industry. Enlisting few of them.</p>
+<ul>
+<li>MS-Word</li>
+<li>MS-Excel</li>
+<li>Power-Point</li>
+<li>Adobe Photoshop</li>
+<li>Adobe Illustrator</li>
+<li>Types Of Softwares:</li>
+</ul>
+<p>A computer software is divided into two catagories. These are as follow.</p>
+<ul>
+<li>System Software</li>
+<li>Application Software</li>
+</ul>
+<h2 id="system-software">System Software</h2>
+<p>A system software is a software that directly operates the computer hardware and provides the basic functionality to the user as well to other softwares to operate smoothly. In simple words, a system software basically controls a computer’s internal functioning and also controls hardware devices such as monitors, printers and storage devices e.t.c. It is like an interface between hardware and user applications.</p>
+<h2 id="properties-of-a-system-software">Properties Of A System Software</h2>
+<ul>
+<li>System software is closer to computer system</li>
+<li>System software is written in low-level language in general</li>
+<li>System software is difficult to design and understand</li>
+<li>System software is fast in speed</li>
+<li>System software is less interactive to users in comparison to application software</li>
+</ul>
+<h2 id="types-of-system-software">Types Of System Software</h2>
+<p>The system software is further divided into two types,</p>
+<ul>
+<li>Operating System</li>
+<li>Language Process</li>
+</ul>
+<h2 id="application-software">Application Software</h2>
+<p>Software that performs special funtions or provide functions that are much more involve than the basic operations of the computer is known as application software.Application software is designed to perform special tasks.</p>
+<h2 id="properties-of-an-application-software">Properties Of An Application Software</h2>
+<p>Few properties of an application software are as follow:</p>
+<ul>
+<li>It performs more specialized tasks like word processing, email, spreadsheet e.t.c</li>
+<li>The size of an application software is usually less than the system software. It commonly takes less storage</li>
+<li>Application software is much more interactive than the system software</li>
+<li>The Application software is easy to design</li>
+<li>Application software is written in high-level language</li>
+</ul>
+<h2 id="types-of-application-software">Types Of Application Software</h2>
+<p>The application softwares are divided into three types.</p>
+<ul>
+<li>General purpose softwares</li>
+<li>Customized softwares</li>
+<li>Utility softwares</li>
+</ul>
+<p>Also keep in mind, softwares are designed in specific languages. These languages are the core of all the programs. These programming languages will be explained in detail within the comming days.</p>
+</div>
+	
+<button type="button" class="collapsible">Queue Data Structure Implementation in C Plus Plus</button>
+<div class="content">
+<p>Queue is also one of the famous data structure. Although it is pretty similar to stack but it has its own applications. You might know the working law of Queue <strong>&quot;THE-FIFO-Principal&quot;</strong>. Here i&#39;ve defined some rules of queue alongside with its implementaion in <code>c++</code>/</p>
+<h2 id="rules">Rules</h2>
+<p>The queue follow the basic rule of, </p>
+<ul>
+<li>First In First Out.</li>
+<li>Two pointers will be used in queue.</li>
+<li>One will be used for insertion and the second one will be used in deletion.</li>
+<li>Insertion in queue in known as Enqueue.</li>
+<li>Deletion in queue is known as Dequeue.</li>
+<li>Insertion in queue is done through rear pointer.</li>
+<li>Deletion through queue is done through front pointer.</li>
+<li>Queue can be implemented by two ways.</li>
+<li>First by: Array data structure</li>
+<li>Second by: Linked List data structure.</li>
+</ul>
+<h2 id="implementation">Implementation</h2>
+<p>Below is the provided code of Linked List Implementation of queue.I have covered the 4 basic functions of the queue in ths implementation.</p>
+<ul>
+<li>Enqueue(): Insertion in queue.</li>
+<li>Dequeue(): Deletion in queue.</li>
+<li>isFull(): Checking whether the queue is Full or not.</li>
+<li>isEmpty(): Checking whether the queue is Empty or not.</li>
+</ul>
+<h2 id="code-in-c-">Code In C++</h2>
+<p>Here are the initial imports,</p>
+<pre><code><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+</code></pre><p>Then define a node class for a basic node objects,</p>
+<pre><code>class <span class="hljs-keyword">Node</span><span class="hljs-title">{
+    public</span>:
+    int data;
+    <span class="hljs-keyword">Node</span><span class="hljs-title">*next</span>;
+    <span class="hljs-keyword">Node</span><span class="hljs-title">(int</span> data){
+        this-&gt;<span class="hljs-attr">data=</span>data;
+        <span class="hljs-attr">next=</span>NULL;
+    }
+};
+</code></pre><p>Now we&#39;ve the queue class,</p>
+<pre><code><span class="hljs-keyword">class</span> Queued{
+    <span class="hljs-keyword">private</span>:
+    Node*front,*rear;
+    <span class="hljs-keyword">int</span> length;
+    <span class="hljs-keyword">public</span>:
+    Queued(){
+        front=rear=<span class="hljs-literal">NULL</span>;
+        length=<span class="hljs-number">0</span>;
+    }
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Enqueue</span><span class="hljs-params">(<span class="hljs-keyword">int</span> valve)</span></span>{
+        Node*n=<span class="hljs-keyword">new</span> Node(valve);
+        <span class="hljs-keyword">if</span>(front==<span class="hljs-literal">NULL</span>){
+            <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"Queue is Empty right now, u can insert elements: "</span>&lt;&lt;<span class="hljs-built_in">endl</span>;
+            front=rear=n;
+        }
+        <span class="hljs-keyword">else</span>{
+            rear-&gt;next=n;
+            rear=n;
+        }
+    }
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">Dequeue</span><span class="hljs-params">()</span></span>{
+        <span class="hljs-keyword">if</span>(front!=<span class="hljs-literal">NULL</span>){
+        Node*t=front;
+        front=front-&gt;next;
+        <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"The value stored in the Node was: "</span>;
+        <span class="hljs-keyword">if</span>(t-&gt;data!=<span class="hljs-number">0</span>){
+        <span class="hljs-keyword">return</span> t-&gt;data;}
+        }
+    }
+    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isEmpty</span><span class="hljs-params">()</span></span>{
+        <span class="hljs-keyword">if</span>(front==<span class="hljs-literal">NULL</span>){
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+    }
+    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isFull</span><span class="hljs-params">()</span></span>{
+        <span class="hljs-keyword">if</span>(front==rear){
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+    }
+};
+</code></pre><p>At the end we&#39;ve the objects and function calls in the <code>main</code> of function,</p>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    Queued obj1;
+    obj1.Enqueue(<span class="hljs-number">25</span>);
+    obj1.Enqueue(<span class="hljs-number">28</span>);
+    obj1.Enqueue(<span class="hljs-number">28</span>);
+    obj1.Enqueue(<span class="hljs-number">25</span>);
+    <span class="hljs-built_in">cout</span>&lt;&lt;obj1.Dequeue()&lt;&lt;<span class="hljs-built_in">endl</span>;
+    <span class="hljs-built_in">cout</span>&lt;&lt;obj1.Dequeue()&lt;&lt;<span class="hljs-built_in">endl</span>;
+    <span class="hljs-built_in">cout</span>&lt;&lt;obj1.Dequeue()&lt;&lt;<span class="hljs-built_in">endl</span>;
+    <span class="hljs-built_in">cout</span>&lt;&lt;obj1.Dequeue()&lt;&lt;<span class="hljs-built_in">endl</span>;
+    <span class="hljs-keyword">if</span>(obj1.isEmpty()){
+        <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"The Queue is Empty: "</span>;
+    }
+    <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"\n"</span>;
+    <span class="hljs-comment">/*
+    if(obj1.isFull()){
+        cout&lt;&lt;"The Queue is Full: ";
+    }
+    */</span>
+}
+</code></pre><p>Before running, do remember to keep the complete code in a single file with a <code>cpp</code> extension.</p>
+</div>
+
+<button type="button" class="collapsible">Post Fix Evaluation using Stack in C Plus Plus</button>
+<div class="content">
+<p>Just like the other data structures, <strong>STACK</strong> has multiple applications. Here is one of them for the evaluation of <strong>post-fix</strong> Expression. The code is mentioned in the separate portions for better understanding. Better is you put the complete code in a single file with a <code>cpp</code> extension and run it then. Here is the code, take a look at it,</p>
+<p>Initial imports are,</p>
+<pre><code><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> size 100</span>
+</code></pre><p>Create a user-defined class with the name of <code>Stack</code> will the data-members and member-functions in it,</p>
+<pre><code><span class="hljs-keyword">class</span> Stack{
+    <span class="hljs-keyword">private</span>:
+    <span class="hljs-keyword">int</span> top;
+    <span class="hljs-keyword">int</span> arr[size];
+    <span class="hljs-keyword">public</span>:
+        Stack(){
+            top=<span class="hljs-number">-1</span>;
+            <span class="hljs-keyword">int</span> arr[size];
+        }
+        <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">push</span><span class="hljs-params">(<span class="hljs-keyword">int</span> val)</span></span>{
+            <span class="hljs-keyword">if</span>(top&gt;(size<span class="hljs-number">-1</span>)){
+                <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"Stack Overflow Occured"</span>;
+            }
+            <span class="hljs-keyword">else</span>{
+                top++;
+                arr[top]=val;
+            }
+        }
+        <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">pop</span><span class="hljs-params">()</span></span>{
+            <span class="hljs-keyword">int</span> item;
+            <span class="hljs-keyword">if</span>(top&lt;<span class="hljs-number">0</span>){
+
+                <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"Stack Overflowed Occur"</span>;
+            }
+            <span class="hljs-keyword">else</span>{
+                item=arr[top];
+                top--;
+                <span class="hljs-keyword">return</span> item;
+            }
+        }
+        <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">peek</span><span class="hljs-params">()</span></span>{
+            <span class="hljs-keyword">if</span>(top&lt;(size<span class="hljs-number">-1</span>) &amp;&amp; top&gt;=<span class="hljs-number">0</span>){
+                <span class="hljs-keyword">int</span> x=arr[top];
+                <span class="hljs-keyword">return</span> x;
+            }
+            <span class="hljs-keyword">else</span>{
+                <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"Stack is Empty"</span>;
+            }
+        }
+        <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">EvaluatePostFix</span><span class="hljs-params">(<span class="hljs-keyword">char</span> postfix[])</span></span>{
+            <span class="hljs-keyword">int</span> i;
+            <span class="hljs-keyword">char</span> ch;
+            <span class="hljs-keyword">int</span> val;
+            <span class="hljs-keyword">int</span> A,B;
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;postfix[i]!=<span class="hljs-string">')'</span>;i++){
+                ch=postfix[i];
+                <span class="hljs-keyword">if</span>(<span class="hljs-built_in">isdigit</span>(ch)){
+                    push(ch-<span class="hljs-string">'0'</span>);
+                }
+                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(ch==<span class="hljs-string">'+'</span>||ch==<span class="hljs-string">'-'</span>||ch==<span class="hljs-string">'*'</span>||ch==<span class="hljs-string">'/'</span>){
+                    A=pop();
+                    B=pop();
+                    <span class="hljs-keyword">switch</span>(ch){
+                        <span class="hljs-keyword">case</span> <span class="hljs-string">'*'</span>:
+                        val=B*A;
+                        <span class="hljs-keyword">break</span>;
+                        <span class="hljs-keyword">case</span> <span class="hljs-string">'-'</span>:
+                        val=B-A;
+                        <span class="hljs-keyword">break</span>;
+                        <span class="hljs-keyword">case</span> <span class="hljs-string">'/'</span>:
+                        val=B/A;
+                        <span class="hljs-keyword">break</span>;
+                        <span class="hljs-keyword">case</span> <span class="hljs-string">'+'</span>:
+                        val=B+A;
+                        <span class="hljs-keyword">break</span>;
+                    }
+                    push(val);
+                }
+            }
+            <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"The result of the expression is: "</span>&lt;&lt;pop();
+        }
+        <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">isEmpty</span><span class="hljs-params">()</span></span>{
+            <span class="hljs-keyword">if</span>(top==<span class="hljs-number">-1</span>){
+                <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"Stack is Empty "</span>;
+            }
+        }
+        <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span></span>{
+            <span class="hljs-keyword">if</span>(top!=<span class="hljs-number">-1</span>){
+                <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=top;i&gt;<span class="hljs-number">-1</span>;i--){
+                    <span class="hljs-built_in">cout</span>&lt;&lt;arr[i]&lt;&lt;<span class="hljs-string">" "</span>;
+                }
+            }
+        }
+};
+</code></pre><p>Here is the <code>main</code> of program,</p>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    Stack s1;
+    <span class="hljs-keyword">int</span> i;
+    <span class="hljs-keyword">char</span> ch[size];
+    <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"Enter the expression inside the character array: "</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;=size;i++){
+        <span class="hljs-built_in">cin</span>&gt;&gt;ch[i];
+        <span class="hljs-keyword">if</span>(ch[i]==<span class="hljs-string">')'</span>){
+            <span class="hljs-keyword">break</span>;
+        }
+    }
+    s1.EvaluatePostFix(ch);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>
+</div>
+
+<button type="button" class="collapsible">Bubble Sort Algorithm in NASM-16 bit</button>
+<div class="content">
+<p>Bubble sort is a very famous algorithm for sorting numbers. It is commonly used to sort numbers in ascending order. It works totally same here just like the other high level programming languages. Althought coding in 16-bit seems quite difficult but witha a little practice and understanding you can write any code in it. Here is the code,</p>
+<pre><code>[org <span class="hljs-number">0x0100</span>]
+
+<span class="hljs-keyword">jmp</span> start
+<span class="hljs-symbol">
+data:</span><span class="hljs-built_in">dw</span> <span class="hljs-number">60</span>,<span class="hljs-number">55</span>,<span class="hljs-number">45</span>,<span class="hljs-number">50</span>
+<span class="hljs-symbol">
+swap:</span><span class="hljs-built_in">db</span> <span class="hljs-number">0</span>
+<span class="hljs-symbol">
+bubblesort:</span>
+    <span class="hljs-keyword">dec</span> <span class="hljs-built_in">cx</span>
+    <span class="hljs-keyword">shl</span> <span class="hljs-built_in">cx</span>,<span class="hljs-number">1</span>
+<span class="hljs-symbol">
+    mainloop:</span>
+        <span class="hljs-keyword">mov</span> <span class="hljs-built_in">si</span>,<span class="hljs-number">0</span>
+        <span class="hljs-keyword">mov</span> <span class="hljs-built_in">byte</span>[swap],<span class="hljs-number">0</span>
+<span class="hljs-symbol">
+        innerloop:</span>
+            <span class="hljs-keyword">mov</span> <span class="hljs-built_in">ax</span>,[<span class="hljs-built_in">bx</span>+<span class="hljs-built_in">si</span>]
+            <span class="hljs-keyword">cmp</span> <span class="hljs-built_in">ax</span>,[<span class="hljs-built_in">bx</span>+<span class="hljs-built_in">si</span>+<span class="hljs-number">2</span>]
+            <span class="hljs-keyword">jbe</span> noswap
+
+                <span class="hljs-keyword">mov</span> <span class="hljs-built_in">dx</span>,[<span class="hljs-built_in">bx</span>+<span class="hljs-built_in">si</span>+<span class="hljs-number">2</span>]
+                <span class="hljs-keyword">mov</span> [<span class="hljs-built_in">bx</span>+<span class="hljs-built_in">si</span>],<span class="hljs-built_in">dx</span>
+                <span class="hljs-keyword">mov</span> [<span class="hljs-built_in">bx</span>+<span class="hljs-built_in">si</span>+<span class="hljs-number">2</span>],<span class="hljs-built_in">ax</span>
+                <span class="hljs-keyword">mov</span> <span class="hljs-built_in">byte</span>[swap],<span class="hljs-number">1</span>
+<span class="hljs-symbol">
+                noswap:</span>
+                <span class="hljs-keyword">add</span> <span class="hljs-built_in">si</span>,<span class="hljs-number">2</span>
+                <span class="hljs-keyword">cmp</span> <span class="hljs-built_in">si</span>,<span class="hljs-built_in">cx</span>
+                <span class="hljs-keyword">jne</span> innerloop
+
+            <span class="hljs-keyword">cmp</span> <span class="hljs-built_in">byte</span>[swap],<span class="hljs-number">1</span>
+            <span class="hljs-keyword">je</span> mainloop
+            <span class="hljs-keyword">ret</span> <span class="hljs-comment">;notice this</span>
+</code></pre><p>Here is the initialization and function call,</p>
+<pre><code><span class="hljs-symbol">start:</span>
+    <span class="hljs-keyword">mov</span> <span class="hljs-built_in">bx</span>,data
+    <span class="hljs-keyword">mov</span> <span class="hljs-built_in">cx</span>,<span class="hljs-number">4</span>
+
+    <span class="hljs-comment">;make a function call</span>
+    <span class="hljs-keyword">call</span> bubblesort
+
+    <span class="hljs-comment">;data is sorted now!</span>
+
+    <span class="hljs-keyword">mov</span> <span class="hljs-built_in">ax</span>,<span class="hljs-number">0x4c00</span>
+    <span class="hljs-keyword">int</span> <span class="hljs-number">0x21</span>
+</code></pre><p>Before running, write the complete code in a single file.</p>
+</div>
+
+<button type="button" class="collapsible">Adobe Photoshop Basics</button>
+<div class="content">
+<p>Adobe Photoshop is one of the finest graphical editors that is widely being used in the world. It is being developed by the well-known software development company Adobe. The Adobe 7.0 was the version of Photoshop that had boosted this franchise to another level. Now the company has developed a much more reliable and advanced version of Photoshop. </p>
+<p>Currently different big industries including the filming industry, gaming industry, and music industry are widely using Adobe Photoshop for their work.</p>
+<p><img src="/assets/images/clt/adobe-photoshop/1.png" alt="1"></p>
+<h2 id="_-design-anything-with-ease-_"><em>“Design Anything With Ease”</em></h2>
+<h2 id="versions-of-photoshop">Versions of Photoshop</h2>
+<p>The 3 well-known versions of Adobe Photoshop are:</p>
+<ul>
+<li>Photoshop CC</li>
+<li>Photoshop CS6</li>
+<li>Photoshop 7.0</li>
+</ul>
+<h2 id="use-of-photoshop">Use of Photoshop</h2>
+<p>Photoshop is used by:</p>
+<ul>
+<li>GFX Industry</li>
+<li>Model Designers</li>
+<li>Game Developers</li>
+<li>Movie Makers</li>
+<li>Music Industry</li>
+<li>Freelancers</li>
+</ul>
+<h2 id="-stun-your-viewers-"><em>Stun Your Viewers…….</em></h2>
+<h2 id="adobe-photoshop-cc">Adobe Photoshop CC</h2>
+<p>Photoshop cc is the most reliable and latest version of photoshop. I myself using this version nowadays. The interface of it is much user friendly and easy to use.</p>
+<h2 id="intro-to-the-interface">Intro to the interface</h2>
+<p>This is the main interface of Photoshop.</p>
+<p><img src="/assets/images/clt/adobe-photoshop/2.png" alt="2"></p>
+<p>It consists of the following portions,</p>
+<ul>
+<li>Document Window</li>
+<li>Toolbar</li>
+<li>Options Bar</li>
+<li>Menu Bar</li>
+<li>Pannels</li>
+</ul>
+<h2 id="document-window">Document Window</h2>
+<p>This is called the Document Window. You can see 1 document opened in it with the name <strong>Untitled-1</strong>.</p>
+<p><img src="/assets/images/clt/adobe-photoshop/3.png" alt="3"></p>
+<p>Here all the documents are present on which you can work and switch from one document to the other.</p>
+<h2 id="toolbar">Toolbar</h2>
+<p>The toolbar is the small window present on the top left of the interface. Here, all the basic tools are present that are being used widely in a work. Adobe is also introducing new tools to it from time to time. Have a look on the toolbar window.</p>
+<p><img src="/assets/images/clt/adobe-photoshop/4.png" alt="4"></p>
+<p>Here it is. This is the toolbar. All the tools of Photoshop are present here.</p>
+<h2 id="option-bar">Option Bar</h2>
+<p>Options bar is the place where the following options are present:</p>
+<ul>
+<li>Adjusting size</li>
+<li>Font adjustment</li>
+<li>Color Changing</li>
+<li>Perspective Options</li>
+<li>Shadow</li>
+<li>Opacity</li>
+<li>Fade</li>
+<li>e.t.c</li>
+</ul>
+<p>It is present on the topmost of the interface. The picture attached below shows the option bar.</p>
+<p><img src="/assets/images/clt/adobe-photoshop/5.png" alt="5"></p>
+<p>Here the uppermost bar is the options bar.</p>
+<h2 id="menu-bar">Menu Bar</h2>
+<p>Just like the options bar menu bar is also a small bar present on the topmost of the interface Photoshop window. It consists of options like:</p>
+<ul>
+<li>Importing a picture</li>
+<li>Exporting a picture</li>
+<li>Changing Size</li>
+<li>Making Document</li>
+<li>Blur Menu</li>
+<li>Flare Menu</li>
+<li>Camera Raw Filter</li>
+<li>e.t.c</li>
+</ul>
+<p>Have a look at this window,</p>
+<p><img src="/assets/images/clt/adobe-photoshop/6.png" alt="6"></p>
+<h2 id="pannels">Pannels</h2>
+<p>Pannel is the place where your work happens. Photoshop basically works on the basis of layers. These layers are present in the panels. In addition to it, we can add effects to the documents using panels. Panels can also be used to keep the record of every single step that you do on a document. Here is a preview of the Panel,</p>
+<p><img src="/assets/images/clt/adobe-photoshop/7.png" alt="7"></p>
+<p>So this was all the basic infrastructure of Adobe Photoshop. I will discuss these menus further in the next blogs.</p>
+</div>
+
+<button type="button" class="collapsible">Windows Storage Sense</button>
+<div class="content">
+<p>I use the Windows operating system mainly for playing video games. Recently i faced this issue of disk space auto filling up whenever the os got updates resulting in lower remaining space in the os drive. Eventually i&#39;ve to replace the windows with a new one every 2 or 3 years which was a headache.</p>
+<p>I did search multiple threads in order to find the solution. Some people said this occur b/c of leftout update files while some were saying the TEMP files as a major cause of this issue. I removed the temp files from the multiple folders <code>prefetch</code>, <code>Temp</code>, <code>%temp%</code> (we used to do it in windows 7) but i got 2 or 3 gigs free. Then i found this built in windows feature by the name of Storage Sense. You simply have to turn it on the moment you install the windows and Vola! it will manage/remove all the roleback update files. Here is a snippet where you can find it also there is a path from system settings,</p>
+<p><img src="/assets/images/clt/windows-storage-sense/1.png" alt="1"></p>
+
+</div>
+	
+<button type="button" class="collapsible"></button>
+<div class="content">
+</div>
+
+	
+	
+	
+	
+	
+	
+
+	
+
+	
 
 
 
-<button type="button" class="collapsible">PHP Hello World</button>
+
+
+<button type="button" class="collapsible"></button>
 <div class="content">
 </div>
 
