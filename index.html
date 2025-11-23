@@ -28,7 +28,37 @@ body {
 	word-wrap: break-word;
 	padding-left: 5px;
 }
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  background-color: #FFE7B7;
+  color: blue;
+  !cursor: pointer;
+  !padding: 18px;
+  padding-left: 0px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 16px;
+  font-family: aerial;
+  text-decoration: underline;
+  !word-wrap: break-word;
+}
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+  background-color: #ccc;
+}
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding-left: 0px;
+  display: none;
+  overflow: hidden;
+  background-color: #E7CF9E;
+  !word-wrap: break-word;
+}
 </style>
+
+
 </head>
 <body>
 <div class="wrapper">
@@ -55,11 +85,263 @@ body {
 <div class="myKiv">
 	<h2>BLOGS</h2>
 	<br>
-	<a href="posts/web/php/php-installation-and-complete-working.html">PHP Hello World</a>
-	<br>
-	Php is one of the famous server-side scripting language. In common websites, it is used to handle the backend portion. No doubt, many new frameworks are now introduced in the market but still PHP is used in a wide number of websites......
-	<br>
-	<a href="posts/web/php/2020-10-07-how-to-display-error-in-php.html">How to Display Error in PHP</a>
+
+	<button type="button" class="collapsible">PHP Hello World</button>
+<div class="content">
+  <p>Php is one of the famous server-side scripting language. In common websites, it is used to handle the backend portion. No doubt, many new frameworks are now introduced in the market but still PHP is used in a wide number of websites.</p>
+<p><img src="/assets/images/clt/php-hello-world/pngegg.png" alt="pngwing"></p>
+<p>In order to use PHP, you simply have to install the xamp on your system. I&#39;m using linux so i&#39;m attaching a linux installation tutorial of xamp. Here is <a href="https://www.youtube.com/watch?v=R5CUn5wGQGg">XAMP INSTALLATION</a></p>
+<p>After installation go this directory and create a folder test in it,</p>
+<pre><code><span class="hljs-keyword">cd</span> /opt/lampp/htdocs/
+<span class="hljs-keyword">mkdir</span> <span class="hljs-keyword">test</span>
+<span class="hljs-keyword">cd</span> <span class="hljs-keyword">test</span>
+</code></pre><p>In here, you&#39;ve to create an index.php file in order to visualize the php code on your localhost. So,</p>
+<pre><code><span class="hljs-keyword">touch</span> <span class="hljs-built_in">index</span>.php
+</code></pre><p>Open up this file and write some basic php code in it like:</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+$name=<span class="hljs-string">'SANDSOFTIMES'</span>;
+
+$color=<span class="hljs-string">'green'</span>;
+<span class="hljs-keyword">echo</span> $name;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"SANDSOFTIMES"</span>;
+
+<span class="hljs-meta">?&gt;</span></span>
+<span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span><span class="php"><span class="hljs-meta">&lt;?php</span> <span class="hljs-keyword">echo</span> $name;<span class="hljs-meta">?&gt;</span></span><span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"color:red"</span>&gt;</span><span class="php"><span class="hljs-meta">&lt;?php</span> <span class="hljs-keyword">echo</span> $name;<span class="hljs-meta">?&gt;</span></span><span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"color:&lt;?php echo $color; ?&gt;"</span>&gt;</span><span class="php"><span class="hljs-meta">&lt;?php</span> <span class="hljs-keyword">echo</span> $name;<span class="hljs-meta">?&gt;</span></span><span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+</code></pre><p>This code will print the php variables inside the html tags. P.S you&#39;ve to use <code>&lt;?php?&gt;</code> in order to write php code and also <code>$</code> is used to declare a variable in php. Also, go to localhost/test/index.php on your browser to view the php code running.</p>
+<p><img src="/assets/images/clt/php-hello-world/php-first.png" alt="php first image"></p>
+<p>If you want breakline or you can say go to next line you&#39;ve to use <code>&quot;&lt;br /&gt;&quot;</code> in your string or in empty echo.</p>
+<pre><code>echo <span class="hljs-string">"&lt;br /&gt;"</span><span class="hljs-comment">;</span>
+</code></pre><p>or</p>
+<pre><code>echo <span class="hljs-string">"What's up &lt;br /&gt;"</span><span class="hljs-comment">;</span>
+</code></pre><h2 id="variables-in-php">Variables in PHP</h2>
+<p>Just like all other programming languages, php also use variables to store any sort of data. The variable is declared by <code>$</code> symbol. Also, we don&#39;t have to specify any <strong>data-type</strong>. Variables make our life easier. We don&#39;t have to do things again and again, below is the example of it, </p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"matrix &lt;br/&gt;"</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"maxwell &lt;br/&gt;"</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"hazel &lt;br/&gt;"</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"simonn &lt;br/&gt;"</span>;
+
+$name=<span class="hljs-string">"SANDY Soft"</span>;
+
+<span class="hljs-keyword">echo</span> $name;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+<span class="hljs-keyword">echo</span> $name;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+<span class="hljs-keyword">echo</span> $name;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+
+<span class="hljs-keyword">echo</span> <span class="hljs-number">5</span>*<span class="hljs-number">3</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-number">5</span>*<span class="hljs-number">9</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-number">5</span>*<span class="hljs-number">11</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+
+$num=<span class="hljs-number">200</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+<span class="hljs-keyword">echo</span> $num*<span class="hljs-number">3</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+<span class="hljs-keyword">echo</span> $num*<span class="hljs-number">9</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+<span class="hljs-keyword">echo</span> $num*<span class="hljs-number">11</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+<span class="hljs-keyword">echo</span> $num;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+$name=<span class="hljs-string">"What is up"</span>;
+<span class="hljs-keyword">echo</span> $name;
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p>Also keep in mind that variables with same names but with different upper and lower case letters are treated separately,</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-comment">// echo "Hello";</span>
+$Name=<span class="hljs-string">"peter"</span>;
+<span class="hljs-keyword">echo</span> $Name;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+$NAME=<span class="hljs-string">"john"</span>;
+<span class="hljs-keyword">echo</span> $NAME;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+$namE=<span class="hljs-string">"tony"</span>;
+<span class="hljs-keyword">echo</span> $namE;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+$a=$b=<span class="hljs-number">3</span>;
+<span class="hljs-keyword">echo</span> $a;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+<span class="hljs-keyword">echo</span> $b;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><h2 id="using-php-and-html-together">Using PHP and HTML Together</h2>
+<p>You can use both ways,</p>
+<ul>
+<li>Php inside the HTML</li>
+<li>HTML inside the PHP</li>
+</ul>
+<p>Below is the attached example of both,</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;h1&gt;php with html&lt;/h1&gt;"</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;h3 style='color:blue'&gt;php with html&lt;/h3&gt;"</span>;
+<span class="hljs-meta">?&gt;</span></span>
+
+<span class="hljs-comment">&lt;!-- HTML in php --&gt;</span>
+<span class="php"><span class="hljs-meta">&lt;?php</span>
+$name=<span class="hljs-string">"SANDY"</span>;
+$color=<span class="hljs-string">'blue'</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;h1 style='color:orange'&gt;$name&lt;/h1&gt;"</span>;
+<span class="hljs-meta">?&gt;</span></span>
+
+
+<span class="hljs-comment">&lt;!-- php in HTML --&gt;</span>
+
+
+
+<span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">style</span>=<span class="hljs-string">'color:green'</span>&gt;</span><span class="php"><span class="hljs-meta">&lt;?php</span> <span class="hljs-keyword">echo</span> <span class="hljs-string">"this is h2 tag&lt;br&gt;"</span>;<span class="hljs-meta">?&gt;</span></span><span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">style</span>=<span class="hljs-string">'color:&lt;?php echo $color;?&gt;'</span>&gt;</span><span class="php"><span class="hljs-meta">&lt;?php</span> <span class="hljs-keyword">echo</span> <span class="hljs-string">"this is h2 tag&lt;br&gt;"</span>;<span class="hljs-meta">?&gt;</span></span><span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Here <span class="php"><span class="hljs-meta">&lt;?php</span> <span class="hljs-keyword">echo</span> <span class="hljs-string">"this is h2 tag "</span>; <span class="hljs-keyword">echo</span> $name;  <span class="hljs-meta">?&gt;</span></span><span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">h2</span> <span class="hljs-attr">style</span>=<span class="hljs-string">'color:&lt;?php echo $color;?&gt;'</span>&gt;</span>Here is another tag <span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span> <span class="php"><span class="hljs-meta">&lt;?php</span> <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt; and the color is "</span>; <span class="hljs-keyword">echo</span> $color;<span class="hljs-meta">?&gt;</span></span><span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+</code></pre><p>The output of it will look like,</p>
+<p><img src="/assets/images/clt/php-hello-world/html-in-php.png" alt="html-in-png"></p>
+<h2 id="constants-in-php">Constants in PHP</h2>
+<p>In php you can also declare constants just like the variables they are two way to declare constants. The first one is simply by writing the keywords <strong>const</strong> and variable name along with the value assigned to it. The second one is by using the <code>define()</code>. Here is the below code for the understanding of both methods,</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-comment">// $data="abc";</span>
+<span class="hljs-comment">// const data="peter";</span>
+<span class="hljs-comment">// echo data;</span>
+<span class="hljs-meta">?&gt;</span></span> 
+
+
+<span class="hljs-comment">&lt;!-- First way to declare a variable in php --&gt;</span> 
+<span class="php"><span class="hljs-meta">&lt;?php</span>
+$name=<span class="hljs-string">"bruce"</span>;
+<span class="hljs-comment">// $name="tony";</span>
+<span class="hljs-comment">// echo $name;</span>
+<span class="hljs-meta">?&gt;</span></span> 
+
+<span class="hljs-comment">&lt;!-- Second way to declare a constant in php --&gt;</span>
+<span class="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-comment">// define("data","peter");</span>
+define(<span class="hljs-string">"data"</span>,<span class="hljs-string">"SandsOfTimes"</span>);
+<span class="hljs-keyword">echo</span> data;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+<span class="hljs-keyword">echo</span> $name;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+define(<span class="hljs-string">"DATA"</span>,<span class="hljs-string">"EDZIO"</span>);
+<span class="hljs-keyword">echo</span> DATA;
+<span class="hljs-keyword">const</span> __Hello=<span class="hljs-string">"Mikel"</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+<span class="hljs-keyword">echo</span> __Hello;
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><h2 id="php-datatypes">Php Datatypes</h2>
+<p>Just like other programming languages, php also have several datatypes. Some of them are mentioned as follow:</p>
+<ul>
+<li>String</li>
+<li>Integer</li>
+<li>Float</li>
+<li>Boolean</li>
+<li>Null</li>
+<li>Array</li>
+<li>Object</li>
+<li>Recourse</li>
+</ul>
+<p>Php has a built in function known as <code>var_dump</code>. Use it with the variable name and you can check the variable type from it. Below is a complete code, in which i&#39;m declaring each datatype and then check it using the <code>var_dump</code> function of php.</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-comment">// String</span>
+
+$name=<span class="hljs-string">"Anil sidhu"</span>;
+<span class="hljs-keyword">echo</span> var_dump($name);
+
+<span class="hljs-comment">// Integer</span>
+
+$num=<span class="hljs-number">10</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+<span class="hljs-keyword">echo</span> var_dump($num);
+
+<span class="hljs-comment">// Float</span>
+
+$numFloat=<span class="hljs-number">10.10</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+<span class="hljs-keyword">echo</span> var_dump($numFloat);
+
+<span class="hljs-comment">// Bool</span>
+
+$bool=<span class="hljs-keyword">true</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+<span class="hljs-keyword">echo</span> var_dump($bool);
+
+<span class="hljs-comment">// Array</span>
+
+$arr=[<span class="hljs-string">"anil"</span>,<span class="hljs-string">"sam"</span>,<span class="hljs-string">"ali"</span>,<span class="hljs-number">2</span>];
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+<span class="hljs-keyword">echo</span> var_dump($arr);
+
+<span class="hljs-comment">// Null</span>
+
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+$empty=<span class="hljs-keyword">null</span>;
+<span class="hljs-keyword">echo</span> var_dump($empty);
+
+<span class="hljs-comment">// Object</span>
+
+<span class="hljs-comment">// $user=new className();</span>
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+$connection=ftp_connect(<span class="hljs-string">"127.0.0.1"</span>) <span class="hljs-keyword">or</span> <span class="hljs-keyword">die</span>(<span class="hljs-string">"local host not found"</span>);
+<span class="hljs-keyword">echo</span> var_dump($connection);
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><h2 id="comments-in-php">Comments in php</h2>
+<p>In php, you can also do comments for the purpose of better understanding or if you want to comment out the extra portion of the code. There are two types of comments in php as well.</p>
+<ul>
+<li>Single-line comments</li>
+<li>Multi-line comments</li>
+</ul>
+<p>There is very little difference b/w the syntax of these two. If you want to do a single-line comment, simply write <code>//</code> in the start of the line and if you want to do multi-line comment simple write <code>/*</code> at the start and <code>*/</code> where you want to end the comment. Both of these types can be demonstrated by the example code written by me below:</p>
+<pre><code><span class="hljs-comment">&lt;!-- Single line comments --&gt;</span>
+
+<span class="php"><span class="hljs-meta">&lt;?php</span>
+$name=<span class="hljs-string">"Ali"</span>;
+$name2=<span class="hljs-string">"Sandsoftime"</span>;
+define(<span class="hljs-string">"sandy"</span>,<span class="hljs-string">"what is up"</span>);
+<span class="hljs-meta">?&gt;</span></span>
+
+<span class="hljs-comment">&lt;!-- Multi line comments --&gt;</span>
+
+
+<span class="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-comment">/*
+echo $name;
+echo "&lt;br&gt;";
+echo var_dump(sandy);
+*/</span>
+<span class="hljs-meta">?&gt;</span></span>
+
+
+<span class="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"How are you?"</span>;
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre>
+>
+</div>
+
+<button type="button" class="collapsible">How to Display Error in PHP</button>
+<div class="content">
+<p>Generally by default, php doesnot show error on the browser. It simply says <strong>page isn&#39;t working</strong> instead. Inorder to visualize the error in code in browser. You&#39;ve to do some basic changes. Initially create a new file with name <code>display-error.php</code>. In this file write this php function.</p>
+<pre><code>echo phpinfo()<span class="hljs-comment">;</span>
+</code></pre><p>It will display all the information related to php.
+<img src="/assets/images/clt/display-error-in-php/1.png" alt="1"></p>
+<p>Now, find the <code>Loaded Configuration File</code> and its <strong>path</strong>. In this case, it is <code>/opt/lampp/etc/php.ini</code>. Open this file on your terminal and find the keyword <strong>display_errors</strong> it will be set <strong>off</strong> initially. Write <strong>on</strong> infront of it. Then simply restart your apache-server. After the restart, write a php code in any of your file with some syntax error. Go to browser and this time, you&#39;ll see the actual error being displayed. I&#39;ve a code below:</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-comment">// echo phpinfo();</span>
+<span class="hljs-comment">// echo "Hello";</span>
+$num=<span class="hljs-number">50</span>K
+<span class="hljs-keyword">echo</span> $num*<span class="hljs-number">50</span>
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p>The above code has a syntax error and will display error on the browser like,
+<img src="/assets/images/clt/display-error-in-php/2.png" alt="2"></p>
+</div>
+
+	
+	<a href="posts/web/php/2020-10-07-.html">How to Display Error in PHP</a>
 	<br>
 	Generally by default, php doesnot show error on the browser. It simply says **page isn't working** instead. Inorder to visualize the error in code in browser. You've to do some basic changes. Initially create a new file with name `display-error.php`. In this file write this php function......	
 	<br>
@@ -147,7 +429,33 @@ files at the start.
 	I use the Windows operating system mainly for playing video games. Recently i faced this issue of disk space auto filling up whenever the os got updates resulting in lower remaining space in the os drive. Eventually i've to replace the windows with a new one every 2 or 3 years which was a headache.
 
 
+
+
+
+<button type="button" class="collapsible">PHP Hello World</button>
+<div class="content">
+</div>
+
 </div>
 </div>
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
+
+</script>
+
 </body>
 </html>
