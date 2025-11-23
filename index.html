@@ -86,6 +86,1330 @@ body {
 	<h2>BLOGS</h2>
 	<br>
 
+<button type="button" class="collapsible">LSTM | Text Generation using Supervised Learning</button>
+<div class="content">
+<p>LSTM are a pretty good replacement of RNNS&#39;s. I&#39;ll show the working of LSTM&#39;s with a complete project. Our final model will take an input, whether it is a word or a phrase and predict the rest of the sentence by itself. Also you can ask any type of new query from the model and it will answer you. By some tinkering, i&#39;ve made the model to act as a supervised learning model.</p>
+<p>Initially we need to create a dataset, for this purpose i&#39;m using a dummy dataset of sentences, here it is,</p>
+<pre><code>faqs = <span class="hljs-string">""</span>"
+<span class="hljs-keyword">About</span> the Training
+What is the enrollment cost <span class="hljs-keyword">for</span> the Data Analytics Guidance <span class="hljs-keyword">Program</span> (DAGP 2024)?
+The <span class="hljs-keyword">program</span> operates <span class="hljs-keyword">on</span> a subscription basis where you pay Rs 899 monthly.
+How long is the entire <span class="hljs-keyword">program</span>?
+The full duration is 6 months, making the <span class="hljs-keyword">total</span> fee Rs 899 * 6 = Rs 5400 approximately.
+What is the curriculum <span class="hljs-keyword">for</span> the training?
+We will cover the following topics:
+- Basic Python <span class="hljs-keyword">for</span> Analytics
+- Key Data Science Libraries
+- Data Cleaning Techniques
+- Database Management with SQL
+- Math Concepts <span class="hljs-keyword">for</span> Data Analytics
+- Machine Learning Models
+- Real-world <span class="hljs-keyword">ML</span> Projects
+- MLOps Overview
+- Industry Case Studies
+You can <span class="hljs-keyword">view</span> the detailed syllabus here: https:<span class="hljs-comment">//dataschool.co.in/programs/DAGP-2024/curriculum.</span>
+
+Does this <span class="hljs-keyword">program</span> cover NLP and Deep Learning?
+<span class="hljs-keyword">No</span>, Deep Learning and NLP are not part of this training.
+What <span class="hljs-keyword">if</span> I miss a live session? Will there be a recording?
+Yes, all sessions are recorded, <span class="hljs-keyword">so</span> you can access them <span class="hljs-keyword">if</span> you miss <span class="hljs-keyword">one</span>.
+Where can I find the schedule?
+You can <span class="hljs-keyword">view</span> the <span class="hljs-keyword">program</span> calendar here: https:<span class="hljs-comment">//dataschool.co.in/schedule/DAGP-2024.</span>
+How long are the live sessions?
+Each session runs <span class="hljs-keyword">for</span> <span class="hljs-keyword">about</span> 1.5 to 2 hours.
+What language will the instructor <span class="hljs-keyword">use</span>?
+The sessions are conducted <span class="hljs-keyword">in</span> Hinglish.
+How will I know <span class="hljs-keyword">about</span> upcoming classes?
+We’ll send email notifications before every scheduled session <span class="hljs-keyword">for</span> paid participants.
+Can non-technical participants join?
+Yes, this course is beginner-friendly.
+Can I join the course mid-way?
+Yes, you can enroll at any point during the <span class="hljs-keyword">program</span>.
+Will I have access to previous lectures <span class="hljs-keyword">if</span> I join late?
+Yes, once you pay, you’ll gain access to all past lectures <span class="hljs-keyword">in</span> the dashboard.
+<span class="hljs-keyword">Do</span> I need to submit assignments?
+<span class="hljs-keyword">No</span>, we provide solutions <span class="hljs-keyword">for</span> self-assessment purposes.
+Will the <span class="hljs-keyword">program</span> <span class="hljs-keyword">include</span> case studies?
+Yes, we’ll work through real case studies.
+How can I contact support?
+<span class="hljs-keyword">For</span> inquiries, email <span class="hljs-keyword">us</span> at support@dataschool.co.<span class="hljs-keyword">in</span>.
+
+Payment/Registration Questions
+Where should I make the payment?
+All payments should be made <span class="hljs-keyword">on</span> our official website: https:<span class="hljs-comment">//dataschool.co.in/payments.</span>
+Can I pay the full Rs 5400 <span class="hljs-keyword">in</span> <span class="hljs-keyword">one</span> go?
+<span class="hljs-keyword">No</span>, the payments are <span class="hljs-keyword">split</span> into monthly installments.
+<span class="hljs-keyword">If</span> I pay mid-month, when is the next payment due?
+Your next payment is due 30 days after your first payment date. <span class="hljs-keyword">For</span> example, <span class="hljs-keyword">if</span> you pay <span class="hljs-keyword">on</span> the 10th, your next payment is due <span class="hljs-keyword">on</span> the 10th of the following month.
+Is there a refund policy <span class="hljs-keyword">if</span> I don't like the course?
+Yes, you have a 7-day refund period after making the payment.
+What <span class="hljs-keyword">if</span> I live outside India and can’t make the payment online?
+Please email support@dataschool.co.<span class="hljs-keyword">in</span> <span class="hljs-keyword">for</span> assistance.
+
+<span class="hljs-keyword">Post</span>-Registration Queries
+How long can I access the paid content?
+You can access videos <span class="hljs-keyword">as</span> long <span class="hljs-keyword">as</span> your subscription is active. After completing all payments (totaling Rs 5400), you’ll have access until September 2025.
+Why isn't lifetime access available?
+Due to the low cost of the course, lifetime access is not offered.
+Where can I go <span class="hljs-keyword">for</span> <span class="hljs-keyword">help</span> after a session?
+You can fill <span class="hljs-keyword">out</span> a <span class="hljs-keyword">form</span> <span class="hljs-keyword">on</span> your dashboard, and our team will arrange a 1-<span class="hljs-keyword">on</span>-1 doubt-clearing session.
+Can I ask questions related to sessions I missed from previous weeks?
+Yes, simply select <span class="hljs-string">"previous week"</span> <span class="hljs-keyword">in</span> the doubt <span class="hljs-keyword">form</span>.
+What <span class="hljs-keyword">if</span> I face payment issues <span class="hljs-keyword">while</span> living abroad?
+You can reach <span class="hljs-keyword">out</span> to support@dataschool.co.<span class="hljs-keyword">in</span> <span class="hljs-keyword">for</span> <span class="hljs-keyword">help</span>.
+
+Certificate and Placement Queries
+How <span class="hljs-keyword">do</span> I qualify <span class="hljs-keyword">for</span> a certificate?
+<span class="hljs-keyword">Two</span> conditions apply:
+1. You must pay the full Rs 5400.
+2. You need to complete all assessments.
+I joined late—how <span class="hljs-keyword">do</span> I pay <span class="hljs-keyword">for</span> previous months?
+Once you make your first payment, you will see links <span class="hljs-keyword">in</span> your dashboard to pay <span class="hljs-keyword">for</span> the earlier months.
+Does the <span class="hljs-keyword">program</span> offer job placement services?
+<span class="hljs-keyword">While</span> we provide placement support, it is not a job guarantee. The assistance includes:
+- Sessions <span class="hljs-keyword">on</span> portfolio building
+- Soft skills workshops
+- Interaction with industry experts
+- Guidance <span class="hljs-keyword">on</span> job <span class="hljs-keyword">search</span> strategies.
+<span class="hljs-string">""</span>"
+</code></pre><p>you can check the dataset via variable,</p>
+<pre><code><span class="hljs-attribute">faqs</span>
+</code></pre><p>now this data is in textual form but we cannot feed or use textual data to our model, so we need to convert it into vectors/numbers so import tokenizer and necessary libraries,</p>
+<pre><code><span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf
+from tensorflow.keras.preprocessing.<span class="hljs-keyword">text</span> <span class="hljs-keyword">import</span> Tokenizer
+</code></pre><p>create a tokenizer instance,</p>
+<pre><code><span class="hljs-attr">tokenizer</span> = Tokenizer()
+</code></pre><p>fit the tokenizer on given raw data,</p>
+<pre><code><span class="hljs-selector-tag">tokenizer</span><span class="hljs-selector-class">.fit_on_texts</span>(<span class="hljs-selector-attr">[faqs]</span>)
+</code></pre><p>you can check the token words along with their index,</p>
+<pre><code><span class="hljs-selector-tag">tokenizer</span><span class="hljs-selector-class">.word_index</span>
+</code></pre><p>split the raw data on the basis of new line character <code>\n</code> and store all in a list,</p>
+<pre><code>input_sequences=[]
+<span class="hljs-keyword">for</span> <span class="hljs-keyword">sentence</span> <span class="hljs-keyword">in</span> faqs.<span class="hljs-built_in">split</span>(<span class="hljs-string">'\n'</span>):
+  <span class="hljs-comment"># print(sentence)</span>
+  <span class="hljs-comment"># print(tokenizer.texts_to_sequences([sentence])[0])</span>
+  tokenized_sentence=tokenizer.texts_to_sequences([<span class="hljs-keyword">sentence</span>])[<span class="hljs-number">0</span>]
+
+  <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>,<span class="hljs-built_in">len</span>(tokenized_sentence)):
+    input_sequences.append(tokenized_sentence[:i+<span class="hljs-number">1</span>])
+</code></pre><p>check for the sentence/sequence for the max length for zero padding of vectors,</p>
+<pre><code>max_len=<span class="hljs-built_in">max</span>([<span class="hljs-built_in">len</span>(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> input_sequences])
+max_len
+</code></pre><p>perform the padding,</p>
+<pre><code>from tensorflow<span class="hljs-selector-class">.keras</span><span class="hljs-selector-class">.preprocessing</span><span class="hljs-selector-class">.sequence</span> import pad_sequences
+padded_input_sequences=pad_sequences(input_sequences,maxlen=max_len,<span class="hljs-attribute">padding</span>=<span class="hljs-string">'pre'</span>)
+padded_input_sequences
+</code></pre><p>split the output and output features into x and y so to make a proper dataset,</p>
+<pre><code><span class="hljs-attr">x</span>=padded_input_sequences[:,:-<span class="hljs-number">1</span>] #except last colm
+<span class="hljs-comment"># padded_input_sequences[:,-1]</span>
+<span class="hljs-attr">y</span>=padded_input_sequences[:,-<span class="hljs-number">1</span>]
+</code></pre><p>check the shape of x and y,</p>
+<pre><code><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(x.shape)</span></span>
+<span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(y.shape)</span></span>
+</code></pre><p>check the total token words,</p>
+<pre><code><span class="hljs-function"><span class="hljs-title">len</span><span class="hljs-params">(tokenizer.word_index)</span></span>
+</code></pre><p>convert the output scalar y into a vector,</p>
+<pre><code>from tensorflow<span class="hljs-selector-class">.keras</span><span class="hljs-selector-class">.utils</span> import to_categorical
+y=to_categorical(y,num_classes=<span class="hljs-number">283</span>)
+</code></pre><p>check the shape,</p>
+<pre><code><span class="hljs-selector-tag">y</span><span class="hljs-selector-class">.shape</span>
+</code></pre><p>now lets make our model, import the necessary libraries,</p>
+<pre><code>from tensorflow<span class="hljs-selector-class">.keras</span><span class="hljs-selector-class">.models</span> import Sequential
+from tensorflow<span class="hljs-selector-class">.keras</span><span class="hljs-selector-class">.layers</span> import Embedding,LSTM,Dense
+</code></pre><p>create the model,</p>
+<pre><code><span class="hljs-keyword">model</span>=Sequential()
+<span class="hljs-keyword">model</span>.add(Embedding(<span class="hljs-number">283</span>,<span class="hljs-number">100</span>,input_length=<span class="hljs-number">56</span>))
+<span class="hljs-keyword">model</span>.add(LSTM(<span class="hljs-number">150</span>))
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">283</span>,activation=<span class="hljs-string">'softmax'</span>))
+</code></pre><p>compile the model,</p>
+<pre><code><span class="hljs-keyword">model</span>.compile(loss=<span class="hljs-string">'categorical_crossentropy'</span>,optimizer=<span class="hljs-string">'adam'</span>,metrics=[<span class="hljs-string">'accuracy'</span>])
+</code></pre><p>check the model summary,</p>
+<pre><code><span class="hljs-selector-tag">model</span><span class="hljs-selector-class">.summary</span>()
+</code></pre><p>fit the model on x and y,</p>
+<pre><code><span class="hljs-attr">model.fit(x,y,epochs</span>=<span class="hljs-string">100)</span>
+</code></pre><p>lets take a word, tokenize it, do zero padding and predict the next word from it using the model,</p>
+<pre><code>import numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">text</span>=<span class="hljs-string">"mail"</span>
+
+token_text=tokenizer.texts_to_sequences([<span class="hljs-keyword">text</span>])[<span class="hljs-number">0</span>]
+
+padded_token_text=pad_sequences([token_text],maxlen=<span class="hljs-number">56</span>,padding=<span class="hljs-string">'pre'</span>)
+pos=np.argmax(model.predict(padded_token_text))
+<span class="hljs-keyword">for</span> <span class="hljs-built_in">word</span>,index <span class="hljs-keyword">in</span> tokenizer.word_index.<span class="hljs-keyword">items</span>():
+  <span class="hljs-keyword">if</span> index==pos:
+    print(<span class="hljs-built_in">word</span>)
+</code></pre><p>inorder to predict a complete sentence, use for loop,</p>
+<pre><code><span class="hljs-keyword">import</span> <span class="hljs-built_in">time</span>
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">text</span>=<span class="hljs-string">"NLP and Deep Learning both"</span>
+
+<span class="hljs-keyword">for</span> i <span class="hljs-built_in">in</span> range(<span class="hljs-number">10</span>):
+  token_text=tokenizer.texts_to_sequences([<span class="hljs-keyword">text</span>])[<span class="hljs-number">0</span>]
+  padded_token_text=pad_sequences([token_text],maxlen=<span class="hljs-number">56</span>,padding=<span class="hljs-string">'pre'</span>)
+  pos=np.argmax(model.predict(padded_token_text))
+
+  <span class="hljs-keyword">for</span> word,index <span class="hljs-built_in">in</span> tokenizer.word_index.items():
+    <span class="hljs-keyword">if</span> index==pos:
+      <span class="hljs-keyword">text</span>=<span class="hljs-keyword">text</span>+ <span class="hljs-string">" "</span>+ word
+      print(<span class="hljs-keyword">text</span>)
+      <span class="hljs-built_in">time</span>.sleep(<span class="hljs-number">2</span>)
+</code></pre><p><img src="/assets/images/clt/lstm-new-word-or-sentence-predictor/1.png" alt="1"></p>
+<p>another demo is, </p>
+<pre><code><span class="hljs-keyword">import</span> <span class="hljs-built_in">time</span>
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">text</span>=<span class="hljs-string">"total duration of the course"</span>
+
+<span class="hljs-keyword">for</span> i <span class="hljs-built_in">in</span> range(<span class="hljs-number">10</span>):
+  token_text=tokenizer.texts_to_sequences([<span class="hljs-keyword">text</span>])[<span class="hljs-number">0</span>]
+  padded_token_text=pad_sequences([token_text],maxlen=<span class="hljs-number">56</span>,padding=<span class="hljs-string">'pre'</span>)
+  pos=np.argmax(model.predict(padded_token_text))
+
+  <span class="hljs-keyword">for</span> word,index <span class="hljs-built_in">in</span> tokenizer.word_index.items():
+    <span class="hljs-keyword">if</span> index==pos:
+      <span class="hljs-keyword">text</span>=<span class="hljs-keyword">text</span>+ <span class="hljs-string">" "</span>+ word
+      print(<span class="hljs-keyword">text</span>)
+      <span class="hljs-built_in">time</span>.sleep(<span class="hljs-number">2</span>)
+</code></pre><p><img src="/assets/images/clt/lstm-new-word-or-sentence-predictor/2.png" alt="2"></p>
+</div>
+
+<button type="button" class="collapsible">Transfer Learning in Keras | Fine Tuning VS Feature Extraction</button>
+<div class="content">
+<p>Transfer learning is also one of the most important topic in Deep-Learning/Machine-Learning. I would say it is like using others pre-trained models for your problem. Deep Learning models are difficult to train because they are data-hungry. By this i mean they require alot of data in order to achieve good performance. Therefore is alot of data you can say labelled-data is required. </p>
+<p>Let&#39;s assume the example of a simple cat-dog classifier. We&#39;ll need a huge data inorder to make a good classifier. One method is to scrap the data using various data-scrapping techniques but there is still an issue in this case. That data will be unlabelled, you&#39;ve to assign labels manually and for this purpose labor will be required which is costly. This is the first problem.</p>
+<p>Second reason for using the Pre-Trained models is the time. Deep Learning models usually take a huge time to train so people don&#39;t prefer long trainings by theirselves. The solution of these two problems is using pre-trained models for your projects. One of the most famous dataset is ImageNet. It is a big dataset of images almost 1.4 million images and there are total of 1000 classes in this dataset. Many models are trained on this dataset. Rather than creating your model and training it on this dataset, you can use those pre-trained models.</p>
+<p>There is one problem in using pre-trained models. What if the class you want to classify is not present in the dataset on which model is trained. Here comes the transfer learning. In transfer learning we use the pre-trained models and we re-train a portion of the model on our dataset. Basically in CNN, there are two major parts of the architecture. One is the convolution layer portion while the second one is the fully-connected layer portion. The first portion works for all the problems because it extract the primitive features which is same for all the problems/classification task. While the fully connected portion is used for classification mainly, so we retrain this portion on our required dataset according to the problem.</p>
+<p>Transfer learning is done in two ways,</p>
+<ul>
+<li>Feature Extraction Method</li>
+<li>Fine-Tuning Method</li>
+</ul>
+<p>In the first method, we only retrain the fully connected layer portion according to our need. While in the Fine-Tuning method, we retrain some of the last convolution layers and fully connected layers. </p>
+<h2 id="transfer-learning-feature-extraction-without-using-data-augmentation">Transfer Learning Feature Extraction without using Data Augmentation</h2>
+<p>First of all download the dataset in your notebook,</p>
+<pre><code>!mkdir -<span class="hljs-selector-tag">p</span> ~/<span class="hljs-selector-class">.kaggle</span>
+!cp kaggle<span class="hljs-selector-class">.json</span> ~/.kaggle/
+!kaggle datasets download -d salader/dogs-vs-cats
+</code></pre><p>Then unzip the dataset,</p>
+<pre><code><span class="hljs-keyword">import</span> zipfile
+zip_ref = zipfile.ZipFile(<span class="hljs-string">'/content/dogs-vs-cats.zip'</span>, <span class="hljs-string">'r'</span>)
+zip_ref.extractall(<span class="hljs-string">'/content'</span>)
+zip_ref.<span class="hljs-built_in">close</span>()
+</code></pre><p>import tensorflow and necessary libraries,</p>
+<pre><code><span class="hljs-keyword">import</span> tensorflow
+<span class="hljs-title">from</span> tensorflow <span class="hljs-keyword">import</span> keras
+<span class="hljs-title">from</span> keras <span class="hljs-keyword">import</span> Sequential
+<span class="hljs-title">from</span> keras.layers <span class="hljs-keyword">import</span> Dense,Flatten
+<span class="hljs-title">from</span> keras.applications.vgg16 <span class="hljs-keyword">import</span> VGG16
+</code></pre><p>create a base model,</p>
+<pre><code>conv_base = VGG16(
+    <span class="hljs-name">weights=</span>'imagenet',
+    include_top = False,
+    input_shape=(<span class="hljs-number">150</span>,<span class="hljs-number">150</span>,<span class="hljs-number">3</span>)
+)
+</code></pre><p>check the model summary,</p>
+<pre><code><span class="hljs-selector-tag">conv_base</span><span class="hljs-selector-class">.summary</span>()
+</code></pre><p><img src="/assets/images/clt/transfer-learning-in-keras/1.png" alt="1"></p>
+<p>Then create and connect the rest of the model,</p>
+<pre><code><span class="hljs-keyword">model</span> = Sequential()
+
+<span class="hljs-keyword">model</span>.add(conv_base)
+<span class="hljs-keyword">model</span>.add(Flatten())
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">256</span>,activation=<span class="hljs-string">'relu'</span>))
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">1</span>,activation=<span class="hljs-string">'sigmoid'</span>))
+</code></pre><pre><code><span class="hljs-keyword">check</span> <span class="hljs-keyword">model</span> summary,
+</code></pre><p>model.summary()</p>
+<pre><code>
+![<span class="hljs-string">2</span>](<span class="hljs-link">/assets/images/clt/transfer-learning-in-keras/2.png</span>)
+
+change the training parameter for the starting covolution layers,
+</code></pre><p>conv_base.trainable=False</p>
+<pre><code>
+<span class="hljs-built_in">add</span> <span class="hljs-keyword">the</span> generators <span class="hljs-built_in">to</span> efficiently use <span class="hljs-keyword">the</span> resources,
+</code></pre><p>train_ds = keras.utils.image_dataset_from_directory(
+    directory = &#39;/content/train&#39;,
+    labels=&#39;inferred&#39;,
+    label_mode = &#39;int&#39;,
+    batch_size=32,
+    image_size=(150,150)
+)</p>
+<p>validation_ds = keras.utils.image_dataset_from_directory(
+    directory = &#39;/content/test&#39;,
+    labels=&#39;inferred&#39;,
+    label_mode = &#39;int&#39;,
+    batch_size=32,
+    image_size=(150,150)
+)</p>
+<pre><code>
+<span class="hljs-built_in">normalize</span> the images,
+</code></pre><p>def process(image,label):
+    image = tensorflow.cast(image/255. ,tensorflow.float32)
+    return image,label</p>
+<p>train_ds = train_ds.map(process)
+validation_ds = validation_ds.map(process)</p>
+<pre><code>
+compile the <span class="hljs-keyword">model</span>,
+</code></pre><p>model.compile(optimizer=&#39;adam&#39;,loss=&#39;binary_crossentropy&#39;,metrics=[&#39;accuracy&#39;])</p>
+<pre><code>
+store <span class="hljs-keyword">the</span> history <span class="hljs-keyword">in</span> <span class="hljs-keyword">a</span> <span class="hljs-built_in">variable</span>,
+</code></pre><p>history = model.fit(train_ds,epochs=10,validation_data=validation_ds)</p>
+<pre><code>
+plot <span class="hljs-keyword">the</span> accuracy <span class="hljs-keyword">and</span> validation accuracy <span class="hljs-keyword">using</span> this history <span class="hljs-built_in">variable</span>,
+</code></pre><p>import matplotlib.pyplot as plt</p>
+<p>plt.plot(history.history[&#39;accuracy&#39;],color=&#39;red&#39;,label=&#39;train&#39;)
+plt.plot(history.history[&#39;val_accuracy&#39;],color=&#39;blue&#39;,label=&#39;validation&#39;)
+plt.legend()
+plt.show()</p>
+<pre><code>
+![<span class="hljs-string">3</span>](<span class="hljs-link">/assets/images/clt/transfer-learning-in-keras/3.png</span>)
+
+plot the loss and the validation loss,
+</code></pre><p>plt.plot(history.history[&#39;loss&#39;],color=&#39;red&#39;,label=&#39;train&#39;)
+plt.plot(history.history[&#39;val_loss&#39;],color=&#39;blue&#39;,label=&#39;validation&#39;)
+plt.legend()
+plt.show()
+```</p>
+<p><img src="/assets/images/clt/transfer-learning-in-keras/4.png" alt="4"></p>
+</div>
+
+<button type="button" class="collapsible">Transfer Learning in Keras | with Data Augmentation</button>
+<div class="content">
+<p>Transfer learning gives a bit different results when done with data-augmentation and without data-augmentation. The accuracy is a bit improved with data augmentation technique. Here i&#39;ve implemented a code today for transfer learning technique with data-augmentation. You can check my previous without augmentation implementation as well from <a href="/2021/04/10/transfer-learnin-in-keras">here!</a></p>
+<p>First of all, do necessary importing and download dataset,</p>
+<pre><code>!mkdir -<span class="hljs-selector-tag">p</span> ~/<span class="hljs-selector-class">.kaggle</span>
+!cp kaggle<span class="hljs-selector-class">.json</span> ~/.kaggle/
+!kaggle datasets download -d salader/dogs-vs-cats
+</code></pre><p>unzip the dataset,</p>
+<pre><code><span class="hljs-keyword">import</span> zipfile
+zip_ref = zipfile.ZipFile(<span class="hljs-string">'/content/dogs-vs-cats.zip'</span>, <span class="hljs-string">'r'</span>)
+zip_ref.extractall(<span class="hljs-string">'/content'</span>)
+zip_ref.<span class="hljs-built_in">close</span>()
+</code></pre><p>import libraries for the model,</p>
+<pre><code><span class="hljs-keyword">import</span> tensorflow
+<span class="hljs-title">from</span> tensorflow <span class="hljs-keyword">import</span> keras
+<span class="hljs-title">from</span> keras <span class="hljs-keyword">import</span> Sequential
+<span class="hljs-title">from</span> keras.layers <span class="hljs-keyword">import</span> Dense,Flatten
+<span class="hljs-title">from</span> keras.applications.vgg16 <span class="hljs-keyword">import</span> VGG16
+</code></pre><p>use the VGG16 convolution base,</p>
+<pre><code>conv_base = VGG16(
+    <span class="hljs-name">weights=</span>'imagenet',
+    include_top = False,
+    input_shape=(<span class="hljs-number">150</span>,<span class="hljs-number">150</span>,<span class="hljs-number">3</span>)
+)
+</code></pre><p>create the rest of the model and connect with the base,</p>
+<pre><code><span class="hljs-keyword">model</span> = Sequential()
+
+<span class="hljs-keyword">model</span>.add(conv_base)
+<span class="hljs-keyword">model</span>.add(Flatten())
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">256</span>,activation=<span class="hljs-string">'relu'</span>))
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">1</span>,activation=<span class="hljs-string">'sigmoid'</span>))
+</code></pre><p>freeze the convolution layers training,</p>
+<pre><code>conv_base<span class="hljs-selector-class">.trainable</span> = False
+</code></pre><p>import the image generators for the data augmentation,</p>
+<pre><code>from keras<span class="hljs-selector-class">.preprocessing</span><span class="hljs-selector-class">.image</span> import ImageDataGenerator, array_to_img, img_to_array, load_img
+</code></pre><p>create the generators and do image augmentation,</p>
+<pre><code><span class="hljs-attr">batch_size</span> = <span class="hljs-number">32</span>
+
+<span class="hljs-attr">train_datagen</span> = ImageDataGenerator(
+        <span class="hljs-attr">rescale=1./255,</span>
+        <span class="hljs-attr">shear_range=0.2,</span>
+        <span class="hljs-attr">zoom_range=0.2,</span>
+        <span class="hljs-attr">horizontal_flip=True)</span>
+
+<span class="hljs-attr">test_datagen</span> = ImageDataGenerator(<span class="hljs-attr">rescale=1./255)</span>
+
+<span class="hljs-attr">train_generator</span> = train_datagen.flow_from_directory(
+        '/content/train',
+        <span class="hljs-attr">target_size=(150,</span> <span class="hljs-number">150</span>),
+        <span class="hljs-attr">batch_size=batch_size,</span>
+        <span class="hljs-attr">class_mode='binary')</span> 
+
+<span class="hljs-attr">validation_generator</span> = test_datagen.flow_from_directory(
+        '/content/test',
+        <span class="hljs-attr">target_size=(150,</span> <span class="hljs-number">150</span>),
+        <span class="hljs-attr">batch_size=batch_size,</span>
+        <span class="hljs-attr">class_mode='binary')</span>
+</code></pre><p>compile the model,</p>
+<pre><code><span class="hljs-keyword">model</span>.compile(optimizer=<span class="hljs-string">'adam'</span>,loss=<span class="hljs-string">'binary_crossentropy'</span>,metrics=[<span class="hljs-string">'accuracy'</span>])
+</code></pre><p>fit the model and store the history,</p>
+<pre><code><span class="hljs-attr">history</span> = model.fit_generator(
+        train_generator,
+        <span class="hljs-attr">epochs=10,</span>
+        <span class="hljs-attr">validation_data=validation_generator)</span>
+</code></pre><p>do plotting of accuracy,</p>
+<pre><code>import matplotlib<span class="hljs-selector-class">.pyplot</span> as plt
+
+plt.plot(history<span class="hljs-selector-class">.history</span>[<span class="hljs-string">'accuracy'</span>],<span class="hljs-attribute">color</span>=<span class="hljs-string">'red'</span>,label=<span class="hljs-string">'train'</span>)
+plt.plot(history<span class="hljs-selector-class">.history</span>[<span class="hljs-string">'val_accuracy'</span>],<span class="hljs-attribute">color</span>=<span class="hljs-string">'blue'</span>,label=<span class="hljs-string">'validation'</span>)
+plt.legend()
+plt.show()
+</code></pre><p><img src="/assets/images/clt/transfer-learnin-in-keras-data-augmentaion/1.png" alt="1"></p>
+<p>plot the loss,</p>
+<pre><code>plt.plot(history.history[<span class="hljs-string">'loss'</span>],color=<span class="hljs-string">'red'</span>,<span class="hljs-keyword">label</span><span class="bash">=<span class="hljs-string">'train'</span>)
+</span>plt.plot(history.history[<span class="hljs-string">'val_loss'</span>],color=<span class="hljs-string">'blue'</span>,<span class="hljs-keyword">label</span><span class="bash">=<span class="hljs-string">'validation'</span>)
+</span>plt.legend()
+plt.show()
+</code></pre><p><img src="/assets/images/clt/transfer-learnin-in-keras-data-augmentaion/2.png" alt="2">
+</div></p>
+
+</div>
+
+<button type="button" class="collapsible">GRADUATE Admission Prediction using ANN</button>
+<div class="content">
+<p>Today we are going to solve a regression problem using an <strong>Artificial Neural Network</strong>. The dataset i&#39;m using contains the information about the students, their GRE score, TOEFL score, CGPA e.t.c.</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/14.png" alt="14"></p>
+<p>First of all import the <code>numpy</code> and <code>pandas</code> libraries,</p>
+<pre><code><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+</code></pre><p>Next import the dataset we want to work on,</p>
+<pre><code><span class="hljs-attr">df</span>=pd.read_csv(<span class="hljs-string">'/kaggle/input/graduate-admissions/Admission_Predict_Ver1.1.csv'</span>)
+</code></pre><p>Have a look at the dataset using the <code>head()</code> function,</p>
+<pre><code><span class="hljs-selector-tag">df</span><span class="hljs-selector-class">.head</span>()
+</code></pre><p>Here is how it will look like,</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/1.png" alt="1"></p>
+<p>Then checkout the shape of dataset,</p>
+<pre><code><span class="hljs-selector-tag">df</span><span class="hljs-selector-class">.shape</span>
+</code></pre><p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/2.png" alt="2"></p>
+<p>Then use the info() function to get more details,</p>
+<pre><code><span class="hljs-selector-tag">df</span><span class="hljs-selector-class">.info</span>()
+</code></pre><p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/3.png" alt="3"></p>
+<p>Next is, we will check if there are any duplicate rows present or not,</p>
+<pre><code><span class="hljs-selector-tag">df</span><span class="hljs-selector-class">.duplicated</span>()<span class="hljs-selector-class">.sum</span>()
+</code></pre><p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/4.png" alt="4"></p>
+<p>Now drop the <code>Serial No.</code> column because it is of no use for us,</p>
+<pre><code>df.<span class="hljs-built_in">drop</span>(columns=[<span class="hljs-string">'Serial No.'</span>],inplace=<span class="hljs-literal">True</span>)
+</code></pre><p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/5.png" alt="5"></p>
+<p>Have a look at the dataset,</p>
+<pre><code><span class="hljs-selector-tag">df</span><span class="hljs-selector-class">.head</span>()
+</code></pre><p>Here is how it looks like,</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/6.png" alt="6"></p>
+<p>Now separate the columns for testing and training data,</p>
+<pre><code><span class="hljs-attr">X</span>=df.iloc[:,<span class="hljs-number">0</span>:-<span class="hljs-number">1</span>]
+<span class="hljs-attr">y</span>=df.iloc[:,-<span class="hljs-number">1</span>]
+</code></pre><p>Here is how the features looks like,</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/7.png" alt="7"></p>
+<p>Here is a view of target label,</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/8.png" alt="8"></p>
+<p>Now import the <code>train_test_split</code> and divide the data into 4-parts,</p>
+<pre><code><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split
+X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=<span class="hljs-number">0.2</span>,random_state=<span class="hljs-number">1</span>)
+</code></pre><p><code>X_train</code> will look like this,</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/9.png" alt="9"></p>
+<p>Now it is time to scale the values so that the weights can converge in a better way,</p>
+<pre><code>from sklearn.preprocessing <span class="hljs-built_in">import</span> MinMaxScaler
+<span class="hljs-attr">scaler=MinMaxScaler()</span>
+<span class="hljs-attr">X_train_scaled=scaler.fit_transform(X_train)</span>
+<span class="hljs-attr">X_test_scaled=scaler.transform(X_test)</span>
+</code></pre><p>Scaled values will look like this,</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/10.png" alt="10"></p>
+<p>Now it is time to build our <strong>NEURAL NETWORK</strong>. For this purpose import all the necessary libraries,</p>
+<pre><code><span class="hljs-keyword">import</span> tensorflow
+<span class="hljs-title">from</span> tensorflow <span class="hljs-keyword">import</span> keras
+<span class="hljs-title">from</span> keras <span class="hljs-keyword">import</span> Sequential 
+<span class="hljs-title">from</span> keras.layers <span class="hljs-keyword">import</span> Dense
+</code></pre><p>Create a sequential model and add layers to it,</p>
+<pre><code><span class="hljs-keyword">model</span>=Sequential()
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">7</span>,activation=<span class="hljs-string">'relu'</span>,input_dim=<span class="hljs-number">7</span>))
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">7</span>,activation=<span class="hljs-string">'relu'</span>))
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">1</span>,activation=<span class="hljs-string">'linear'</span>))
+</code></pre><p>Check out the model summary,</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/11.png" alt="11"></p>
+<p>Then compile the model,</p>
+<pre><code><span class="hljs-keyword">model</span>.compile(loss=<span class="hljs-string">'mean_squared_error'</span>,optimizer=<span class="hljs-string">'Adam'</span>)
+</code></pre><p>Now fit the model with the training data and provide epochs,</p>
+<pre><code>history=model.fit(X_train_scaled,y_train,epochs=<span class="hljs-number">100</span>,validation_split=<span class="hljs-number">0.2</span>)
+`
+</code></pre><p>Our model is trained now, it&#39;s time to make some predictions now,</p>
+<pre><code><span class="hljs-attr">y_pred</span>=model.predict(X_test_scaled)
+</code></pre><p>Calculate the <code>r2_score</code> of the predictions,</p>
+<pre><code>from sklearn<span class="hljs-selector-class">.metrics</span> import r2_score
+<span class="hljs-function"><span class="hljs-title">r2_score</span><span class="hljs-params">(y_test,y_pred)</span></span>
+</code></pre><p>Have a look at it,</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/12.png" alt="12"></p>
+<p>Now import the plotting libraries and make a plot between <code>loss</code> and <code>validaton_loss</code> of our model,</p>
+<pre><code>import matplotlib<span class="hljs-selector-class">.pyplot</span> as plt
+plt.plot(history<span class="hljs-selector-class">.history</span>[<span class="hljs-string">'loss'</span>])
+plt.plot(history<span class="hljs-selector-class">.history</span>[<span class="hljs-string">'val_loss'</span>])
+</code></pre><p>Here is the plot,</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/13.png" alt="13"></p>
+</div>
+
+<button type="button" class="collapsible">Handwritten Digit Classification using ANN | MNIST Dataset</button>
+<div class="content">
+<p>Today, we are going to build anther Artificial Neural Network for one of the famous dataset known as <strong>MNIST</strong>. It is use to classify digits(0-9).</p>
+<p><img src="/assets/images/clt/handwritten-digit-classification-using-ann/4.png" alt="4"></p>
+<p>Initially we did all the necessary importings,</p>
+<pre><code><span class="hljs-keyword">import</span> tensorflow
+<span class="hljs-title">from</span> tensorflow <span class="hljs-keyword">import</span> keras
+<span class="hljs-title">from</span> tensorflow.keras <span class="hljs-keyword">import</span> Sequential
+<span class="hljs-title">from</span> tensorflow.keras.layers <span class="hljs-keyword">import</span> Dense,Flatten
+</code></pre><p>Then simply load the dataset using keras, it will automatically do the train and test split.</p>
+<pre><code>(X_train,y_train),(X_test,y_test)=keras<span class="hljs-selector-class">.datasets</span><span class="hljs-selector-class">.mnist</span><span class="hljs-selector-class">.load_data</span>()
+</code></pre><p>Visualize the shape of train and test,</p>
+<pre><code>X_test<span class="hljs-selector-class">.shape</span>
+`
+</code></pre><pre><code>y_test<span class="hljs-selector-class">.shape</span>
+`
+</code></pre><pre><code>X_train<span class="hljs-selector-class">.shape</span>
+`
+</code></pre><pre><code>y_train<span class="hljs-selector-class">.shape</span>
+`
+</code></pre><p><strong>y_train</strong> will be the labels array.</p>
+<p>Then import plotting library and do some plotting of training data to acutually visualize the digits.</p>
+<pre><code><span class="hljs-selector-tag">import</span> <span class="hljs-selector-tag">matplotlib</span><span class="hljs-selector-class">.pyplot</span> <span class="hljs-selector-tag">as</span> <span class="hljs-selector-tag">plt</span>
+<span class="hljs-selector-tag">plt</span><span class="hljs-selector-class">.imshow</span>(<span class="hljs-selector-tag">X_train</span><span class="hljs-selector-attr">[2]</span>)
+</code></pre><p>Now scale the data to better calculate the parameters e.g weight and bias.</p>
+<pre><code><span class="hljs-attr">X_train</span>=X_train/<span class="hljs-number">255</span>
+<span class="hljs-attr">X_test</span>=X_test/<span class="hljs-number">255</span>
+</code></pre><p>Lets make our ANN now with keras sequential() model, </p>
+<pre><code><span class="hljs-keyword">model</span> = Sequential()
+
+<span class="hljs-keyword">model</span>.add(Flatten(input_shape=(<span class="hljs-number">28</span>,<span class="hljs-number">28</span>)))
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">128</span>,activation=<span class="hljs-string">'relu'</span>))
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">32</span>,activation=<span class="hljs-string">'relu'</span>))
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">10</span>,activation=<span class="hljs-string">'softmax'</span>))
+</code></pre><p><strong>Flatten</strong> will convert the 28x28 matrix into single long array.</p>
+<p>View the model summary using,</p>
+<pre><code>model.summary()
+`
+</code></pre><p>Add the loss function to our model, </p>
+<pre><code><span class="hljs-keyword">model</span>.compile(loss=<span class="hljs-string">'sparse_categorical_crossentropy'</span>,optimizer=<span class="hljs-string">'Adam'</span>,metrics=[<span class="hljs-string">'accuracy'</span>])
+</code></pre><p>Now fit the model on our training data to calculate the weight and bias,</p>
+<pre><code>history=model.fit(X_train,y_train,epochs=<span class="hljs-number">25</span>,validation_split=<span class="hljs-number">0.2</span>)
+# history = model.fit(X_train,y_train,epochs=<span class="hljs-number">25</span>,validation_split=<span class="hljs-number">0.2</span>)
+</code></pre><p>The model will run for 25 epochs. It is now time to make some predictions from our model,</p>
+<pre><code><span class="hljs-attr">y_prob=model.predict(X_test)</span>
+<span class="hljs-attr">y_pred</span> = y_prob.argmax(<span class="hljs-attr">axis=1)</span>
+y_pred
+</code></pre><p>Inorder to check accuracy of our model <strong>import accuracy_score</strong></p>
+<pre><code>from sklearn<span class="hljs-selector-class">.metrics</span> import accuracy_score
+<span class="hljs-function"><span class="hljs-title">accuracy_score</span><span class="hljs-params">(y_test,y_pred)</span></span>
+</code></pre><p>Also we will check the overfitting by plotting the loss and validation_loss,</p>
+<pre><code><span class="hljs-selector-tag">plt</span><span class="hljs-selector-class">.plot</span>(<span class="hljs-selector-tag">history</span><span class="hljs-selector-class">.history</span><span class="hljs-selector-attr">['loss']</span>)
+<span class="hljs-selector-tag">plt</span><span class="hljs-selector-class">.plot</span>(<span class="hljs-selector-tag">history</span><span class="hljs-selector-class">.history</span><span class="hljs-selector-attr">['val_loss']</span>)
+</code></pre><p><img src="/assets/images/clt/handwritten-digit-classification-using-ann/1.png" alt="1"></p>
+<p>Now compare the accuracy with the validation_accuracy</p>
+<pre><code><span class="hljs-selector-tag">plt</span><span class="hljs-selector-class">.plot</span>(<span class="hljs-selector-tag">history</span><span class="hljs-selector-class">.history</span><span class="hljs-selector-attr">['accuracy']</span>)
+<span class="hljs-selector-tag">plt</span><span class="hljs-selector-class">.plot</span>(<span class="hljs-selector-tag">history</span><span class="hljs-selector-class">.history</span><span class="hljs-selector-attr">['val_accuracy']</span>)
+</code></pre><p><img src="/assets/images/clt/handwritten-digit-classification-using-ann/2.png" alt="2"></p>
+<p>Lets test our model on a random value from the testing data,</p>
+<pre><code><span class="hljs-selector-tag">plt</span><span class="hljs-selector-class">.imshow</span>(<span class="hljs-selector-tag">X_test</span><span class="hljs-selector-attr">[9]</span>)
+</code></pre><pre><code>model.predict(X_test[<span class="hljs-number">9</span>].reshape(<span class="hljs-number">1</span>,<span class="hljs-number">28</span>,<span class="hljs-number">28</span>)).argmax(axis=<span class="hljs-number">1</span>)
+</code></pre><p><img src="/assets/images/clt/handwritten-digit-classification-using-ann/3.png" alt="3"></p>
+
+</div>
+
+<button type="button" class="collapsible">Customer Churn Prediction using ANN | Keras and Tensorflow | Deep Learning Classification</button>
+<div class="content">
+<p>The working of a Artificial Neural Network can be observed in multiple ways. One way is to solve a practical use-case on it. The problem we are going to solve today is Customer-Churn problem of a Bank<code>(will the customer stay or go)</code>.</p>
+<p><img src="/assets/images/clt/customer-churn-prediction-using-ann/3.png" alt="3"> </p>
+<p>For this purpose, i&#39;m going to use the available dataset on kaggle. </p>
+<p>Initially we are importing the necessary libraries including numpy and pandas. Then we are obtaining the path to the dataset csv file.</p>
+<pre><code><span class="hljs-comment"># This Python 3 environment comes with many helpful analytics libraries installed</span>
+<span class="hljs-comment"># It is defined by the kaggle/python Docker image: https://github.com/kaggle/docker-python</span>
+<span class="hljs-comment"># For example, here's several helpful packages to load</span>
+
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np <span class="hljs-comment"># linear algebra</span>
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd <span class="hljs-comment"># data processing, CSV file I/O (e.g. pd.read_csv)</span>
+
+<span class="hljs-comment"># Input data files are available in the read-only "../input/" directory</span>
+<span class="hljs-comment"># For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory</span>
+
+<span class="hljs-keyword">import</span> os
+<span class="hljs-keyword">for</span> dirname, _, filenames <span class="hljs-keyword">in</span> os.walk(<span class="hljs-string">'/kaggle/input'</span>):
+    <span class="hljs-keyword">for</span> filename <span class="hljs-keyword">in</span> filenames:
+        print(os.path.join(dirname, filename))
+
+<span class="hljs-comment"># You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save &amp; Run All" </span>
+<span class="hljs-comment"># You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session</span>
+</code></pre><p>Now read the data in the form of pandas dataframe,</p>
+<pre><code><span class="hljs-attr">df</span>=pd.read_csv(<span class="hljs-string">'/kaggle/input/credit-card-customer-churn-prediction/Churn_Modelling.csv'</span>)
+</code></pre><p>Observe the dataset by using these functions,</p>
+<pre><code><span class="hljs-selector-tag">df</span><span class="hljs-selector-class">.describe</span>()
+<span class="hljs-selector-tag">df</span><span class="hljs-selector-class">.head</span>()
+</code></pre><p>Dataset information will be displayed. Also see the un-nessary columns and drop them.e.g <strong>RowNumber,CustomerId and Surname are of no use for us</strong>,</p>
+<pre><code>df.<span class="hljs-built_in">drop</span>(columns = [<span class="hljs-string">'RowNumber'</span>,<span class="hljs-string">'CustomerId'</span>,<span class="hljs-string">'Surname'</span>],inplace=<span class="hljs-literal">True</span>)
+</code></pre><p>Now count the total categorical values in <code>Geography</code> and <code>Gender</code> column </p>
+<pre><code>df[<span class="hljs-string">'Geography'</span>].<span class="hljs-keyword">value</span><span class="hljs-number">_</span>counts()
+</code></pre><pre><code>df[<span class="hljs-string">'Gender'</span>].<span class="hljs-keyword">value</span><span class="hljs-number">_</span>counts()
+</code></pre><p>The next step is to get the dummies where possible,</p>
+<pre><code><span class="hljs-attr">df</span>=pd.get_dummies(df,columns=[<span class="hljs-string">'Geography'</span>,<span class="hljs-string">'Gender'</span>],drop_first=<span class="hljs-literal">True</span>)
+</code></pre><p>You&#39;ve your dataset in useful form now, perform the initial<code>train-test-split</code>.</p>
+<pre><code>X=df.drop(<span class="hljs-attribute">columns</span>=[<span class="hljs-string">'Exited'</span>])
+y=df[<span class="hljs-string">'Exited'</span>]<span class="hljs-selector-class">.values</span>
+
+from sklearn<span class="hljs-selector-class">.model_selection</span> import train_test_split
+X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=<span class="hljs-number">0.2</span>,random_state=<span class="hljs-number">0</span>)
+</code></pre><p>Then scale the values using <code>StandardScaler library</code>,</p>
+<pre><code>from sklearn.preprocessing <span class="hljs-built_in">import</span> StandardScaler
+<span class="hljs-attr">scaler=StandardScaler()</span>
+<span class="hljs-attr">X_train_trf=scaler.fit_transform(X_train)</span>
+<span class="hljs-attr">X_test_trf=scaler.transform(X_test)</span>
+</code></pre><p>It is now time to make our first Artificial Neural Network, so do necessary importings of tensorflow and keras,</p>
+<pre><code><span class="hljs-keyword">import</span> tensorflow
+<span class="hljs-title">from</span> tensorflow <span class="hljs-keyword">import</span> keras
+<span class="hljs-title">from</span> tensorflow.keras <span class="hljs-keyword">import</span> Sequential
+<span class="hljs-title">from</span> tensorflow.keras.layers <span class="hljs-keyword">import</span> Dense
+</code></pre><p>Now make a sequential model and add hidden layers to it,</p>
+<pre><code><span class="hljs-keyword">model</span>=Sequential()
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">11</span>,activation=<span class="hljs-string">'relu'</span>,input_dim=<span class="hljs-number">11</span>))
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">11</span>,activation=<span class="hljs-string">'relu'</span>))
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">1</span>,activation=<span class="hljs-string">'sigmoid'</span>))
+</code></pre><p>Check the model summary,</p>
+<pre><code><span class="hljs-selector-tag">model</span><span class="hljs-selector-class">.summary</span>()
+</code></pre><p>The next step is to add a loss-function to your ANN. Here we are using <code>binary_crossentropy</code> with optimizer <code>Adam</code></p>
+<pre><code><span class="hljs-keyword">model</span>.compile(loss=<span class="hljs-string">'binary_crossentropy'</span>,optimizer=<span class="hljs-string">'Adam'</span>,metrics=[<span class="hljs-string">'accuracy'</span>])
+</code></pre><p>Fit the model on the training data and validate 20% of the data during training and store it in a variable. This will run for 100 epochs and we will have the perfect weights for hidden layers.</p>
+<pre><code><span class="hljs-attr">history</span>=model.fit(X_train_trf,y_train,epochs=<span class="hljs-number">100</span>,validation_split=<span class="hljs-number">0.2</span>)
+</code></pre><p>Check the weights of hidden layers,</p>
+<pre><code><span class="hljs-selector-tag">model</span><span class="hljs-selector-class">.layers</span><span class="hljs-selector-attr">[0]</span><span class="hljs-selector-class">.get_weights</span>()
+</code></pre><pre><code><span class="hljs-selector-tag">model</span><span class="hljs-selector-class">.layers</span><span class="hljs-selector-attr">[1]</span><span class="hljs-selector-class">.get_weights</span>()
+</code></pre><pre><code><span class="hljs-selector-tag">model</span><span class="hljs-selector-class">.layers</span><span class="hljs-selector-attr">[2]</span><span class="hljs-selector-class">.get_weights</span>()
+</code></pre><p>We are going to make predictions from our model now,</p>
+<pre><code><span class="hljs-attr">y_log</span>=model.predict(X_test_trf)
+</code></pre><p>As the activation function is sigmoid and relu, so it will give values b/w the range of 0 and 1. We&#39;ve to use some threshold to obtain the binary values from the results.</p>
+<pre><code>y_pred=np.where(y_log&gt;<span class="hljs-number">0.5</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>)
+</code></pre><p>Check the accuracy of the ANN,</p>
+<pre><code>from sklearn<span class="hljs-selector-class">.metrics</span> import accuracy_score
+<span class="hljs-function"><span class="hljs-title">accuracy_score</span><span class="hljs-params">(y_test,y_pred)</span></span>
+</code></pre><p>history is the object itself. So inorder to access the values use,</p>
+<pre><code><span class="hljs-keyword">history</span>.<span class="hljs-keyword">history</span>
+</code></pre><p>Now see the overfitting, compare the loss and validation loss.</p>
+<pre><code>import matplotlib<span class="hljs-selector-class">.pyplot</span> as plt
+
+plt.plot(history<span class="hljs-selector-class">.history</span>[<span class="hljs-string">'loss'</span>])
+plt.plot(history<span class="hljs-selector-class">.history</span>[<span class="hljs-string">'val_loss'</span>])
+</code></pre><p><img src="/assets/images/clt/customer-churn-prediction-using-ann/1.png" alt="1"></p>
+<p>Similarly compare the accuracy and validation accuracy.</p>
+<pre><code><span class="hljs-selector-tag">plt</span><span class="hljs-selector-class">.plot</span>(<span class="hljs-selector-tag">history</span><span class="hljs-selector-class">.history</span><span class="hljs-selector-attr">['accuracy']</span>)
+<span class="hljs-selector-tag">plt</span><span class="hljs-selector-class">.plot</span>(<span class="hljs-selector-tag">history</span><span class="hljs-selector-class">.history</span><span class="hljs-selector-attr">['val_accuracy']</span>)
+</code></pre><p><img src="/assets/images/clt/customer-churn-prediction-using-ann/2.png" alt="2"></p>
+
+</div>
+
+<button type="button" class="collapsible">Softmax Function and Variance in Python</button>
+<div class="content">
+<p>Softmax function is one of the most widely used activation function in deep learning. Applying it on a data with high variance and cause problems. Therefore we most provide the scaled data with low variance to this activation function. The implementation of softmax is very simple. Here is few lines code showing the implementation of softmax,</p>
+<p>First of all import all the necessary libraries,</p>
+<pre><code><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np 
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+</code></pre><p>then here is the softmax,</p>
+<pre><code>def softmax(x):
+  <span class="hljs-comment"># Ensure numerical stability by subtracting the max value from each element</span>
+  e_x=np.<span class="hljs-built_in">exp</span>(x-np.<span class="hljs-built_in">max</span>(x))
+  softmax_values=e_x/e_x.<span class="hljs-built_in">sum</span>(axis=<span class="hljs-number">0</span>) <span class="hljs-comment"># Normalize</span>
+  percent_values=softmax_values*<span class="hljs-number">100</span> <span class="hljs-comment">#convert to percent</span>
+  <span class="hljs-comment">#Format each value to a string with 2 decimal places followed by a percent sign</span>
+  formatted_percent_values=[f<span class="hljs-string">"{value:.2f}%"</span> <span class="hljs-keyword">for</span> <span class="hljs-built_in">value</span> <span class="hljs-keyword">in</span> percent_values]
+  <span class="hljs-literal">return</span> formatted_percent_values
+</code></pre><p>you can check it by apply on any vector of any dimension,</p>
+<pre><code>softmax(<span class="hljs-name">np</span>.array([<span class="hljs-number">1</span>,<span class="hljs-number">10</span>]))
+</code></pre><p><img src="/assets/images/clt/softmax-and-variance/1.png" alt="1"></p>
+<p>also variance is a big problem in deep learning. You&#39;ve to make sure the vector/scalar passed to softmax function has low variance other wise, the softmax will push the values to both maximum and minimum extremes. Check the variance by using the built in function numpy function <code>var</code></p>
+<pre><code>np.array([<span class="hljs-number">10</span>,<span class="hljs-number">20</span>,<span class="hljs-number">30</span>,<span class="hljs-number">40</span>,<span class="hljs-number">50</span>,<span class="hljs-number">60</span>,<span class="hljs-number">70</span>]).var()
+</code></pre><p><img src="/assets/images/clt/softmax-and-variance/2.png" alt="2"></p>
+<p>values close to each other (with less difference) have small variance,</p>
+<pre><code>np.array([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>]).var()
+</code></pre><p><img src="/assets/images/clt/softmax-and-variance/3.png" alt="3"></p>
+
+</div>
+
+<button type="button" class="collapsible">Bidirectional RNN | LSTM | GRU Implementation</button>
+<div class="content">
+<p>There are some problems where ordinary RNN architectures fail b/c of uncertainty. The most common example of it is the real-time voice to text recognition, we don&#39;t know what the person is going speak next i.e the problem in which we need the future information, we need bidirection rnns for it.</p>
+<p>For this purpose, we will use the <code>Bidirectional</code> built in wrapper of keras. Initially import the libraries and the wrapper,</p>
+<pre><code>import tensorflow as tf
+from tensorflow<span class="hljs-selector-class">.keras</span><span class="hljs-selector-class">.datasets</span> import imdb
+from tensorflow<span class="hljs-selector-class">.keras</span><span class="hljs-selector-class">.preprocessing</span><span class="hljs-selector-class">.sequence</span> import pad_sequences
+from tensorflow<span class="hljs-selector-class">.keras</span><span class="hljs-selector-class">.models</span> import Sequential
+from tensorflow<span class="hljs-selector-class">.keras</span><span class="hljs-selector-class">.layers</span> import Embedding,Bidirectional,SimpleRNN,LSTM,GRU,Dense
+</code></pre><p>load the dataset and do train test split</p>
+<pre><code><span class="hljs-attr">num_words=10000</span>
+(x_train,y_train),(x_test,y_test)=imdb.load_data(<span class="hljs-attr">num_words=num_words)</span>
+</code></pre><p>pad the training and testing data</p>
+<pre><code><span class="hljs-attr">maxlen</span>=<span class="hljs-number">100</span>
+<span class="hljs-attr">x_train</span>=pad_sequences(x_train,maxlen=maxlen,padding=<span class="hljs-string">'post'</span>,truncating=<span class="hljs-string">'post'</span>)
+<span class="hljs-attr">x_test</span>=pad_sequences(x_test,maxlen=maxlen,padding=<span class="hljs-string">'post'</span>,truncating=<span class="hljs-string">'post'</span>)
+</code></pre><p>set the embedding dimensions for future use,</p>
+<pre><code><span class="hljs-attr">embedding_dim</span>=<span class="hljs-number">32</span>
+</code></pre><h2 id="sequential-model-for-simplernn-with-bidirectional-wrapper">Sequential Model for SimpleRNN with Bidirectional Wrapper</h2>
+<p>Create the sequential model for simpleRNN with all the layers,</p>
+<pre><code>model=Sequential([
+    Embedding(<span class="hljs-name">input_dim=num_words</span>,output_dim=embedding_dim,input_length=maxlen),
+    Bidirectional(<span class="hljs-name">SimpleRNN</span>(<span class="hljs-number">5</span>)),
+    Dense(<span class="hljs-number">1</span>,activation='sigmoid')
+])
+</code></pre><p>compile the model and check the summary</p>
+<pre><code><span class="hljs-keyword">model</span>.compile(optimizer=<span class="hljs-string">'adam'</span>,loss=<span class="hljs-string">'binary_crossentropy'</span>,metrics=[<span class="hljs-string">'accuracy'</span>])
+<span class="hljs-keyword">model</span>.summary()
+</code></pre><h2 id="sequential-model-for-gru-with-bidirectional-wrapper">Sequential Model for GRU with Bidirectional Wrapper</h2>
+<p>Again make a sequential model for a GRU and wrap it in a bidirectional wrapper</p>
+<pre><code>mode=Sequential([
+    Embedding(<span class="hljs-name">input_dim=num_words</span>,output_dim=embedding_dim,input_length=maxlen),
+    Bidirectional(<span class="hljs-name">GRU</span>(<span class="hljs-number">5</span>)),
+    Dense(<span class="hljs-number">1</span>,activation='sigmoid')
+])
+</code></pre><p>compile the model and check its summary</p>
+<pre><code><span class="hljs-keyword">model</span>.compile(optimizer=<span class="hljs-string">'adam'</span>,loss=<span class="hljs-string">'binary_crossentropy'</span>,metrics=[<span class="hljs-string">'accuracy'</span>])
+<span class="hljs-keyword">model</span>.summary()
+</code></pre><h2 id="sequential-model-for-lstm-with-bidirectional-wrapper">Sequential Model for LSTM with Bidirectional Wrapper</h2>
+<p>One last time make a sequential model for lstm and put it in bidirectional wrapper</p>
+<pre><code>model=Sequential([
+    Embedding(<span class="hljs-name">input_dim=num_words</span>,output_dim=embedding_dim,input_length=maxlen),
+    Bidirectional(<span class="hljs-name">LSTM</span>(<span class="hljs-number">5</span>)),
+    Dense(<span class="hljs-number">1</span>,activation='sigmoid')
+])
+</code></pre><p>compiler the model and check its summary</p>
+<pre><code><span class="hljs-keyword">model</span>.compile(optimizer=<span class="hljs-string">'adam'</span>,loss=<span class="hljs-string">'binary_crossentropy'</span>,metrics=[<span class="hljs-string">'accuracy'</span>])
+<span class="hljs-keyword">model</span>.summary()
+</code></pre>
+</div>
+
+<button type="button" class="collapsible">GRU | Gated Recurrent Unit Architecture</button>
+<div class="content">
+<p>Here i&#39;ve discussed the complete Architecture of Gated Recurrent Unit. This is a type of RNN pretty similar to LSTM but a bit faster from the LSTM. Although it outperforms the LSTM in some problems while there are some cases where you still need to use LSTM&#39;s. It is better to test out both techniques to find good results on your problem.</p>
+<p>Here is some basic intuition and introduction GRU,</p>
+<p><img src="/assets/images/clt/gated-recurrent-unit/1.png" alt="1"></p>
+<p>similary here is some sentences with timestamps along with the Update and Rest gates.</p>
+<p><img src="/assets/images/clt/gated-recurrent-unit/2.png" alt="2"></p>
+<p>rest gate working is down below,</p>
+<p><img src="/assets/images/clt/gated-recurrent-unit/3.png" alt="3"></p>
+<p>here is some mathematical chart representation,</p>
+<p><img src="/assets/images/clt/gated-recurrent-unit/4.png" alt="4"></p>
+<p>a basic neural netwok representation with point-wise addition b/w rest game and previous hidden state/context</p>
+<p><img src="/assets/images/clt/gated-recurrent-unit/5.png" alt="5"></p>
+<p>update gate working and final hidden state/context calculation,</p>
+<p><img src="/assets/images/clt/gated-recurrent-unit/6.png" alt="6"></p>
+
+</div>
+
+<button type="button" class="collapsible">Why RNNS are Needed? | RNNs VS ANNs</button>
+<div class="content">
+<p>This question always come to mind. Why RNNS are needed when you have CNNs and ANNs? RNNs stand for Recurrent Neural Networks. It&#39;s a type of neural network most suited for Natural Language Processing tasks. They are used to deal with Sequential Data that&#39;s why they are better known as sequential models. You may ask what is sequential data. The data in which following the order is must is known as sequential data.</p>
+<p>Let me explain you with an example, suppose you&#39;ve a dataset of textual sentences. Pick one sentense from the dataset, e.g</p>
+<pre><code>I<span class="hljs-symbol">'ll</span> go <span class="hljs-keyword">to</span> school.
+</code></pre><p>You cannot write,</p>
+<ul>
+<li>School to go I&#39;ll </li>
+</ul>
+<p>or </p>
+<p>*To School go I&#39;ll</p>
+<p>b/c they don&#39;t give us any information. It means sequence is important to us and we call this type of data as Sequential Data. Other examples of Sequential Data are,</p>
+<ul>
+<li><p>Time Series Data</p>
+</li>
+<li><p>Speech</p>
+</li>
+<li><p>DNA Sequence </p>
+</li>
+</ul>
+<p>Now what if we use ANNs or CNN to solve sequential data problems. Assume you&#39;ve a student dataset with input features,</p>
+<ul>
+<li>iq</li>
+<li>gender</li>
+<li>marks</li>
+</ul>
+<p>and you&#39;ve to predict the placement of student. For an ANN you cannot directly feed the textual data. We must have to vectorize the words. For this purpose we use the simplest method of 1 hot encoding with 12 numbers long vector for each number. It may look like,</p>
+<pre><code>I'll [<span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span>]
+
+go [<span class="hljs-number">0</span> <span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span>]
+
+to [<span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span>]
+
+school [<span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">0</span>]
+</code></pre><p>Now we&#39;ve to arrange these vectors vertically and make a vectors stack. </p>
+<p><img src="/assets/images/clt/why-rnns-are-needed/1.png" alt="1"></p>
+<p>You can see for first sentence we&#39;ll have 192 trainable parameters only for first hidden layer. Similarly for the next sentence of dataset.</p>
+<pre><code>How <span class="hljs-keyword">are</span> you?
+</code></pre><p><img src="/assets/images/clt/why-rnns-are-needed/2.png" alt="2"></p>
+<p>We will have 3 inputs, while last sentence were passing 4 inputs so its not possible for ANNs to take inputs of different size. In order to solve this we will do zero-padding and will add an extra vector with all zeros in it b/c input size for all inputs should be same. </p>
+<p>Now take an example of large scale datasets, here take a look,</p>
+<p><img src="/assets/images/clt/why-rnns-are-needed/3.png" alt="3"></p>
+<p>lets suppose,we have maximum 100 words and minimum 5 words sentences in a dataset but as we are using ANNs so we must have to make input shape same for all sentences, this means we will have 100 vectors for all the sentences even for the small ones with the zero padding. We are using vector with 10000 numbers for a single word so,</p>
+<pre><code><span class="hljs-number">10000</span>x100=<span class="hljs-number">1000000</span>
+
+Now if first hidden layer have <span class="hljs-number">10</span> neurons then, 
+
+<span class="hljs-number">1000000</span>x10=<span class="hljs-number">10000000</span>
+</code></pre><p>We have a high number of trainable parameters and most of them are with zero vectors which is totally a computational anomly and is inefficient. There are total of four problems in ANNs for sequential data,</p>
+<ul>
+<li>Variable text input make ANNs unsuitable</li>
+<li>Zero Padding will cause unnecessary computations</li>
+<li>Even if we train the ANNs on sequential data, the prediction will still be not good</li>
+<li>ANNs will disregard the sequence information</li>
+</ul>
+<p>This last point is the biggest problem because ANNs doesnot have any capability of storing memory so they cannot retain information. Therefore we needed a new architecture for sequence based data and then came the RNNs. There are multiple application of RNNs like,</p>
+<ul>
+<li>Sentiment Analysis</li>
+<li>Ecommerce Customer Behaviour Analysis</li>
+<li>Sentence Completion (Gmail)</li>
+<li>Mobile Phone Text Keywords</li>
+<li>Image Caption Generation</li>
+<li>Translation (Google Translate)</li>
+<li>Question Answer Systems</li>
+</ul>
+
+</div>
+
+<button type="button" class="collapsible">Non-Linear Neural Networks | Keras Functional Model</button>
+<div class="content">
+<p>There are some problems which cannot be solved with a sequential model, therefore we need non-sequential model. Sequential model goes on with the assumption of single input and single output. What if you&#39;ve to predict two things? What if linear topology doesnot solve your problem. </p>
+<p>In order to make non-sequential model, we use keras-functional-api. First of all import the model from keras,</p>
+<pre><code><span class="hljs-keyword">from</span> keras.models <span class="hljs-keyword">import</span> Model
+</code></pre><p>Then simply create the model but don&#39;t run the cell and leave inputs and outputs empty for now,</p>
+<pre><code><span class="hljs-keyword">model</span>=<span class="hljs-keyword">Model</span>(inputs=,outputs=)
+</code></pre><p>Import all keras-layers,</p>
+<pre><code><span class="hljs-keyword">from</span> keras.layers <span class="hljs-keyword">import</span> *
+</code></pre><p>Define an input shape for your model,</p>
+<pre><code>x=Input(<span class="hljs-name">shape=</span>(<span class="hljs-number">3</span>,))
+</code></pre><p>Create hidden layers and output layers for the model,</p>
+<pre><code>hidden1=Dense(<span class="hljs-number">128</span>,activation='relu')(<span class="hljs-name">x</span>)
+hidden2=Dense(<span class="hljs-number">64</span>,activation='relu')(<span class="hljs-name">hidden1</span>)
+output1=Dense(<span class="hljs-number">1</span>,activation='linear')(<span class="hljs-name">hidden2</span>)
+output2=Dense(<span class="hljs-number">1</span>,activation='sigmoid')(<span class="hljs-name">hidden2</span>)
+</code></pre><p>You can see we&#39;ve two outputs for the above architecture one with the activation function of sigmoid and other with the linear function. Now go back to the cell which we left where we were creating the model and give the inputs and outputs,</p>
+<pre><code><span class="hljs-keyword">model</span>=<span class="hljs-keyword">Model</span>(inputs=x,outputs=[output1,output2])
+</code></pre><p>Now check the model summary,</p>
+<pre><code><span class="hljs-selector-tag">model</span><span class="hljs-selector-class">.summary</span>()
+</code></pre><p><img src="/assets/images/clt/non-linear-neural-networks/2.png" alt="2"></p>
+<p>At the end plot the model for visual demonstration of model architecture,</p>
+<pre><code>from keras<span class="hljs-selector-class">.utils</span> import plot_model
+<span class="hljs-function"><span class="hljs-title">plot_model</span><span class="hljs-params">(model,show_shapes=True)</span></span>
+</code></pre><p>Here is how it will look,</p>
+<p><img src="/assets/images/clt/non-linear-neural-networks/1.png" alt="1"></p>
+<h2 id="multi-input-model">Multi-Input Model</h2>
+<p>Simply do the imports of Model and Layers,</p>
+<pre><code><span class="hljs-keyword">from</span> keras.layers <span class="hljs-keyword">import</span> *
+<span class="hljs-keyword">from</span> keras.models <span class="hljs-keyword">import</span> Model
+</code></pre><p>Then defined two inputs,</p>
+<pre><code>inputA=Input(<span class="hljs-name">shape=</span>(<span class="hljs-number">32</span>,))
+inputB=Input(<span class="hljs-name">shape=</span>(<span class="hljs-number">128</span>,))
+</code></pre><p>Define first branch for first input,</p>
+<pre><code>x=Dense(<span class="hljs-number">8</span>,activation=<span class="hljs-string">"relu"</span>)(<span class="hljs-name">inputA</span>)
+x1=Dense(<span class="hljs-number">4</span>,activation=<span class="hljs-string">"relu"</span>)(<span class="hljs-name">x</span>)
+</code></pre><p>and second branch for second input,</p>
+<pre><code>y=Dense(<span class="hljs-number">64</span>,activation=<span class="hljs-string">"relu"</span>)(<span class="hljs-name">inputB</span>)
+y1=Dense(<span class="hljs-number">32</span>,activation=<span class="hljs-string">"relu"</span>)(<span class="hljs-name">y</span>)
+y2=Dense(<span class="hljs-number">4</span>,activation=<span class="hljs-string">"relu"</span>)(<span class="hljs-name">y1</span>)
+</code></pre><p>combine output of both branches,</p>
+<pre><code><span class="hljs-attr">combined</span>=concatenate([x1,y2])
+</code></pre><p>then apply fully connected layer on combined output,</p>
+<pre><code><span class="hljs-comment"># apply a FC layer and then a regression prediction on the</span>
+<span class="hljs-comment"># combined outputs</span>
+<span class="hljs-attr">z</span> = Dense(<span class="hljs-number">2</span>, activation=<span class="hljs-string">"relu"</span>)(combined)
+<span class="hljs-attr">z1</span> = Dense(<span class="hljs-number">1</span>, activation=<span class="hljs-string">"linear"</span>)(z)
+</code></pre><p>define the model and its input at the end,</p>
+<pre><code><span class="hljs-comment"># our model will accept the inputs of the two branches and</span>
+<span class="hljs-comment"># then output a single value</span>
+<span class="hljs-attr">model</span> = Model(<span class="hljs-attr">inputs=[inputA,</span> inputB], <span class="hljs-attr">outputs=z1)</span>
+</code></pre><p>Check the model summary,</p>
+<pre><code><span class="hljs-selector-tag">model</span><span class="hljs-selector-class">.summary</span>()
+</code></pre><p><img src="/assets/images/clt/non-linear-neural-networks/3.png" alt="3"></p>
+<p>at the end plot the model,</p>
+<pre><code>from keras<span class="hljs-selector-class">.utils</span> import plot_model
+<span class="hljs-function"><span class="hljs-title">plot_model</span><span class="hljs-params">(model)</span></span>
+</code></pre><p><img src="/assets/images/clt/non-linear-neural-networks/4.png" alt="4"></p>
+<h2 id="age-gender-project">Age Gender Project</h2>
+<p>Do necessary imports,</p>
+<pre><code>!mkdir -<span class="hljs-selector-tag">p</span> ~/<span class="hljs-selector-class">.kaggle</span>
+!cp kaggle<span class="hljs-selector-class">.json</span> ~/.kaggle/
+</code></pre><p>download the dataset on your notebook,</p>
+<pre><code>!kaggle datasets download -d jangedoo/utkface-<span class="hljs-keyword">new</span>
+</code></pre><p>unzip the dataset,</p>
+<pre><code><span class="hljs-keyword">import</span> zipfile
+<span class="hljs-built_in">zip</span> = zipfile.<span class="hljs-type">ZipFile</span>(<span class="hljs-string">"/content/utkface-new.zip"</span>,'r')
+<span class="hljs-built_in">zip</span>.extractall(<span class="hljs-string">"/content"</span>)
+<span class="hljs-built_in">zip</span>.close()
+</code></pre><p>import the datagenerator for data-augmentation,</p>
+<pre><code><span class="hljs-keyword">import</span> os
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-title">from</span> keras.preprocessing.image <span class="hljs-keyword">import</span> ImageDataGenerator
+</code></pre><p>define a path for data augmentation folder,</p>
+<pre><code><span class="hljs-attr">folder_path</span> = <span class="hljs-string">'/content/utkface_aligned_cropped/UTKFace'</span>
+</code></pre><p>define the dataframe format,</p>
+<pre><code>age=[]
+gender=[]
+img_path=[]
+<span class="hljs-keyword">for</span> <span class="hljs-keyword">file</span> in os.listdir(folder_path):
+  age.<span class="hljs-keyword">append</span>(<span class="hljs-keyword">int</span>(<span class="hljs-keyword">file</span>.<span class="hljs-keyword">split</span>(<span class="hljs-string">'_'</span>)[<span class="hljs-number">0</span>]))
+  gender.<span class="hljs-keyword">append</span>(<span class="hljs-keyword">int</span>(<span class="hljs-keyword">file</span>.<span class="hljs-keyword">split</span>(<span class="hljs-string">'_'</span>)[<span class="hljs-number">1</span>]))
+  img_path.<span class="hljs-keyword">append</span>(<span class="hljs-keyword">file</span>)
+</code></pre><p>check length of age,</p>
+<pre><code><span class="hljs-function"><span class="hljs-title">len</span><span class="hljs-params">(age)</span></span>
+</code></pre><p>create the dataframe,</p>
+<pre><code>df=pd.DataFrame({<span class="hljs-string">'age'</span><span class="hljs-symbol">:age</span>,<span class="hljs-string">'gender'</span><span class="hljs-symbol">:gender</span>,<span class="hljs-string">'img'</span><span class="hljs-symbol">:img_path</span>})
+</code></pre><p>check the shape of dataframe,</p>
+<pre><code><span class="hljs-selector-tag">df</span><span class="hljs-selector-class">.shape</span>
+</code></pre><p>dataframe will look like this,</p>
+<p><img src="/assets/images/clt/non-linear-neural-networks/5.png" alt="5"></p>
+<p>check the head,</p>
+<pre><code><span class="hljs-selector-tag">df</span><span class="hljs-selector-class">.head</span>()
+</code></pre><p>divide the data into train and test,</p>
+<pre><code><span class="hljs-attr">train_df</span>=df.sample(frac=<span class="hljs-number">1</span>,random_state=<span class="hljs-number">0</span>).iloc[:<span class="hljs-number">20000</span>]
+<span class="hljs-attr">test_df</span>=df.sample(frac=<span class="hljs-number">1</span>,random_state=<span class="hljs-number">0</span>).iloc[<span class="hljs-number">20000</span>:]
+</code></pre><p>check the train shape,</p>
+<pre><code><span class="hljs-selector-tag">train_df</span><span class="hljs-selector-class">.shape</span>
+</code></pre><p>and the test shape,</p>
+<pre><code><span class="hljs-selector-tag">test_df</span><span class="hljs-selector-class">.shape</span>
+</code></pre><p>define the imageGenerator parameters for train and test data,</p>
+<pre><code><span class="hljs-attr">train_datagen</span> = ImageDataGenerator(<span class="hljs-attr">rescale=1./255,</span>
+                                   <span class="hljs-attr">rotation_range=30,</span>
+                                   <span class="hljs-attr">width_shift_range=0.2,</span>
+                                   <span class="hljs-attr">height_shift_range=0.2,</span>
+                                   <span class="hljs-attr">shear_range=0.2,</span>
+                                   <span class="hljs-attr">zoom_range=0.2,</span>
+                                   <span class="hljs-attr">horizontal_flip=True)</span>
+
+<span class="hljs-attr">test_datagen</span> = ImageDataGenerator(<span class="hljs-attr">rescale=1./255)</span>
+</code></pre><p>generate the data with generators,</p>
+<pre><code><span class="hljs-attr">train_generator</span> = train_datagen.flow_from_dataframe(train_df,
+                                                    <span class="hljs-attr">directory=folder_path,</span>
+                                                    <span class="hljs-attr">x_col='img',</span>
+                                                    <span class="hljs-attr">y_col=['age','gender'],</span>
+                                                    <span class="hljs-attr">target_size=(200,200),</span>
+                                                    <span class="hljs-attr">class_mode='multi_output')</span>
+
+<span class="hljs-attr">test_generator</span> = test_datagen.flow_from_dataframe(test_df,
+                                                    <span class="hljs-attr">directory=folder_path,</span>
+                                                    <span class="hljs-attr">x_col='img',</span>
+                                                    <span class="hljs-attr">y_col=['age','gender'],</span>
+                                                    <span class="hljs-attr">target_size=(200,200),</span>
+                                                  <span class="hljs-attr">class_mode='multi_output')</span>
+</code></pre><p><img src="/assets/images/clt/non-linear-neural-networks/6.png" alt="6"></p>
+<p>import the resNet50 model,</p>
+<pre><code><span class="hljs-keyword">from</span> keras.applications.resnet50 <span class="hljs-keyword">import</span> ResNet50
+<span class="hljs-keyword">from</span> keras.layers <span class="hljs-keyword">import</span> *
+<span class="hljs-keyword">from</span> keras.models <span class="hljs-keyword">import</span> Model
+</code></pre><p>create the instance of resnet50 and define its parameters,</p>
+<pre><code><span class="hljs-attr">resnet</span> = ResNet50(include_top=<span class="hljs-literal">False</span>, input_shape=(<span class="hljs-number">200</span>,<span class="hljs-number">200</span>,<span class="hljs-number">3</span>))
+</code></pre><p>complete the model architecture by adding dense and flatten layers to resNet50,</p>
+<pre><code><span class="hljs-attr">resnet</span> = ResNet50(<span class="hljs-attr">include_top=False,</span> <span class="hljs-attr">input_shape=(200,200,3))</span>
+
+resnet.<span class="hljs-attr">trainable=False</span>
+
+<span class="hljs-attr">output</span> = resnet.layers[-<span class="hljs-number">1</span>].output
+
+<span class="hljs-attr">flatten</span> = Flatten()(output)
+
+<span class="hljs-attr">dense1</span> = Dense(<span class="hljs-number">512</span>, <span class="hljs-attr">activation='relu')(flatten)</span>
+<span class="hljs-attr">dense2</span> = Dense(<span class="hljs-number">512</span>,<span class="hljs-attr">activation='relu')(flatten)</span>
+
+<span class="hljs-attr">dense3</span> = Dense(<span class="hljs-number">512</span>,<span class="hljs-attr">activation='relu')(dense1)</span>
+<span class="hljs-attr">dense4</span> = Dense(<span class="hljs-number">512</span>,<span class="hljs-attr">activation='relu')(dense2)</span>
+
+<span class="hljs-attr">output1</span> = Dense(<span class="hljs-number">1</span>,<span class="hljs-attr">activation='linear',name='age')(dense3)</span>
+<span class="hljs-attr">output2</span> = Dense(<span class="hljs-number">1</span>,<span class="hljs-attr">activation='sigmoid',name='gender')(dense4)</span>
+</code></pre><p>define model with inputs and outputs,</p>
+<pre><code><span class="hljs-keyword">model</span>=<span class="hljs-keyword">Model</span>(inputs=resnet.input,outputs=[output1,output2])
+</code></pre><p>compile the model,</p>
+<pre><code>model.compile(optimizer=<span class="hljs-string">'adam'</span>,loss={<span class="hljs-string">'age'</span>:<span class="hljs-string">'mae'</span>,<span class="hljs-string">'gender'</span>:<span class="hljs-string">'binary_crossentropy'</span>},metrics={<span class="hljs-string">'age'</span>:<span class="hljs-string">'mae'</span>,<span class="hljs-string">'gender'</span>:<span class="hljs-string">'accuracy'</span>},loss_weights={<span class="hljs-string">'age'</span>:<span class="hljs-number">1</span>,<span class="hljs-string">'gender'</span>:<span class="hljs-number">99</span>})
+</code></pre><p>at the end fit the model,</p>
+<pre><code>model.fit(train_generator, <span class="hljs-attr">batch_size=32,</span> <span class="hljs-attr">epochs=10,</span> <span class="hljs-attr">validation_data=test_generator)</span>
+</code></pre><p><img src="/assets/images/clt/non-linear-neural-networks/7.png" alt="7"></p>
+
+</div>
+
+<button type="button" class="collapsible">Back Propagation in CNN</button>
+<div class="content">
+</div>
+
+<button type="button" class="collapsible">Forward Propagation in Multi-Layer-Perceptron</button>
+<div class="content">
+<p>Generally <code>Back-Propagation</code> is the main algorithm to train the neural network but before it, we need to do a forward pass which is known as <code>Forward Propagation</code>. Inputs are given through input layer with the weights. Simple linear algebra which includes matrix multiplication is used.</p>
+<p><img src="/assets/images/clt/forward-propagation/1.jpeg" alt="1"></p>
+<p>We need to know how a neural network predict. For this purpose we need to understand the flow. Initially you&#39;ve to identify the <code>total trainable parameters</code>. Here in this case we have 4 inputs and 3 hiddens layers. Find the total connections,</p>
+<p><img src="/assets/images/clt/forward-propagation/2.jpeg" alt="2"></p>
+<p>This forward pass will be used to check the prediction. In the back the dot product b/w the inputs and weights is taken place with addition with the bias.</p>
+<pre><code><span class="hljs-keyword">input</span>*weights+bias
+</code></pre><p>Here is the full calculations,</p>
+<p><img src="/assets/images/clt/forward-propagation/4.jpeg" alt="4"></p>
+<p>To understand the full flow in one go. I&#39;ve solved a complete example with all mathematical calculations. You&#39;ll get enough idea from it.</p>
+<p><img src="/assets/images/clt/forward-propagation/new1.jpeg" alt="new1"></p>
+<p><img src="/assets/images/clt/forward-propagation/new2.jpeg" alt="new2"></p>
+<p>The ouput of first hidden layer will become input for the next hidden layer,</p>
+<p><img src="/assets/images/clt/forward-propagation/3.jpeg" alt="3"></p>
+<p>Atlast sigmoid function will be applied on the output obtained from the output layer and we&#39;ll have a value in 1x1 matrix.</p>
+<p><img src="/assets/images/clt/forward-propagation/new3.jpeg" alt="new3"></p>
+
+</div>
+
+<button type="button" class="collapsible">Multi Layer Perceptron Intuition</button>
+<div class="content">
+<p>As we know that a single perceptron is not able to classify non-linear data, you can check out my blog on this <a href="/2021/02/07/perceptron-issue-for-non-linear-data">Perceptron Issue</a>. So how we can classify non-linear data using <code>Multi-Layer-Perceptron</code>. </p>
+<p>We all know that a single-perceptron cannot converge on non-linear data. This means that it cannot draw the Decision Boundaries in the data. This is where multi-layer-percetpron comes into play. Multi-Layer-Perceptron uses smoothing and super-imposition concepts to draw the decision boundaries. The output of one layer of perceptron becomes the input for the next hidden layer and thus your classification results are ore and more accurate. Here is a basic MLP architecture:</p>
+<p><img src="/assets/images/clt/multi-layer-perceptron-intuition/mlp-1.jpeg" alt="basic mlp network"></p>
+<h2 id="layers-breakdown-">Layers Breakdown:</h2>
+<p>You can see here, we have multiple layers, each layer with multiple perceptrons. The initial layer labelled as 1 is the input layer, the middle layers with label 2 and 3 are the hidden layers and the layer 4 is called the output layer.</p>
+<p>In a MLP-architecture,you&#39;ve to calculate three things:</p>
+<ul>
+<li>Weight</li>
+<li>Bias</li>
+<li>Output</li>
+</ul>
+<p><img src="/assets/images/clt/multi-layer-perceptron-intuition/mlp-2.jpeg" alt="mlp-2"></p>
+<p>Also at the end we combine the multiple perceptron outputs and pass them through the activation function. While in the case of single perceptron, the output z was passed through the activation function. But here in MLP, there are multiple hidden layers. Keep in mind that you can change the architecture of MLP using 4 methods:</p>
+<ul>
+<li>Increase the nodes in hidden layers</li>
+<li>Increase the nodes in input layer</li>
+<li>Increase the nodes in output layer</li>
+<li>Increase the number of hidden layers</li>
+</ul>
+<p>Here you can see the basic training flow and the first two architecture changes.</p>
+<p><img src="/assets/images/clt/multi-layer-perceptron-intuition/mlp-3.jpeg" alt="mlp-3"></p>
+<p>Also the examples of the 3rd and 4th way to change the mlp architecture can be demonstrated by below note snippet,</p>
+<p><img src="/assets/images/clt/multi-layer-perceptron-intuition/mlp-4.jpeg" alt="mlp-4"></p>
+<p>Now, i&#39;m going show some demonstrations of how well MLP performs on a non-linear data. Initially i&#39;m taking a single hidden layer with 2 perceptrons in it. Let&#39;s see the results.</p>
+<p><img src="/assets/images/clt/multi-layer-perceptron-intuition/mlp-5.png" alt="mlp-5"></p>
+<p>Let&#39;s test it out on a more complex non-linear dataset but we&#39;ve increased a perceptron in the hidden layer. Here is the demonstration,</p>
+<p><img src="/assets/images/clt/multi-layer-perceptron-intuition/mlp-6.png" alt="mlp-6"></p>
+<p>In the final-example, we are taking the most complex dataset among these. For this we&#39;ll use two hidden layers, each with 4 perceptrons in. Let&#39;s see how our Neural Network do the classification.</p>
+<p><img src="/assets/images/clt/multi-layer-perceptron-intuition/mlp-7.png" alt="mlp-7"></p>
+<p>So far, this was all about the Multi-Layer-Perceptron(MLP). I hope my explaination will some abstract as well as some practical knowledge of MLP working.  </p>
+</div>
+
+<button type="button" class="collapsible">Perceptron Issue for Non-Linear Data</button>
+<div class="content">
+<p>Perceptron is no doubt the core-component of Deep-Learning. When it comes to single-perceptron. It is best suited for the Linear-Data. Linear-Data means which can be classified into two classes easily by a single-line or classifier. </p>
+<p>For this purpose, showing the classification results using multiple python codes. Initially import all the necessary libraries:</p>
+<pre><code><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
+</code></pre><p>Then making 3-empty datasets using pandas-dataframe.</p>
+<pre><code>
+<span class="hljs-attr">or_data</span>=pd.DataFrame()
+<span class="hljs-attr">and_data</span>=pd.DataFrame()
+<span class="hljs-attr">xor_data</span>=pd.DataFrame()
+</code></pre><p>Then fill-in the Dataframes:</p>
+<pre><code>
+or_data['input1']=[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>]
+or_data['input2']=[<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>]
+or_data['output']=[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>]
+</code></pre><p>Then import the simple perceptron model from sklearn and make 3 instances of it:</p>
+<pre><code>from sklearn.linear_model <span class="hljs-built_in">import</span> Perceptron
+<span class="hljs-attr">clf1=Perceptron()</span>
+<span class="hljs-attr">clf2=Perceptron()</span>
+<span class="hljs-attr">clf3=Perceptron()</span>
+</code></pre><p>Then fit-in the data using our datasets:</p>
+<pre><code><span class="hljs-selector-tag">clf1</span><span class="hljs-selector-class">.fit</span>(<span class="hljs-selector-tag">and_data</span><span class="hljs-selector-class">.iloc</span><span class="hljs-selector-attr">[:,0:2]</span><span class="hljs-selector-class">.values</span>,<span class="hljs-selector-tag">and_data</span><span class="hljs-selector-class">.iloc</span><span class="hljs-selector-attr">[:,-1]</span><span class="hljs-selector-class">.values</span>)
+<span class="hljs-selector-tag">clf2</span><span class="hljs-selector-class">.fit</span>(<span class="hljs-selector-tag">or_data</span><span class="hljs-selector-class">.iloc</span><span class="hljs-selector-attr">[:,0:2]</span><span class="hljs-selector-class">.values</span>,<span class="hljs-selector-tag">or_data</span><span class="hljs-selector-class">.iloc</span><span class="hljs-selector-attr">[:,-1]</span><span class="hljs-selector-class">.values</span>)
+<span class="hljs-selector-tag">clf3</span><span class="hljs-selector-class">.fit</span>(<span class="hljs-selector-tag">xor_data</span><span class="hljs-selector-class">.iloc</span><span class="hljs-selector-attr">[:,0:2]</span><span class="hljs-selector-class">.values</span>,<span class="hljs-selector-tag">xor_data</span><span class="hljs-selector-class">.iloc</span><span class="hljs-selector-attr">[:,-1]</span><span class="hljs-selector-class">.values</span>)
+</code></pre><p>If you plot the the clf1 and as it is trained on linearly separable data, it will look like this:</p>
+<pre><code><span class="hljs-selector-tag">plt</span><span class="hljs-selector-class">.plot</span>(x,y)
+<span class="hljs-selector-tag">sns</span><span class="hljs-selector-class">.scatterplot</span>(x=<span class="hljs-string">'input1'</span>,y=<span class="hljs-string">'input2'</span>,data=and_data,hue=<span class="hljs-string">'output'</span>,s=<span class="hljs-number">200</span>)
+</code></pre><!-- ![A test image](/assets/images/clt/image.png) -->
+<p><img src="/assets/images/clt/perceptron-for-non-linear-data/perceptron-linear-data1.png" alt="Perceptron on linear-data image"></p>
+<p>Similarly if you plot the second perceptron classifier instance, which was trained on <code>or</code> data. It will look like this:</p>
+<pre><code><span class="hljs-selector-tag">plt</span><span class="hljs-selector-class">.plot</span>(x,y)
+<span class="hljs-selector-tag">sns</span><span class="hljs-selector-class">.scatterplot</span>(x=<span class="hljs-string">'input1'</span>,y=<span class="hljs-string">'input2'</span>,hue=<span class="hljs-string">'output'</span>,data=or_data,s=<span class="hljs-number">200</span>)
+</code></pre><p><img src="/assets/images/clt/perceptron-for-non-linear-data/perceptron-linear-data2.png" alt="Perceptron on linear-data OR image">
+You can also get the idea of it by a visul representation from <a href="https://playground.tensorflow.org/#activation=sigmoid&amp;batchSize=10&amp;dataset=gauss&amp;regDataset=reg-plane&amp;learningRate=0.01&amp;regularizationRate=0&amp;noise=10&amp;networkShape=&amp;seed=0.71127&amp;showTestData=false&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false">PlayGround.Tensorflow</a></p>
+<p><img src="/assets/images/clt/perceptron-for-non-linear-data/playgrountensorflow.png" alt="playgroundtensorflow"></p>
+<p>Now if you apply the same single perceptron model on non-linearly separable data. It will look like this:</p>
+<p><img src="/assets/images/clt/perceptron-for-non-linear-data/perceptron-non-linear-data3.png" alt="Perceptron-non-linear-issue"></p>
+<p><img src="/assets/images/clt/perceptron-for-non-linear-data/perceptron-linear-data4.png" alt="Per-non-linear-issue-2nd-image"></p>
+<p>Here you can see that our <code>Perceptron-Model</code> doesnot work for non-linear data. This was the issue with the use of single-perceptron.</p>
+</div>
+
+<button type="button" class="collapsible">Introduction to Machine Learning using Scikit Learn</button>
+<div class="content">
+<p>When it comes to machine learning, <code>Scikit Learn</code> is the most widely used library. Today, we are going to practice the very basic machine learning model. We are going to use scikit learn to split our data into <code>train</code> and <code>test</code> subsets. Then we are going to create the <code>Linear Regression</code> model and afterwards, we train and test it by using the subsets.</p>
+<p>Initially import all the necessary libraries including <code>pandas</code>, <code>numpy</code>, <code>matplotlib</code> and <code>seaborn</code></p>
+<pre><code><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
+%matplotlib inline
+</code></pre><p>then read the data from the dataset, in this case we are using data from a self-generate csv file with the name &#39;USA_Housing.csv&#39;</p>
+<pre><code><span class="hljs-attr">USAhousing</span>=pd.read_csv(<span class="hljs-string">'USA_Housing.csv'</span>)
+</code></pre><p>Now have a look at the imported dataset,</p>
+<pre><code><span class="hljs-selector-tag">USAhousing</span><span class="hljs-selector-class">.head</span>()
+</code></pre><p>Then check some info of the imported dataset,</p>
+<pre><code><span class="hljs-selector-tag">USAhousing</span><span class="hljs-selector-class">.info</span>()
+</code></pre><p>After it, apply the <code>describe()</code> method to extract some valuable information,</p>
+<pre><code><span class="hljs-selector-tag">USAhousing</span><span class="hljs-selector-class">.describe</span>()
+</code></pre><p>Then, specifically extract the columns of the datasets,</p>
+<pre><code><span class="hljs-selector-tag">USAhousing</span><span class="hljs-selector-class">.columns</span>
+</code></pre><p>After it, we will visualize the imported data in the form of plots. We are going to use seaborn library for this purpose which we&#39;ve imported at the start. First we&#39;ll look the data in the form of pairplot</p>
+<pre><code><span class="hljs-selector-tag">sns</span><span class="hljs-selector-class">.pairplot</span>(<span class="hljs-selector-tag">USAhousing</span>)
+</code></pre><p>Then visualize the data in the form of distplot,</p>
+<pre><code><span class="hljs-selector-tag">sns</span><span class="hljs-selector-class">.distplot</span>(<span class="hljs-selector-tag">USAhousing</span><span class="hljs-selector-attr">['Price']</span>)
+</code></pre><p>Similarly, check heat plot as well for the given data,</p>
+<pre><code><span class="hljs-selector-tag">sns</span><span class="hljs-selector-class">.heatmap</span>(<span class="hljs-selector-tag">USAhousing</span><span class="hljs-selector-class">.corr</span>())
+</code></pre><p>After visualization, we are going to train our first linear regression model. We will need to first split up our data into an X array that contains the features to train on, and a y array with the target variable, in this case the Price column. We will toss out the Address column because it only has text info that the linear regression model can&#39;t use.</p>
+<pre><code><span class="hljs-symbol">X</span> = <span class="hljs-symbol">USAhousing</span>[[<span class="hljs-string">'Avg. Area Income'</span>, <span class="hljs-string">'Avg. Area House Age'</span>, <span class="hljs-string">'Avg. Area Number of Rooms'</span>,
+               <span class="hljs-string">'Avg. Area Number of Bedrooms'</span>, <span class="hljs-string">'Area Population'</span>]]
+y = <span class="hljs-symbol">USAhousing</span>[<span class="hljs-string">'Price'</span>]
+</code></pre><p>Now let&#39;s split the data into a training set and a testing set. We will train out model on the training set and then use the test set to evaluate the model.</p>
+<pre><code><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split
+</code></pre><pre><code>X_train, X_test, y_train, <span class="hljs-attr">y_test</span> = train_test_split(X, y, <span class="hljs-attr">test_size=0.4,</span> <span class="hljs-attr">random_state=101)</span>
+</code></pre><p>Now we will create and train the model,</p>
+<pre><code><span class="hljs-keyword">from</span> sklearn.linear_model <span class="hljs-keyword">import</span> LinearRegression
+</code></pre><pre><code><span class="hljs-attr">lm</span> = LinearRegression()
+</code></pre><pre><code><span class="hljs-selector-tag">lm</span><span class="hljs-selector-class">.fit</span>(<span class="hljs-selector-tag">X_train</span>,<span class="hljs-selector-tag">y_train</span>)
+</code></pre><p>Let&#39;s evaluate the model by checking out it&#39;s coefficients and how we can interpret them.</p>
+<pre><code><span class="hljs-comment"># print the intercept</span>
+<span class="hljs-built_in">print</span>(lm.intercept_)
+</code></pre><pre><code>coeff_df = pd.DataFrame(lm<span class="hljs-selector-class">.coef_</span>,X<span class="hljs-selector-class">.columns</span>,<span class="hljs-attribute">columns</span>=[<span class="hljs-string">'Coefficient'</span>])
+coeff_df
+</code></pre><h2 id="interpreting-the-coefficients-">Interpreting the coefficients:</h2>
+<ul>
+<li>Holding all other features fixed, a 1 unit increase in Avg. Area Income is associated with an <em>increase of $21.52 </em>.</li>
+<li>Holding all other features fixed, a 1 unit increase in Avg. Area House Age is associated with an <em>increase of $164883.28 </em>.</li>
+<li>Holding all other features fixed, a 1 unit increase in Avg. Area Number of Rooms is associated with an <em>increase of $122368.67 </em>.</li>
+<li>Holding all other features fixed, a 1 unit increase in Avg. Area Number of Bedrooms is associated with an <em>increase of $2233.80 </em>.</li>
+<li>Holding all other features fixed, a 1 unit increase in Area Population is associated with an <em>increase of $15.15 </em>.</li>
+</ul>
+</div>
+
+<button type="button" class="collapsible">Data Analysis with Python</button>
+<div class="content">
+<p>Today we&#39;ll be taking a closer look at the Python for Data Analysis. I will show you some data manipulation and analysis capabilities in Python . First thing that you should know is Pandas. Pandas is a fundamental library in Python for data analysis and manipulation. It provides powerful tools for data cleaning, transformation, and exploration.</p>
+<p>Pandas is an open-source library built on top of NumPy. It&#39;s designed to handle structured data efficiently. One of the key features of pandas is its ability to perform data cleaning and operations quickly. It also boasts data visualization capabilities, making it a versatile tool for data scientists and analysts. You can easily install pandas using either <code>conda install pandas</code> or <code>pip install pandas</code>.</p>
+<p>Now let&#39;s talk about the <code>Series</code> datatype. Series, which is a fundamental data type in pandas. Series can be thought of as a one-dimensional array with labeled data. They serve as the building blocks for more complex data structures in pandas.</p>
+<p>DataFrames, which are the heart of pandas. DataFrames are two-dimensional, tabular data structures that can store data of different types. They are incredibly versatile and are used for most data analysis tasks. DataFrames provide a flexible and efficient way to work with data, making it easier to perform complex operations and manipulations. Understanding DataFrames is crucial for any data analysis project using pandas.</p>
+<p>Handling missing data is a common challenge in data analysis pandas can help you manage and deal with missing values, ensuring that your analyses are accurate and robust.</p>
+<p>&quot;Group By&quot; operation in pandas, which is an essential tool for aggregating and summarizing data. This feature is invaluable when you need to perform analysis based on specific groups within your dataset.</p>
+<p>Merging, Joining, and Concatenating of DataFrames are important operations in python. These operations allow you to combine datasets in various ways, providing the flexibility needed to work with complex data structures.</p>
+<p>There are different others general operations as well. These operations include arithmetic, conditional, and statistical operations, enabling you to analyze your data efficiently.</p>
+<p>You can also read data from different file formats and save your processed data back to files.</p>
+</div>
+
+<button type="button" class="collapsible">Numpy Arrays, Indexing and Operations in Python</button>
+<div class="content">
+<p>Today, we&#39;ll explore some essential concepts related to NumPy arrays, which is a fundamental library for numerical computations in Python. NumPy, short for Numerical Python, is an indispensable tool for data scientists, engineers, and anyone dealing with large datasets. </p>
+<p>NumPy, imported as <code>np</code>, allows you to cast a regular Python list as an array. Moreover, it provides several methods for creating arrays with different properties. You can use <code>np.eye</code> to create an identity matrix, <code>np.linspace()</code> to generate evenly spaced values, and <code>np.arange</code> to create a range of values. NumPy also offers functions like <code>np.ones()</code> and <code>np.zeros()</code> to create arrays filled with ones or zeros, respectively. For generating random values, <code>np.random.rand()</code> produces values from a uniform distribution, while <code>np.random.randn()</code> generates values from a standard normal distribution. If you prefer integers, <code>np.random.randint()</code> is your go-to function. You can also reshape arrays using the <code>arr.reshape()</code> method and find the maximum, minimum, index of maximum, and index of minimum values using functions like <code>ranarr.max()</code>, <code>ranarr.min()</code>, <code>ranarr.argmax()</code>, and <code>ranarr.argmin()</code>. Additionally, you can check the shape and data type of an array using <code>arr.shape()</code> and <code>arr.dtype</code>.</p>
+<p>Now moving to NumPy array indexing. One crucial point to note is that NumPy doesn&#39;t automatically make copies of arrays to save memory. Instead, it creates views or references to the original data when indexing. To create a proper copy of an array, you can use <code>arr_copy = arr.copy()</code>. The video also explains the concept of broadcasting, which allows you to perform operations on arrays of different shapes without explicitly creating copies. You&#39;ll explore the double bracket and single bracket formats for grabbing values from a matrix, which can be immensely helpful when working with multi-dimensional arrays.</p>
+<p>NumPy operations are also of great importance. These operations include arithmetic operations, element-wise operations, and aggregation functions for summarizing data within arrays. NumPy simplifies mathematical computations and statistical analyses, making it a powerful tool for data manipulation and analysis.</p>
+</div>
+
+<button type="button" class="collapsible">Filter Function, Dictionaries And Tupple Unpacking in Python</button>
+<div class="content">
+<p>Today, i&#39;m going to introduce you to python&#39;s Tupple Unpacking, Lambda function and Filter function. We are also going to discuss some Methods in python. These are widely used when working with python. I&#39;m going to discuss each one by one.</p>
+<p>First of all, when it comes to lambda expressions, they are one of the powerful feature in python. They are basically a functions that can be defined in single line, making code more concise and clean. Below is the example of lamba function in python, to double a variable.</p>
+<pre><code>times2 = lambda <span class="hljs-keyword">var</span>: <span class="hljs-keyword">var</span> * <span class="hljs-number">2</span>
+<span class="hljs-literal">result</span> = times2(<span class="hljs-number">6</span>)  <span class="hljs-comment"># This will give you 12</span>
+</code></pre><p>Lambda expressions are commonly used when working with lists and Pandas library. Below is the example, in which we are using the lambda function with the &#39;<strong>map&#39;</strong> funtion to perform operation on every element of a list.</p>
+<pre><code><span class="hljs-attr">seq</span> = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+<span class="hljs-attr">doubled_seq</span> = list(map(lambda num: num * <span class="hljs-number">2</span>, seq))
+</code></pre><p>Now talking about &#39;<strong>filter&#39;</strong> function. It is also very handy tool in python. It allows you to filter elements from a list based on a specified condition. Below is the example of filter expression to filter even numbers from a sequence. You can use a lambda expression with filter function.</p>
+<pre><code><span class="hljs-attr">seq</span> = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>]
+<span class="hljs-attr">even_numbers</span> = list(filter(lambda num: num % <span class="hljs-number">2</span> == <span class="hljs-number">0</span>, seq))
+</code></pre><p>This function takes values from the list, applies the provided condition, and returns the values that satisfy it. To obtain a more readable result, wrap the <strong>filter</strong> function with the <strong>list</strong> function.</p>
+<p>Lets talk about the Methods and String Manipulation in python. Python strings comes with alot of methods to extract useful information from them. e.g <strong>lower()</strong> method is used to convert a string to lowercase or <strong>upper()</strong> is used to convert a string to uppercase. Similarly <strong>split()</strong> method is used for breaking of s string into substring, based on spaces or other characters. Example is attached below.</p>
+<pre><code><span class="hljs-attr">s</span> = <span class="hljs-string">'hello my name is Sam'</span>
+<span class="hljs-attr">s_lower</span> = s.lower()
+<span class="hljs-attr">s_upper</span> = s.upper()
+<span class="hljs-attr">words</span> = s.split()  # Splits the string into individual words
+</code></pre><p>Also, you can use split() method with a specific character as a separator, which can be very handy for a handling hashtags in social media content.</p>
+<pre><code><span class="hljs-attr">tweet</span> = <span class="hljs-string">'Go Sports! #Sports'</span>
+<span class="hljs-attr">hashtags</span> = tweet.split(<span class="hljs-string">'#'</span>)  # Results in [<span class="hljs-string">'Go Sports!'</span>, <span class="hljs-string">'Sports'</span>]
+</code></pre><p>Dictionaries and lists are fundamental data structures in Python. With dictionaries, you can access values using keys, retrieve keys, or get a list of key-value pairs. For instance,</p>
+<pre><code>d = {<span class="hljs-string">'k1'</span>: <span class="hljs-number">1</span>, <span class="hljs-string">'k2'</span>: <span class="hljs-number">2</span>}
+<span class="hljs-built_in">keys</span> = d.<span class="hljs-built_in">keys</span>()    # Returns the dictionary <span class="hljs-built_in">keys</span>
+<span class="hljs-built_in">items</span> = d.<span class="hljs-built_in">items</span>()  # Returns key-value pairs
+<span class="hljs-built_in">values</span> = d.<span class="hljs-built_in">values</span>()  # Returns <span class="hljs-built_in">values</span> associated with <span class="hljs-built_in">keys</span>
+</code></pre><p>When working with lists, you can perform various operations, such as adding or removing elements. You can use the <code>pop()</code> method to remove elements from the list, and specify the index to remove a specific item.</p>
+<pre><code>lst = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]
+item = lst.<span class="hljs-keyword">pop</span>()  # Removes <span class="hljs-built_in">and</span> stores the <span class="hljs-keyword">last</span> item, <span class="hljs-string">'item'</span> will <span class="hljs-keyword">be</span> <span class="hljs-number">3</span>
+<span class="hljs-keyword">first</span> = lst.<span class="hljs-keyword">pop</span>(<span class="hljs-number">0</span>)  # Removes <span class="hljs-built_in">and</span> stores the <span class="hljs-keyword">first</span> item, <span class="hljs-string">'first'</span> will <span class="hljs-keyword">be</span> <span class="hljs-number">1</span>
+</code></pre><p>You can also check if an item exists in a list using the <code>in</code> operator.</p>
+<p>Tuple unpacking is a another powerful technique often used in loops. It allows you to extract elements from tuples within a list quickly. For example, given a list of tuples,</p>
+<pre><code>x = [(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>), (<span class="hljs-number">3</span>, <span class="hljs-number">4</span>), (<span class="hljs-number">5</span>, <span class="hljs-number">6</span>)]
+</code></pre><p>You can use tuple unpacking to access the elements in these tuples,</p>
+<pre><code><span class="hljs-keyword">for</span> <span class="hljs-built_in">item</span> <span class="hljs-keyword">in</span> x:
+    print(<span class="hljs-built_in">item</span>)
+</code></pre><p>This code will print all the tuples in the list. Tuple unpacking can help you work with specific elements within each tuple,</p>
+<pre><code><span class="hljs-keyword">for</span> (<span class="hljs-keyword">a</span>, b) <span class="hljs-keyword">in</span> x:
+    print(<span class="hljs-keyword">a</span>)  <span class="hljs-comment"># Prints 1, 3, 5</span>
+</code></pre><p>Or,</p>
+<pre><code><span class="hljs-keyword">for</span> (a, b) <span class="hljs-keyword">in</span> x:
+    <span class="hljs-built_in">print</span>(b)  <span class="hljs-comment"># Prints 2, 4, 6</span>
+</code></pre><p>Tuple unpacking simplifies the process of working with data in lists and enhances code readability.</p>
+</div>
+
+<button type="button" class="collapsible">Starter with Python and Jupyter Notebook</button>
+<div class="content">
+<p>You all might have some know-how of what is Python. If u are not unaware, then let me add this information to your knowledge. Python is basically a high-level-programming language, which can be used in a variety of ways. You can work with python is a number of environment/ide.</p>
+<p>The environment that i&#39;m using now a days is Jupyter Notebook. Jupyter notebook is a simplified notebook. That executes the python code line by line or you can say cell by cell. Also, you should know that python is a interpreted language. Its code run line by line.</p>
+<p>If you are a beginner, you should install Anaconda. Anaconda will install python as well as jupyter notebook.</p>
+<p>Apart from code, we can also write text in jupyter notebook. Jupyter notebook have a type of cell known as Markdown Cell. By using these markdown cells, you can also create presentations. Markdown cells are also usied to give headings e.t.c.</p>
+<p>In order to execute a cell in jupyter notebook. You have to use short-cut of Shift+Enter. Also, in order to execute a cell and create a new cell below the current one, use the shortcute of Alt+ENTER. Third way is of Ctrl+Enter, this one is used when you want to execute the current cell and want to stay on the same cell.</p>
+<p>To save a jupyter notebook, use the shortcute of Ctrl+S.</p>
+<p>i.e, adding this point as well that if u donot want to get into anaconda and stuff you, can also install jupyter notebook by using a single command on linux terminal, which is below.</p>
+<pre><code>Python -m pip <span class="hljs-keyword">install</span> jupyter
+</code></pre><p>This was a basic get to know about python and jupyter notebook. I&#39;ll also add some posts later on covering these both in more detail. Stay tuned.</p>
+</div>
+
+<button type="button" class="collapsible">NLP | Natural Language Processing and Multiple Ways to Approach it</button>
+<div class="content">
+<p>In simple words, natural language processing is the combination of 3 things. Linguistics, Computer Science and Artificial Intelligence. It is concerned with the interactions between computers and human language. This question came in mind what was the need of nlp? Humans are unable to communicate to computers in native languages and nlp is briding this gap.</p>
+<p>There are multiple real world applications of nlp,</p>
+<ul>
+<li>Contextual Advertisements</li>
+<li>Email Clients - spam filtering, smart reply</li>
+<li>Social Media - removing adult content, opinion mining</li>
+<li>Search Engines</li>
+<li>Chatbots</li>
+</ul>
+<p>Apart of these applications, nlp is performing a wide variety of tasks like</p>
+<ul>
+<li>text/document classification</li>
+<li>sentiment  analysis</li>
+<li>information retrieval</li>
+<li>parts of speech tagging</li>
+<li>language detection and machine translation</li>
+<li>conversational agents</li>
+<li>knowledge graph and question answer systems</li>
+<li>text summarization</li>
+<li>topic modelling</li>
+<li>text generation</li>
+<li>spell checking and grammar correction</li>
+<li>text parsing and speech to text</li>
+</ul>
+<p>In general there are three approaches to NLP</p>
+<ul>
+<li>Heuristic Methods</li>
+<li>Machine Learning Based Methods</li>
+<li>Deep Learning Based Methods</li>
+</ul>
+<h2 id="heuristic-approaches">Heuristic Approaches</h2>
+<p>Heuristic approach is the most basic approach for natural language processing. It works on the basis of regular expressions or common sense of mind. The main advantage of this approach is that it is very easy to implement but there is a disadvantage, which is that it is not open-ended. You cannot apply the same approach on different problems.</p>
+<h2 id="machine-learning-approach">Machine Learning Approach</h2>
+<p>The biggest advantage of ML approach for nlp is the workflow. It works in a way that you can solve multiple problems using the same technique thus it&#39;s easy to solve open-ended problems with it. Multiple algorithms are used in ml like,</p>
+<ul>
+<li>Naive Bayes</li>
+<li>Logistic Regression</li>
+<li>SVM</li>
+<li>LDA</li>
+<li>Hidden Markov Models</li>
+</ul>
+<h2 id="deep-learning-approach">Deep Learning Approach</h2>
+<p>The last one and the most advance technique is using Deep Learning. It supports nlp in many ways like auto feature engineering and better results providing the data you give is sufficient. Multiple deep learning algorithms are there in the market</p>
+<ul>
+<li>RNN</li>
+<li>LSTM</li>
+<li>GRU/CNN</li>
+<li>Transformers</li>
+<li>Autoencoders</li>
+</ul>
+</div>
+
+<button type="button" class="collapsible">Android Studio Installation in Linux</button>
+<div class="content">
+<!-- ![4](/assets/images/clt/android-studio-installation-in-linux/4.png) -->
+<p>It is a fast go-through for the installation procedure of Android-Studio in all linux platforms. In my case i&#39;m using linux mint but the method works for all distributions. First of all download the android studio from this link <a href="https://redirector.gvt1.com/edgedl/android/studio/ide-zips/2024.1.1.13/android-studio-2024.1.1.13-linux.tar.gz">&quot;Click Here To Download.&quot;</a> By this the tar.gz file will start downloading. After the download is complete, it will look like this, </p>
+<p><img src="/assets/images/clt/android-studio-installation-in-linux/1.png" alt="1"></p>
+<p>Open the file and extract the folder present within it. </p>
+<p><img src="/assets/images/clt/android-studio-installation-in-linux/2.png" alt="2"></p>
+<p>Now go to this directory and within it open the bin directory. Here open up the terminal and write this command,</p>
+<pre><code>./studio.<span class="hljs-keyword">sh</span>
+</code></pre><p>Installer will open and you simply have to follow along by pressing the next button. Eventually the downloading of the packages will start and after it, they&#39;ll be installed automatically. Now that the installation is finished, you now have a shortcut of android-studio in the start menu. Click on it and application will launch,</p>
+<p><img src="/assets/images/clt/android-studio-installation-in-linux/3.png" alt="3"></p>
+<p>Soon i&#39;ll post about the basic working of android-studio. stay-tuned!</p>
+</div>
+
+<button type="button" class="collapsible">Remove Deleted or Recently Accessed Files from Linux Mint Search Menu</button>
+<div class="content">
+<p>I personally use the Windows Key shortcut to open up the start menu and search for the applications from there, usually i pin the most used apps in the start. Recently when i was using the menu, i saw this thing of recently opened files displaying there. I mean those files which you used earlier in the past 7 days appear at start and can be disturbing to your workflow. </p>
+<p>Gadly i&#39;ve found a solution for it. Simply follow the guide-line. First of all press window button and search for system settings. It will look like this,</p>
+<p><img src="/assets/images/clt/linux-mint-remove-deleted-files-from-search-menu/1.png" alt="1"></p>
+<p>Then in the preferences section, go to privacy, you&#39;ll see these options,</p>
+<p><img src="/assets/images/clt/linux-mint-remove-deleted-files-from-search-menu/2.png" alt="2"></p>
+<p>Simply turn off the first option of <code>remember recently accessed files</code>,</p>
+<p><img src="/assets/images/clt/linux-mint-remove-deleted-files-from-search-menu/3.png" alt="3"></p>
+<p>and you are done, your recently opened files will not contradict with the pre-added shortcuts via alphabet typing.</p>
+</div>
+
+<button type="button" class="collapsible">XAMPP Installation in Linux Mint</button>
+<div class="content">
+<p>Setting the environment for PHP is very simple in Linux. You just have to run xampp and it will install PHP plus all the requisites for it. First of all download the xampp installer from their offical <a href="https://www.apachefriends.org/download_success.html">website</a>. After the download has finished go to the download directory and run the command,</p>
+<pre><code>ls <span class="hljs-_">-l</span>
+</code></pre><p>you&#39;ll see the xampp installer has no executition permission so do this,</p>
+<pre><code><span class="hljs-selector-tag">sudo</span> <span class="hljs-selector-tag">chmod</span> +<span class="hljs-selector-tag">x</span> <span class="hljs-selector-tag">xampp-linux-x64-8</span><span class="hljs-selector-class">.2</span><span class="hljs-selector-class">.12-0-installer</span><span class="hljs-selector-class">.run</span>
+</code></pre><p>it is now executable, run the installer using this,</p>
+<pre><code>sudo ./xampp-linux-x64<span class="hljs-number">-8.2</span><span class="hljs-number">.12</span><span class="hljs-number">-0</span>-installer.run
+</code></pre><p>Simply press forward till last step and it will start the installation,</p>
+<p><img src="/assets/images/clt/linux-mint-xampp-install/1.png" alt="1"></p>
+<p>After the installation has finished open up the xampp using this command,</p>
+<pre><code>sudo /opt/lampp/manager-linux-x64.<span class="hljs-built_in">run</span>
+</code></pre><p>Press the start all button to start all the services of xampp. Also to open the dashboard or PHPMyAdmin go to this url,</p>
+<pre><code>http:<span class="hljs-regexp">//</span>localhost<span class="hljs-regexp">/dashboard/</span>
+</code></pre><p>Keep in mind, if you want to open MySQl on terminal use this command,</p>
+<pre><code><span class="hljs-symbol">sudo</span>  /<span class="hljs-meta">opt</span>/lampp/<span class="hljs-keyword">bin/mysql </span>-u root
+</code></pre>
+</div>
+
+<button type="button" class="collapsible">Shell Scripting | a Complete Guide with an Example</button>
+<div class="content">
+<p>Shell scripting is a powerful tool which is widely used to perform different task using the command line. Mainly it is used for the purpose of automation.Shell scripting is a highly flexible tool and it very powerful due to high support of operating system. Mainly it is used by system administrators. They used it for the purpose of system monitoring, account creating and variety of tasks. Developers and DevOps professionals also widely use shell scripting on almost daily basis.</p>
+<p>Shell scripting consist of various terminologies. Mainly of which are:</p>
+<ol>
+<li>Terminal: Establish connection with the server</li>
+<li>Shell: Interpret shell scripting commands</li>
+<li>Script: Short program that performs a specific task</li>
+<li>Shell Script: Script which runs through command-line shell</li>
+</ol>
+<h2 id="types-of-shells-">Types of Shells:</h2>
+<p>Different types of shells are used for different tasks. It totally depends upon the nature of application. Shell decides how can we execute programs and which system resources should be access. Some common tpes of shells are below:</p>
+<ol>
+<li>Bourne shell</li>
+<li>C shell</li>
+<li>Bash shell</li>
+<li>Korn shell</li>
+<li>Z shell</li>
+</ol>
+<p>We are going to look into the bash shell mainly as i&#39;m using linux and bash shell is widely used in it. Let&#39;s write some basic hello world shell script by using a hello.sh file.</p>
+<pre><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Hello Shell"</span>
+</code></pre><p>After it, we have to check the permissions of the hello.sh file so that we can execute this script. For this purpose, we will add execution permission for this <code>.sh file</code></p>
+<pre><code><span class="hljs-selector-tag">chmod</span> +<span class="hljs-selector-tag">x</span> <span class="hljs-selector-tag">hello</span><span class="hljs-selector-class">.sh</span>
+</code></pre><p>Now, confirm the permissions of the file by,</p>
+<pre><code>ls <span class="hljs-_">-l</span>
+</code></pre><p>As the file is now executable, run the file by using,</p>
+<pre><code>./hello.<span class="hljs-keyword">sh</span>
+</code></pre><p>and here you go. A message of &quot;<code>Hello Shell&quot;</code> is in front of you.</p>
+</div>
+
+<button type="button" class="collapsible">Linux Configuration for Auto-Mounting Disk</button>
+<div class="content">
+<p>By default if you&#39;ve multiple Disk-Drives or partitions, either in NTFS or FAT partition system, linux donot automatically mount them. You&#39;ve to mount the partition everytime manually which is honestly way too headache for a lazy person like me. Why not solve this issue and do some configurations so that on boot the linux automatically mount all the disk-drives. </p>
+<p>For this purpose you&#39;ve to add your drives in the <code>fstab</code> file,</p>
+<pre><code>sudo nano <span class="hljs-regexp">/etc/</span>fstab
+</code></pre><p>Here you&#39;ll see already added the linux drives by default. In my case i&#39;ve 4 NTFS partitions from my Windows-Drive and i want to mount them automatically on startup. I&#39;ll add the <code>UUID</code> of the drives in this text file. </p>
+<p>Simply open your disk management application on your linux (I&#39;m using linux mint and also i&#39;ve tried the same method on ubuntu, works totally fine for me).</p>
+<p><img src="/assets/images/clt/linux-auto-mount-partitions-on-startup/1.png" alt="1"></p>
+<p>I&#39;ve 4 Hard-Drives. The last one is this linux itself so ignore it and lets focus on the first 3. Click on the first Drive and you&#39;ll see something like this,</p>
+<p><img src="/assets/images/clt/linux-auto-mount-partitions-on-startup/2.png" alt="2"></p>
+<p>The text-file opened in your terminal, it has the following syntax to add partitions.</p>
+<pre><code>UUID=<span class="hljs-number">581</span>EDE4F1EDE2632 /media/saleemshady/hdd2 ntfs defaults <span class="hljs-number">0</span> <span class="hljs-number">2</span>
+</code></pre><p>First of all copy the <code>UUID</code> of this partition from the disk software. In the text-editor write a new line following the same syntax. Replace the UUID with the UUID of your partition. Next check the partition type (whether it is fat,ntfs e.t.c) and write accordingly after the path and the remaining syntax will be same. </p>
+<p>P.S here you can get the partition-type and UUID from the disk-software,</p>
+<p><img src="/assets/images/clt/linux-auto-mount-partitions-on-startup/3.png" alt="3"></p>
+<p>Similarly do the same for other partitions as well. In my case it looks like this,</p>
+<p><img src="/assets/images/clt/linux-auto-mount-partitions-on-startup/4.png" alt="4"></p>
+<p>Now save the file using the shortcut key of <code>CTRL+O</code> and exit from the editor using <code>CTRL+X</code>. </p>
+<p>The configuration is completed. Now whenever you linux will boot. It will automatically mount all the partitions by default. </p>
+</div>
+
+<button type="button" class="collapsible">OBS (Open Broadcasting Software) Crash Launching Fix in Linux</button>
+<div class="content">
+<p>Incase you are using a Linux Operating system and using OBS (Open Broadcasting Software), sometimes this error come which is known by the title of <strong>Not Shutdown Properly Last Time</strong> also known as segmentation fault(on the terminal). In this issue, the obs run and crash on launch. I&#39;ve tried multiple ways to solve it but none of them was useful until i found this specific solution. </p>
+<p><img src="/assets/images/clt/linux-mint-obs-crash/5.png" alt="5"></p>
+<p>Simply you&#39;ve to edit a file. Here is the full command to open the file <code>global.ini</code>,</p>
+<pre><code>nano ~/.config/obs-studio/<span class="hljs-keyword">global</span>.ini
+</code></pre><p>The file will look like this,</p>
+<p><img src="/assets/images/clt/linux-mint-obs-crash/1.png" alt="1"></p>
+<p>In here, you&#39;ve to find a keyword <code>DockState</code>, here it is, </p>
+<p><img src="/assets/images/clt/linux-mint-obs-crash/2.png" alt="2"></p>
+<p>It will be a long text in front of <code>DockState=</code> as you can see from the above snippet. You simply have to remove everything on the right side of the equal <code>(=)</code> sign like this,</p>
+<p><img src="/assets/images/clt/linux-mint-obs-crash/3.png" alt="3"></p>
+<p>Now save the file using the shortcut key of <code>CTRL+O</code> and exit the prompt using <code>CTRL+X</code>. Launch the OBS and it will launch smoothly without an error.</p>
+<p><img src="/assets/images/clt/linux-mint-obs-crash/4.png" alt="4"></p>
+<p>For more information, you can also checkout this thread, </p>
+<p><a href="https://obsproject.com/forum/threads/segmentation-fault.171763/">https://obsproject.com/forum/threads/segmentation-fault.171763/</a></p>
+</div>
+
 	<button type="button" class="collapsible">PHP Hello World</button>
 <div class="content">
   <p>Php is one of the famous server-side scripting language. In common websites, it is used to handle the backend portion. No doubt, many new frameworks are now introduced in the market but still PHP is used in a wide number of websites.</p>
@@ -2268,9 +3592,23 @@ bubblesort:</span>
 <p>I use the Windows operating system mainly for playing video games. Recently i faced this issue of disk space auto filling up whenever the os got updates resulting in lower remaining space in the os drive. Eventually i&#39;ve to replace the windows with a new one every 2 or 3 years which was a headache.</p>
 <p>I did search multiple threads in order to find the solution. Some people said this occur b/c of leftout update files while some were saying the TEMP files as a major cause of this issue. I removed the temp files from the multiple folders <code>prefetch</code>, <code>Temp</code>, <code>%temp%</code> (we used to do it in windows 7) but i got 2 or 3 gigs free. Then i found this built in windows feature by the name of Storage Sense. You simply have to turn it on the moment you install the windows and Vola! it will manage/remove all the roleback update files. Here is a snippet where you can find it also there is a path from system settings,</p>
 <p><img src="/assets/images/clt/windows-storage-sense/1.png" alt="1"></p>
-
 </div>
 	
+<button type="button" class="collapsible">Cloud Computing concept of Load Balancing vs Scalability</button>
+<div class="content">
+<p>Today, i&#39;m going to talk about an intresting debate on <code>Load Balancing</code> and <code>Scalability</code>. Both of these terms are used widely in terms of Cloud Computing. When it comes to the implementation of these two, they almost feel the same but in depth, they are different from each other.</p>
+<h2 id="load-balancing-">Load Balancing:</h2>
+<p>Load balancing is actually distributing the load among the servers by using another server known as <code>Load Balancer</code>. In load balancing, the number of instances (EC2, Servers) remains the same.</p>
+<h2 id="scalability-">Scalability:</h2>
+<p>Scalability is increasing or decreasing the number of instances (EC2, Servers) according to the number of requests. In scalability, the number of instances are not fixed.</p>
+<p>Both of these terms accounts very much in Cloud Computing. Specifically when working with cloud platforms like Microsoft Azure or Amazon Web Services (AWS).</p>
+</div>
+
+
+<button type="button" class="collapsible"></button>
+<div class="content">
+</div>
+
 <button type="button" class="collapsible"></button>
 <div class="content">
 </div>
