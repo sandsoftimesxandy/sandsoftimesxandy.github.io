@@ -62,7 +62,7 @@ body {
 </style>
 </head>
 
-<body>
+<body width = "device-width">
 <div class="wrapper">
 <div class="myDiv">	
 	<h2>	Muhammad Sharjeel Akhtar <br>SandsOfTimes[SANDY]	</h2>
@@ -395,7 +395,7 @@ zip_ref.<span class="hljs-built_in">close</span>()
 )
 </code></pre><p>check the model summary,</p>
 <pre><code><span class="hljs-selector-tag">conv_base</span><span class="hljs-selector-class">.summary</span>()
-</code></pre><p><img class="img-responsive" src="/assets/images/clt/transfer-learning-in-keras/1.png" alt="1"></p>
+</code></pre><p><img src="/assets/images/clt/transfer-learning-in-keras/1.png" alt="1"></p>
 <p>Then create and connect the rest of the model,</p>
 <pre><code><span class="hljs-keyword">model</span> = Sequential()
 
@@ -529,7 +529,7 @@ plt.plot(history<span class="hljs-selector-class">.history</span>[<span class="h
 plt.plot(history<span class="hljs-selector-class">.history</span>[<span class="hljs-string">'val_accuracy'</span>],<span class="hljs-attribute">color</span>=<span class="hljs-string">'blue'</span>,label=<span class="hljs-string">'validation'</span>)
 plt.legend()
 plt.show()
-</code></pre><p><img class="img-fluid" src="/assets/images/clt/transfer-learnin-in-keras-data-augmentaion/1.png" alt="1"></p>
+</code></pre><p><img src="/assets/images/clt/transfer-learnin-in-keras-data-augmentaion/1.png" alt="1"></p>
 <p>plot the loss,</p>
 <pre><code>plt.plot(history.history[<span class="hljs-string">'loss'</span>],color=<span class="hljs-string">'red'</span>,<span class="hljs-keyword">label</span><span class="bash">=<span class="hljs-string">'train'</span>)
 </span>plt.plot(history.history[<span class="hljs-string">'val_loss'</span>],color=<span class="hljs-string">'blue'</span>,<span class="hljs-keyword">label</span><span class="bash">=<span class="hljs-string">'validation'</span>)
