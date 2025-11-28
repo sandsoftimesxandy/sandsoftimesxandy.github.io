@@ -149,6 +149,15 @@ For Bullet Points:
 
 <button type="button" class="collapsible">Recurrent Neural Network (RNN)</button>
 <div class="content">
+    <p>
+        Recurrent Neural Network is a specific type of Neural Network that not only the consider the current input and predict the output instead it maintains 
+        the record of past experience by keeping a hidden state. This hidden state is passed along with the next input to the recurrent unit. There will be two 
+        weights involve, once with the input to the recurrent unit and second the weight with the hidden state comming from previous timestamp which will both 
+        contribute in predicting the output. Similarly the back propagation in RNNs is a bit different from the ordinary neural network. Here <b>"Back-Propagation-Through-Time(BPTT)"</b> 
+        occur. You can look into it in more detail from the excellent blog post of "geeksandgeeks". I've implemented a basic RNN down below, if you want to try it with 
+        different input simply change the first text sequence according to your choice and then in  the prediction pass some portion of it you will see your model will 
+        predict accordingly.
+    </p>
     <object class="pdf" data="/assets/pdf/rnn.recurrent-neural-network.ipynb - Colab.pdf"></object>
 </div>
 
