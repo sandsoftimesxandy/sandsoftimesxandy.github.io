@@ -12,7 +12,7 @@ img {
 }
 .pdf {
         !width: 530;
-        width: 80%;
+        width: 90%;
         height: 750;
         aspect-ratio: 4 / 3;
         display: block;
@@ -111,10 +111,10 @@ body {
     -->
 
 	<hr>
-    <object class="pdf" data="/home/spoofylinux/Downloads/rletter.pdf">
+    <object class="pdf" data="/assets/recommendation/dr-hafeez.pdf">
     </object>
     <br>
-    <object class="pdf" data="/home/spoofylinux/Downloads/data_analysis.pdf">
+    <object class="pdf" data="/assets/pdf/data_analysis.pdf">
     </object>
 
 	<!-- <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdms3YzR2eDc5dWpkanFsMGpjM3U5YXQ1bm9qOTBncG40cTJ6aGJiOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RE6A18EFQHSP6/giphy.gif" alt="Computer man" style="width:950px;height:380px;"> -->
@@ -145,6 +145,11 @@ For Bullet Points:
 
 -->
 
+<button type="button" class="collapsible">Recurrent Neural Network (RNN)</button>
+<div class="content">
+    <object class="pdf" data="/assets/pdf/rnn.recurrent-neural-network.ipynb - Colab.pdf"></object>
+</div>
+
 <button type="button" class="collapsible">Cross Tabulation</button>
 <div class="content">
     <p>Cross Tabulation shows the relations between two variables/features by analyzing their frequency.</p>
@@ -160,44 +165,6 @@ For Bullet Points:
 <!--    !!!!!!!!!!!!!!!!!!!!            MARK DOWN TO HTML CONVERTED BLOGS START HERE      !!!!!!!!!!!!!!!!!!!!          -->
 <!--    !!!!!!!!!!!!!!!!!!!!            MARK DOWN TO HTML CONVERTED BLOGS START HERE      !!!!!!!!!!!!!!!!!!!!          -->
 <!--    !!!!!!!!!!!!!!!!!!!!            MARK DOWN TO HTML CONVERTED BLOGS START HERE      !!!!!!!!!!!!!!!!!!!!          -->
-
-
-<button type="button" class="collapsible">Python Dummy Code</button>
-<div class="content">
-<p>Below is the dummy code i picked from a site to test the purpose of hr tag. Let's see how it works.</p>
-<hr>
-<pre>
-import numpy as np
-import pandas as pd
-import statsmodels.api as sm
-
-my_data = np.array([[5, 'a', 1],
-                    [3, 'b', 3],
-                    [1, 'b', 2],
-                    [3, 'a', 1],
-                    [4, 'b', 2],
-                    [7, 'c', 1],
-                    [7, 'c', 1]])                
-
-
-df = pd.DataFrame(data=my_data, columns=['y', 'dummy', 'x'])
-just_dummies = pd.get_dummies(df['dummy'])
-
-
-step_1 = pd.concat([df, just_dummies], axis=1)      
-step_1.drop(['dummy', 'c'], inplace=True, axis=1)
-# to run the regression we want to get rid of the strings 'a', 'b', 'c' (obviously)
-# and we want to get rid of one dummy variable to avoid the dummy variable trap
-# arbitrarily chose "c", coefficients on "a" an "b" would show effect of "a" and "b"
-# relative to "c"
-step_1 = step_1.applymap(np.int) 
-
-result = sm.OLS(step_1['y'], sm.add_constant(step_1[['x', 'a', 'b']])).fit()
-print result.summary()
-</pre>
-<hr>
-
-</div>
 
 <button type="button" class="collapsible">LSTM | Text Generation using Supervised Learning</button>
 <div class="content">
