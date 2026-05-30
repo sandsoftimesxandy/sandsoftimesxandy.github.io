@@ -1,0 +1,223 @@
+<a href="#" class="home-link">Back to Home</a>
+
+<p>Transfer learning gives a bit different results when done with data-augmentation and without data-augmentation. The accuracy is a bit improved with data augmentation technique. Here i&#39;ve implemented a code today for transfer learning technique with data-augmentation. You can check my previous without augmentation implementation as well</p>
+<p>First of all, do necessary importing and download dataset,</p>
+<pre><code>!mkdir -<span class="hljs-selector-tag">p</span> ~/<span class="hljs-selector-class">.kaggle</span>
+!cp kaggle<span class="hljs-selector-class">.json</span> ~/.kaggle/
+!kaggle datasets download -d salader/dogs-vs-cats
+</code></pre><p>unzip the dataset,</p>
+<pre><code><span class="hljs-keyword">import</span> zipfile
+zip_ref = zipfile.ZipFile(<span class="hljs-string">'/content/dogs-vs-cats.zip'</span>, <span class="hljs-string">'r'</span>)
+zip_ref.extractall(<span class="hljs-string">'/content'</span>)
+zip_ref.<span class="hljs-built_in">close</span>()
+</code></pre><p>import libraries for the model,</p>
+<pre><code><span class="hljs-keyword">import</span> tensorflow
+<span class="hljs-title">from</span> tensorflow <span class="hljs-keyword">import</span> keras
+<span class="hljs-title">from</span> keras <span class="hljs-keyword">import</span> Sequential
+<span class="hljs-title">from</span> keras.layers <span class="hljs-keyword">import</span> Dense,Flatten
+<span class="hljs-title">from</span> keras.applications.vgg16 <span class="hljs-keyword">import</span> VGG16
+</code></pre><p>use the VGG16 convolution base,</p>
+<pre><code>conv_base = VGG16(
+    <span class="hljs-name">weights=</span>'imagenet',
+    include_top = False,
+    input_shape=(<span class="hljs-number">150</span>,<span class="hljs-number">150</span>,<span class="hljs-number">3</span>)
+)
+</code></pre><p>create the rest of the model and connect with the base,</p>
+<pre><code><span class="hljs-keyword">model</span> = Sequential()
+
+<span class="hljs-keyword">model</span>.add(conv_base)
+<span class="hljs-keyword">model</span>.add(Flatten())
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">256</span>,activation=<span class="hljs-string">'relu'</span>))
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">1</span>,activation=<span class="hljs-string">'sigmoid'</span>))
+</code></pre><p>freeze the convolution layers training,</p>
+<pre><code>conv_base<span class="hljs-selector-class">.trainable</span> = False
+</code></pre><p>import the image generators for the data augmentation,</p>
+<pre><code>from keras<span class="hljs-selector-class">.preprocessing</span><span class="hljs-selector-class">.image</span> import ImageDataGenerator, array_to_img, img_to_array, load_img
+</code></pre><p>create the generators and do image augmentation,</p>
+<pre><code><span class="hljs-attr">batch_size</span> = <span class="hljs-number">32</span>
+
+<span class="hljs-attr">train_datagen</span> = ImageDataGenerator(
+        <span class="hljs-attr">rescale=1./255,</span>
+        <span class="hljs-attr">shear_range=0.2,</span>
+        <span class="hljs-attr">zoom_range=0.2,</span>
+        <span class="hljs-attr">horizontal_flip=True)</span>
+
+<span class="hljs-attr">test_datagen</span> = ImageDataGenerator(<span class="hljs-attr">rescale=1./255)</span>
+
+<span class="hljs-attr">train_generator</span> = train_datagen.flow_from_directory(
+        '/content/train',
+        <span class="hljs-attr">target_size=(150,</span> <span class="hljs-number">150</span>),
+        <span class="hljs-attr">batch_size=batch_size,</span>
+        <span class="hljs-attr">class_mode='binary')</span> 
+
+<span class="hljs-attr">validation_generator</span> = test_datagen.flow_from_directory(
+        '/content/test',
+        <span class="hljs-attr">target_size=(150,</span> <span class="hljs-number">150</span>),
+        <span class="hljs-attr">batch_size=batch_size,</span>
+        <span class="hljs-attr">class_mode='binary')</span>
+</code></pre><p>compile the model,</p>
+<pre><code><span class="hljs-keyword">model</span>.compile(optimizer=<span class="hljs-string">'adam'</span>,loss=<span class="hljs-string">'binary_crossentropy'</span>,metrics=[<span class="hljs-string">'accuracy'</span>])
+</code></pre><p>fit the model and store the history,</p>
+<pre><code><span class="hljs-attr">history</span> = model.fit_generator(
+        train_generator,
+        <span class="hljs-attr">epochs=10,</span>
+        <span class="hljs-attr">validation_data=validation_generator)</span>
+</code></pre><p>do plotting of accuracy,</p>
+<pre><code>import matplotlib<span class="hljs-selector-class">.pyplot</span> as plt
+
+plt.plot(history<span class="hljs-selector-class">.history</span>[<span class="hljs-string">'accuracy'</span>],<span class="hljs-attribute">color</span>=<span class="hljs-string">'red'</span>,label=<span class="hljs-string">'train'</span>)
+plt.plot(history<span class="hljs-selector-class">.history</span>[<span class="hljs-string">'val_accuracy'</span>],<span class="hljs-attribute">color</span>=<span class="hljs-string">'blue'</span>,label=<span class="hljs-string">'validation'</span>)
+plt.legend()
+plt.show()
+</code></pre><p><img src="/assets/images/clt/transfer-learnin-in-keras-data-augmentaion/1.png" alt="1"></p>
+<p>plot the loss,</p>
+<pre><code>plt.plot(history.history[<span class="hljs-string">'loss'</span>],color=<span class="hljs-string">'red'</span>,<span class="hljs-keyword">label</span><span class="bash">=<span class="hljs-string">'train'</span>)
+</span>plt.plot(history.history[<span class="hljs-string">'val_loss'</span>],color=<span class="hljs-string">'blue'</span>,<span class="hljs-keyword">label</span><span class="bash">=<span class="hljs-string">'validation'</span>)
+</span>plt.legend()
+plt.show()
+</code></pre><p><img src="/assets/images/clt/transfer-learnin-in-keras-data-augmentaion/2.png" alt="2"></p>
+</div>
+
+<button type="button" class="collapsible">GRADUATE Admission Prediction using ANN</button>
+<div class="content">
+<p>Today we are going to solve a regression problem using an <strong>Artificial Neural Network</strong>. The dataset i&#39;m using contains the information about the students, their GRE score, TOEFL score, CGPA e.t.c.</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/14.png" alt="14"></p>
+<p>First of all import the <code>numpy</code> and <code>pandas</code> libraries,</p>
+<pre><code><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+</code></pre><p>Next import the dataset we want to work on,</p>
+<pre><code><span class="hljs-attr">df</span>=pd.read_csv(<span class="hljs-string">'/kaggle/input/graduate-admissions/Admission_Predict_Ver1.1.csv'</span>)
+</code></pre><p>Have a look at the dataset using the <code>head()</code> function,</p>
+<pre><code><span class="hljs-selector-tag">df</span><span class="hljs-selector-class">.head</span>()
+</code></pre><p>Here is how it will look like,</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/1.png" alt="1"></p>
+<p>Then checkout the shape of dataset,</p>
+<pre><code><span class="hljs-selector-tag">df</span><span class="hljs-selector-class">.shape</span>
+</code></pre><p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/2.png" alt="2"></p>
+<p>Then use the info() function to get more details,</p>
+<pre><code><span class="hljs-selector-tag">df</span><span class="hljs-selector-class">.info</span>()
+</code></pre><p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/3.png" alt="3"></p>
+<p>Next is, we will check if there are any duplicate rows present or not,</p>
+<pre><code><span class="hljs-selector-tag">df</span><span class="hljs-selector-class">.duplicated</span>()<span class="hljs-selector-class">.sum</span>()
+</code></pre><p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/4.png" alt="4"></p>
+<p>Now drop the <code>Serial No.</code> column because it is of no use for us,</p>
+<pre><code>df.<span class="hljs-built_in">drop</span>(columns=[<span class="hljs-string">'Serial No.'</span>],inplace=<span class="hljs-literal">True</span>)
+</code></pre><p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/5.png" alt="5"></p>
+<p>Have a look at the dataset,</p>
+<pre><code><span class="hljs-selector-tag">df</span><span class="hljs-selector-class">.head</span>()
+</code></pre><p>Here is how it looks like,</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/6.png" alt="6"></p>
+<p>Now separate the columns for testing and training data,</p>
+<pre><code><span class="hljs-attr">X</span>=df.iloc[:,<span class="hljs-number">0</span>:-<span class="hljs-number">1</span>]
+<span class="hljs-attr">y</span>=df.iloc[:,-<span class="hljs-number">1</span>]
+</code></pre><p>Here is how the features looks like,</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/7.png" alt="7"></p>
+<p>Here is a view of target label,</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/8.png" alt="8"></p>
+<p>Now import the <code>train_test_split</code> and divide the data into 4-parts,</p>
+<pre><code><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split
+X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=<span class="hljs-number">0.2</span>,random_state=<span class="hljs-number">1</span>)
+</code></pre><p><code>X_train</code> will look like this,</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/9.png" alt="9"></p>
+<p>Now it is time to scale the values so that the weights can converge in a better way,</p>
+<pre><code>from sklearn.preprocessing <span class="hljs-built_in">import</span> MinMaxScaler
+<span class="hljs-attr">scaler=MinMaxScaler()</span>
+<span class="hljs-attr">X_train_scaled=scaler.fit_transform(X_train)</span>
+<span class="hljs-attr">X_test_scaled=scaler.transform(X_test)</span>
+</code></pre><p>Scaled values will look like this,</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/10.png" alt="10"></p>
+<p>Now it is time to build our <strong>NEURAL NETWORK</strong>. For this purpose import all the necessary libraries,</p>
+<pre><code><span class="hljs-keyword">import</span> tensorflow
+<span class="hljs-title">from</span> tensorflow <span class="hljs-keyword">import</span> keras
+<span class="hljs-title">from</span> keras <span class="hljs-keyword">import</span> Sequential 
+<span class="hljs-title">from</span> keras.layers <span class="hljs-keyword">import</span> Dense
+</code></pre><p>Create a sequential model and add layers to it,</p>
+<pre><code><span class="hljs-keyword">model</span>=Sequential()
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">7</span>,activation=<span class="hljs-string">'relu'</span>,input_dim=<span class="hljs-number">7</span>))
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">7</span>,activation=<span class="hljs-string">'relu'</span>))
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">1</span>,activation=<span class="hljs-string">'linear'</span>))
+</code></pre><p>Check out the model summary,</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/11.png" alt="11"></p>
+<p>Then compile the model,</p>
+<pre><code><span class="hljs-keyword">model</span>.compile(loss=<span class="hljs-string">'mean_squared_error'</span>,optimizer=<span class="hljs-string">'Adam'</span>)
+</code></pre><p>Now fit the model with the training data and provide epochs,</p>
+<pre><code>history=model.fit(X_train_scaled,y_train,epochs=<span class="hljs-number">100</span>,validation_split=<span class="hljs-number">0.2</span>)
+`
+</code></pre><p>Our model is trained now, it&#39;s time to make some predictions now,</p>
+<pre><code><span class="hljs-attr">y_pred</span>=model.predict(X_test_scaled)
+</code></pre><p>Calculate the <code>r2_score</code> of the predictions,</p>
+<pre><code>from sklearn<span class="hljs-selector-class">.metrics</span> import r2_score
+<span class="hljs-function"><span class="hljs-title">r2_score</span><span class="hljs-params">(y_test,y_pred)</span></span>
+</code></pre><p>Have a look at it,</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/12.png" alt="12"></p>
+<p>Now import the plotting libraries and make a plot between <code>loss</code> and <code>validaton_loss</code> of our model,</p>
+<pre><code>import matplotlib<span class="hljs-selector-class">.pyplot</span> as plt
+plt.plot(history<span class="hljs-selector-class">.history</span>[<span class="hljs-string">'loss'</span>])
+plt.plot(history<span class="hljs-selector-class">.history</span>[<span class="hljs-string">'val_loss'</span>])
+</code></pre><p>Here is the plot,</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/13.png" alt="13"></p>
+
+</div>
+
+<button type="button" class="collapsible">Handwritten Digit Classification using ANN | MNIST Dataset</button>
+<div class="content">
+<p>Today, we are going to build anther Artificial Neural Network for one of the famous dataset known as <strong>MNIST</strong>. It is use to classify digits(0-9).</p>
+<p><img src="/assets/images/clt/handwritten-digit-classification-using-ann/4.png" alt="4"></p>
+<p>Initially we did all the necessary importings,</p>
+<pre><code><span class="hljs-keyword">import</span> tensorflow
+<span class="hljs-title">from</span> tensorflow <span class="hljs-keyword">import</span> keras
+<span class="hljs-title">from</span> tensorflow.keras <span class="hljs-keyword">import</span> Sequential
+<span class="hljs-title">from</span> tensorflow.keras.layers <span class="hljs-keyword">import</span> Dense,Flatten
+</code></pre><p>Then simply load the dataset using keras, it will automatically do the train and test split.</p>
+<pre><code>(X_train,y_train),(X_test,y_test)=keras<span class="hljs-selector-class">.datasets</span><span class="hljs-selector-class">.mnist</span><span class="hljs-selector-class">.load_data</span>()
+</code></pre><p>Visualize the shape of train and test,</p>
+<pre><code>X_test<span class="hljs-selector-class">.shape</span>
+`
+</code></pre><pre><code>y_test<span class="hljs-selector-class">.shape</span>
+`
+</code></pre><pre><code>X_train<span class="hljs-selector-class">.shape</span>
+`
+</code></pre><pre><code>y_train<span class="hljs-selector-class">.shape</span>
+`
+</code></pre><p><strong>y_train</strong> will be the labels array.</p>
+<p>Then import plotting library and do some plotting of training data to acutually visualize the digits.</p>
+<pre><code><span class="hljs-selector-tag">import</span> <span class="hljs-selector-tag">matplotlib</span><span class="hljs-selector-class">.pyplot</span> <span class="hljs-selector-tag">as</span> <span class="hljs-selector-tag">plt</span>
+<span class="hljs-selector-tag">plt</span><span class="hljs-selector-class">.imshow</span>(<span class="hljs-selector-tag">X_train</span><span class="hljs-selector-attr">[2]</span>)
+</code></pre><p>Now scale the data to better calculate the parameters e.g weight and bias.</p>
+<pre><code><span class="hljs-attr">X_train</span>=X_train/<span class="hljs-number">255</span>
+<span class="hljs-attr">X_test</span>=X_test/<span class="hljs-number">255</span>
+</code></pre><p>Lets make our ANN now with keras sequential() model, </p>
+<pre><code><span class="hljs-keyword">model</span> = Sequential()
+
+<span class="hljs-keyword">model</span>.add(Flatten(input_shape=(<span class="hljs-number">28</span>,<span class="hljs-number">28</span>)))
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">128</span>,activation=<span class="hljs-string">'relu'</span>))
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">32</span>,activation=<span class="hljs-string">'relu'</span>))
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">10</span>,activation=<span class="hljs-string">'softmax'</span>))
+</code></pre><p><strong>Flatten</strong> will convert the 28x28 matrix into single long array.</p>
+<p>View the model summary using,</p>
+<pre><code>model.summary()
+`
+</code></pre><p>Add the loss function to our model, </p>
+<pre><code><span class="hljs-keyword">model</span>.compile(loss=<span class="hljs-string">'sparse_categorical_crossentropy'</span>,optimizer=<span class="hljs-string">'Adam'</span>,metrics=[<span class="hljs-string">'accuracy'</span>])
+</code></pre><p>Now fit the model on our training data to calculate the weight and bias,</p>
+<pre><code>history=model.fit(X_train,y_train,epochs=<span class="hljs-number">25</span>,validation_split=<span class="hljs-number">0.2</span>)
+# history = model.fit(X_train,y_train,epochs=<span class="hljs-number">25</span>,validation_split=<span class="hljs-number">0.2</span>)
+</code></pre><p>The model will run for 25 epochs. It is now time to make some predictions from our model,</p>
+<pre><code><span class="hljs-attr">y_prob=model.predict(X_test)</span>
+<span class="hljs-attr">y_pred</span> = y_prob.argmax(<span class="hljs-attr">axis=1)</span>
+y_pred
+</code></pre><p>Inorder to check accuracy of our model <strong>import accuracy_score</strong></p>
+<pre><code>from sklearn<span class="hljs-selector-class">.metrics</span> import accuracy_score
+<span class="hljs-function"><span class="hljs-title">accuracy_score</span><span class="hljs-params">(y_test,y_pred)</span></span>
+</code></pre><p>Also we will check the overfitting by plotting the loss and validation_loss,</p>
+<pre><code><span class="hljs-selector-tag">plt</span><span class="hljs-selector-class">.plot</span>(<span class="hljs-selector-tag">history</span><span class="hljs-selector-class">.history</span><span class="hljs-selector-attr">['loss']</span>)
+<span class="hljs-selector-tag">plt</span><span class="hljs-selector-class">.plot</span>(<span class="hljs-selector-tag">history</span><span class="hljs-selector-class">.history</span><span class="hljs-selector-attr">['val_loss']</span>)
+</code></pre><p><img src="/assets/images/clt/handwritten-digit-classification-using-ann/1.png" alt="1"></p>
+<p>Now compare the accuracy with the validation_accuracy</p>
+<pre><code><span class="hljs-selector-tag">plt</span><span class="hljs-selector-class">.plot</span>(<span class="hljs-selector-tag">history</span><span class="hljs-selector-class">.history</span><span class="hljs-selector-attr">['accuracy']</span>)
+<span class="hljs-selector-tag">plt</span><span class="hljs-selector-class">.plot</span>(<span class="hljs-selector-tag">history</span><span class="hljs-selector-class">.history</span><span class="hljs-selector-attr">['val_accuracy']</span>)
+</code></pre><p><img src="/assets/images/clt/handwritten-digit-classification-using-ann/2.png" alt="2"></p>
+<p>Lets test our model on a random value from the testing data,</p>
+<pre><code><span class="hljs-selector-tag">plt</span><span class="hljs-selector-class">.imshow</span>(<span class="hljs-selector-tag">X_test</span><span class="hljs-selector-attr">[9]</span>)
+</code></pre><pre><code>model.predict(X_test[<span class="hljs-number">9</span>].reshape(<span class="hljs-number">1</span>,<span class="hljs-number">28</span>,<span class="hljs-number">28</span>)).argmax(axis=<span class="hljs-number">1</span>)
+</code></pre><p><img src="/assets/images/clt/handwritten-digit-classification-using-ann/3.png" alt="3"></p>

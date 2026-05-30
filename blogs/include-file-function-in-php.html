@@ -1,0 +1,32 @@
+<a href="#" class="home-link">Back to Home</a>
+
+<p>Include function is one of the most common function. It is used to include files which contain code which are repeatedly used e.g footers, headers e.t.c. In php, there are 4 ways to include a file,</p>
+<ul>
+<li>include</li>
+<li>include_once</li>
+<li>required</li>
+<li>required_once</li>
+</ul>
+<p>The <code>include</code> and <code>include_once</code> function both are almost same. The only difference is while using a loop, we used <code>include_once</code>. By this, the function include the file only once in a loop while if we used the <code>include</code> in a loop, the file will be included againa and again,</p>
+<p>Here is an outlook of <code>include</code>,</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">include</span>(<span class="hljs-string">"./hello-world1.php"</span>);
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p>Here is another example of <code>include_once</code> in a for loop,</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">for</span> ($i=<span class="hljs-number">0</span>;$i&lt;<span class="hljs-number">10</span>;$i++){
+    <span class="hljs-keyword">include_once</span>(<span class="hljs-string">"./hello-world.php"</span>);
+}
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p>Just like the above, <code>require</code> and <code>require_once</code> are also similar to above two. The only difference between <code>require</code> and <code>include</code> is that the include function gives <strong>warning</strong> if anything goes wrong (we can hide warning in php) but require function gives <strong>fatal error</strong> in case of error (fatal error cannot be hidden). </p>
+<p>Here is an example code for the <code>require</code> function,</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">require</span>(<span class="hljs-string">"./hello-world1.php"</span>);
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p>Below is an example of the <code>require_once</code> function,</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">for</span>($i=<span class="hljs-number">0</span>;$i&lt;<span class="hljs-number">10</span>;$i++){
+    <span class="hljs-keyword">require_once</span>(<span class="hljs-string">"./hello-world.php"</span>);
+}
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre>

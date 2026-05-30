@@ -1,0 +1,49 @@
+<a href="#" class="home-link">Back to Home</a>
+
+<p>When it comes to machine learning, <code>Scikit Learn</code> is the most widely used library. Today, we are going to practice the very basic machine learning model. We are going to use scikit learn to split our data into <code>train</code> and <code>test</code> subsets. Then we are going to create the <code>Linear Regression</code> model and afterwards, we train and test it by using the subsets.</p>
+<p>Initially import all the necessary libraries including <code>pandas</code>, <code>numpy</code>, <code>matplotlib</code> and <code>seaborn</code></p>
+<pre><code><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
+%matplotlib inline
+</code></pre><p>then read the data from the dataset, in this case we are using data from a self-generate csv file with the name &#39;USA_Housing.csv&#39;</p>
+<pre><code><span class="hljs-attr">USAhousing</span>=pd.read_csv(<span class="hljs-string">'USA_Housing.csv'</span>)
+</code></pre><p>Now have a look at the imported dataset,</p>
+<pre><code><span class="hljs-selector-tag">USAhousing</span><span class="hljs-selector-class">.head</span>()
+</code></pre><p>Then check some info of the imported dataset,</p>
+<pre><code><span class="hljs-selector-tag">USAhousing</span><span class="hljs-selector-class">.info</span>()
+</code></pre><p>After it, apply the <code>describe()</code> method to extract some valuable information,</p>
+<pre><code><span class="hljs-selector-tag">USAhousing</span><span class="hljs-selector-class">.describe</span>()
+</code></pre><p>Then, specifically extract the columns of the datasets,</p>
+<pre><code><span class="hljs-selector-tag">USAhousing</span><span class="hljs-selector-class">.columns</span>
+</code></pre><p>After it, we will visualize the imported data in the form of plots. We are going to use seaborn library for this purpose which we&#39;ve imported at the start. First we&#39;ll look the data in the form of pairplot</p>
+<pre><code><span class="hljs-selector-tag">sns</span><span class="hljs-selector-class">.pairplot</span>(<span class="hljs-selector-tag">USAhousing</span>)
+</code></pre><p>Then visualize the data in the form of distplot,</p>
+<pre><code><span class="hljs-selector-tag">sns</span><span class="hljs-selector-class">.distplot</span>(<span class="hljs-selector-tag">USAhousing</span><span class="hljs-selector-attr">['Price']</span>)
+</code></pre><p>Similarly, check heat plot as well for the given data,</p>
+<pre><code><span class="hljs-selector-tag">sns</span><span class="hljs-selector-class">.heatmap</span>(<span class="hljs-selector-tag">USAhousing</span><span class="hljs-selector-class">.corr</span>())
+</code></pre><p>After visualization, we are going to train our first linear regression model. We will need to first split up our data into an X array that contains the features to train on, and a y array with the target variable, in this case the Price column. We will toss out the Address column because it only has text info that the linear regression model can&#39;t use.</p>
+<pre><code><span class="hljs-symbol">X</span> = <span class="hljs-symbol">USAhousing</span>[[<span class="hljs-string">'Avg. Area Income'</span>, <span class="hljs-string">'Avg. Area House Age'</span>, <span class="hljs-string">'Avg. Area Number of Rooms'</span>,
+               <span class="hljs-string">'Avg. Area Number of Bedrooms'</span>, <span class="hljs-string">'Area Population'</span>]]
+y = <span class="hljs-symbol">USAhousing</span>[<span class="hljs-string">'Price'</span>]
+</code></pre><p>Now let&#39;s split the data into a training set and a testing set. We will train out model on the training set and then use the test set to evaluate the model.</p>
+<pre><code><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split
+</code></pre><pre><code>X_train, X_test, y_train, <span class="hljs-attr">y_test</span> = train_test_split(X, y, <span class="hljs-attr">test_size=0.4,</span> <span class="hljs-attr">random_state=101)</span>
+</code></pre><p>Now we will create and train the model,</p>
+<pre><code><span class="hljs-keyword">from</span> sklearn.linear_model <span class="hljs-keyword">import</span> LinearRegression
+</code></pre><pre><code><span class="hljs-attr">lm</span> = LinearRegression()
+</code></pre><pre><code><span class="hljs-selector-tag">lm</span><span class="hljs-selector-class">.fit</span>(<span class="hljs-selector-tag">X_train</span>,<span class="hljs-selector-tag">y_train</span>)
+</code></pre><p>Let&#39;s evaluate the model by checking out it&#39;s coefficients and how we can interpret them.</p>
+<pre><code><span class="hljs-comment"># print the intercept</span>
+<span class="hljs-built_in">print</span>(lm.intercept_)
+</code></pre><pre><code>coeff_df = pd.DataFrame(lm<span class="hljs-selector-class">.coef_</span>,X<span class="hljs-selector-class">.columns</span>,<span class="hljs-attribute">columns</span>=[<span class="hljs-string">'Coefficient'</span>])
+coeff_df
+</code></pre><h2 id="interpreting-the-coefficients-">Interpreting the coefficients:</h2>
+<ul>
+<li>Holding all other features fixed, a 1 unit increase in Avg. Area Income is associated with an <em>increase of $21.52 </em>.</li>
+<li>Holding all other features fixed, a 1 unit increase in Avg. Area House Age is associated with an <em>increase of $164883.28 </em>.</li>
+<li>Holding all other features fixed, a 1 unit increase in Avg. Area Number of Rooms is associated with an <em>increase of $122368.67 </em>.</li>
+<li>Holding all other features fixed, a 1 unit increase in Avg. Area Number of Bedrooms is associated with an <em>increase of $2233.80 </em>.</li>
+<li>Holding all other features fixed, a 1 unit increase in Area Population is associated with an <em>increase of $15.15 </em>.</li>
+</ul>

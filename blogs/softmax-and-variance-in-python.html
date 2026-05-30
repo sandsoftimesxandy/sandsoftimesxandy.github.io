@@ -1,0 +1,24 @@
+<a href="#" class="home-link">Back to Home</a>
+
+<p>Softmax function is one of the most widely used activation function in deep learning. Applying it on a data with high variance and cause problems. Therefore we most provide the scaled data with low variance to this activation function. The implementation of softmax is very simple. Here is few lines code showing the implementation of softmax,</p>
+<p>First of all import all the necessary libraries,</p>
+<pre><code><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np 
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+</code></pre><p>then here is the softmax,</p>
+<pre><code>def softmax(x):
+  <span class="hljs-comment"># Ensure numerical stability by subtracting the max value from each element</span>
+  e_x=np.<span class="hljs-built_in">exp</span>(x-np.<span class="hljs-built_in">max</span>(x))
+  softmax_values=e_x/e_x.<span class="hljs-built_in">sum</span>(axis=<span class="hljs-number">0</span>) <span class="hljs-comment"># Normalize</span>
+  percent_values=softmax_values*<span class="hljs-number">100</span> <span class="hljs-comment">#convert to percent</span>
+  <span class="hljs-comment">#Format each value to a string with 2 decimal places followed by a percent sign</span>
+  formatted_percent_values=[f<span class="hljs-string">"{value:.2f}%"</span> <span class="hljs-keyword">for</span> <span class="hljs-built_in">value</span> <span class="hljs-keyword">in</span> percent_values]
+  <span class="hljs-literal">return</span> formatted_percent_values
+</code></pre><p>you can check it by apply on any vector of any dimension,</p>
+<pre><code>softmax(<span class="hljs-name">np</span>.array([<span class="hljs-number">1</span>,<span class="hljs-number">10</span>]))
+</code></pre><p><img src="/assets/images/clt/softmax-and-variance/1.png" alt="1"></p>
+<p>also variance is a big problem in deep learning. You&#39;ve to make sure the vector/scalar passed to softmax function has low variance other wise, the softmax will push the values to both maximum and minimum extremes. Check the variance by using the built in function numpy function <code>var</code></p>
+<pre><code>np.array([<span class="hljs-number">10</span>,<span class="hljs-number">20</span>,<span class="hljs-number">30</span>,<span class="hljs-number">40</span>,<span class="hljs-number">50</span>,<span class="hljs-number">60</span>,<span class="hljs-number">70</span>]).var()
+</code></pre><p><img src="/assets/images/clt/softmax-and-variance/2.png" alt="2"></p>
+<p>values close to each other (with less difference) have small variance,</p>
+<pre><code>np.array([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>]).var()
+</code></pre><p><img src="/assets/images/clt/softmax-and-variance/3.png" alt="3"></p>

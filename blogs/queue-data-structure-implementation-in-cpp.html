@@ -1,0 +1,105 @@
+<a href="#" class="home-link">Back to Home</a>
+
+<p>Queue is also one of the famous data structure. Although it is pretty similar to stack but it has its own applications. You might know the working law of Queue <strong>&quot;THE-FIFO-Principal&quot;</strong>. Here i&#39;ve defined some rules of queue alongside with its implementaion in <code>c++</code>/</p>
+<h2 id="rules">Rules</h2>
+<p>The queue follow the basic rule of, </p>
+<ul>
+<li>First In First Out.</li>
+<li>Two pointers will be used in queue.</li>
+<li>One will be used for insertion and the second one will be used in deletion.</li>
+<li>Insertion in queue in known as Enqueue.</li>
+<li>Deletion in queue is known as Dequeue.</li>
+<li>Insertion in queue is done through rear pointer.</li>
+<li>Deletion through queue is done through front pointer.</li>
+<li>Queue can be implemented by two ways.</li>
+<li>First by: Array data structure</li>
+<li>Second by: Linked List data structure.</li>
+</ul>
+<h2 id="implementation">Implementation</h2>
+<p>Below is the provided code of Linked List Implementation of queue.I have covered the 4 basic functions of the queue in ths implementation.</p>
+<ul>
+<li>Enqueue(): Insertion in queue.</li>
+<li>Dequeue(): Deletion in queue.</li>
+<li>isFull(): Checking whether the queue is Full or not.</li>
+<li>isEmpty(): Checking whether the queue is Empty or not.</li>
+</ul>
+<h2 id="code-in-c-">Code In C++</h2>
+<p>Here are the initial imports,</p>
+<pre><code><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+</code></pre><p>Then define a node class for a basic node objects,</p>
+<pre><code>class <span class="hljs-keyword">Node</span><span class="hljs-title">{
+    public</span>:
+    int data;
+    <span class="hljs-keyword">Node</span><span class="hljs-title">*next</span>;
+    <span class="hljs-keyword">Node</span><span class="hljs-title">(int</span> data){
+        this-&gt;<span class="hljs-attr">data=</span>data;
+        <span class="hljs-attr">next=</span>NULL;
+    }
+};
+</code></pre><p>Now we&#39;ve the queue class,</p>
+<pre><code><span class="hljs-keyword">class</span> Queued{
+    <span class="hljs-keyword">private</span>:
+    Node*front,*rear;
+    <span class="hljs-keyword">int</span> length;
+    <span class="hljs-keyword">public</span>:
+    Queued(){
+        front=rear=<span class="hljs-literal">NULL</span>;
+        length=<span class="hljs-number">0</span>;
+    }
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Enqueue</span><span class="hljs-params">(<span class="hljs-keyword">int</span> valve)</span></span>{
+        Node*n=<span class="hljs-keyword">new</span> Node(valve);
+        <span class="hljs-keyword">if</span>(front==<span class="hljs-literal">NULL</span>){
+            <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"Queue is Empty right now, u can insert elements: "</span>&lt;&lt;<span class="hljs-built_in">endl</span>;
+            front=rear=n;
+        }
+        <span class="hljs-keyword">else</span>{
+            rear-&gt;next=n;
+            rear=n;
+        }
+    }
+    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">Dequeue</span><span class="hljs-params">()</span></span>{
+        <span class="hljs-keyword">if</span>(front!=<span class="hljs-literal">NULL</span>){
+        Node*t=front;
+        front=front-&gt;next;
+        <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"The value stored in the Node was: "</span>;
+        <span class="hljs-keyword">if</span>(t-&gt;data!=<span class="hljs-number">0</span>){
+        <span class="hljs-keyword">return</span> t-&gt;data;}
+        }
+    }
+    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isEmpty</span><span class="hljs-params">()</span></span>{
+        <span class="hljs-keyword">if</span>(front==<span class="hljs-literal">NULL</span>){
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+    }
+    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isFull</span><span class="hljs-params">()</span></span>{
+        <span class="hljs-keyword">if</span>(front==rear){
+            <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+        }
+    }
+};
+</code></pre><p>At the end we&#39;ve the objects and function calls in the <code>main</code> of function,</p>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    Queued obj1;
+    obj1.Enqueue(<span class="hljs-number">25</span>);
+    obj1.Enqueue(<span class="hljs-number">28</span>);
+    obj1.Enqueue(<span class="hljs-number">28</span>);
+    obj1.Enqueue(<span class="hljs-number">25</span>);
+    <span class="hljs-built_in">cout</span>&lt;&lt;obj1.Dequeue()&lt;&lt;<span class="hljs-built_in">endl</span>;
+    <span class="hljs-built_in">cout</span>&lt;&lt;obj1.Dequeue()&lt;&lt;<span class="hljs-built_in">endl</span>;
+    <span class="hljs-built_in">cout</span>&lt;&lt;obj1.Dequeue()&lt;&lt;<span class="hljs-built_in">endl</span>;
+    <span class="hljs-built_in">cout</span>&lt;&lt;obj1.Dequeue()&lt;&lt;<span class="hljs-built_in">endl</span>;
+    <span class="hljs-keyword">if</span>(obj1.isEmpty()){
+        <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"The Queue is Empty: "</span>;
+    }
+    <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"\n"</span>;
+    <span class="hljs-comment">/*
+    if(obj1.isFull()){
+        cout&lt;&lt;"The Queue is Full: ";
+    }
+    */</span>
+}
+</code></pre><p>Before running, do remember to keep the complete code in a single file with a <code>cpp</code> extension.</p>
+
+
+<code>Hi hello</code>

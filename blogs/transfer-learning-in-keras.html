@@ -1,0 +1,97 @@
+<a href="#" class="home-link">Back to Home</a>
+
+<p>Transfer learning is also one of the most important topic in Deep-Learning/Machine-Learning. I would say it is like using others pre-trained models for your problem. Deep Learning models are difficult to train because they are data-hungry. By this i mean they require alot of data in order to achieve good performance. Therefore is alot of data you can say labelled-data is required. </p>
+<p>Let&#39;s assume the example of a simple cat-dog classifier. We&#39;ll need a huge data inorder to make a good classifier. One method is to scrap the data using various data-scrapping techniques but there is still an issue in this case. That data will be unlabelled, you&#39;ve to assign labels manually and for this purpose labor will be required which is costly. This is the first problem.</p>
+<p>Second reason for using the Pre-Trained models is the time. Deep Learning models usually take a huge time to train so people don&#39;t prefer long trainings by theirselves. The solution of these two problems is using pre-trained models for your projects. One of the most famous dataset is ImageNet. It is a big dataset of images almost 1.4 million images and there are total of 1000 classes in this dataset. Many models are trained on this dataset. Rather than creating your model and training it on this dataset, you can use those pre-trained models.</p>
+<p>There is one problem in using pre-trained models. What if the class you want to classify is not present in the dataset on which model is trained. Here comes the transfer learning. In transfer learning we use the pre-trained models and we re-train a portion of the model on our dataset. Basically in CNN, there are two major parts of the architecture. One is the convolution layer portion while the second one is the fully-connected layer portion. The first portion works for all the problems because it extract the primitive features which is same for all the problems/classification task. While the fully connected portion is used for classification mainly, so we retrain this portion on our required dataset according to the problem.</p>
+<p>Transfer learning is done in two ways,</p>
+<ul>
+<li>Feature Extraction Method</li>
+<li>Fine-Tuning Method</li>
+</ul>
+<p>In the first method, we only retrain the fully connected layer portion according to our need. While in the Fine-Tuning method, we retrain some of the last convolution layers and fully connected layers. </p>
+<h2 id="transfer-learning-feature-extraction-without-using-data-augmentation">Transfer Learning Feature Extraction without using Data Augmentation</h2>
+<p>First of all download the dataset in your notebook,</p>
+<pre><code>!mkdir -<span class="hljs-selector-tag">p</span> ~/<span class="hljs-selector-class">.kaggle</span>
+!cp kaggle<span class="hljs-selector-class">.json</span> ~/.kaggle/
+!kaggle datasets download -d salader/dogs-vs-cats
+</code></pre><p>Then unzip the dataset,</p>
+<pre><code><span class="hljs-keyword">import</span> zipfile
+zip_ref = zipfile.ZipFile(<span class="hljs-string">'/content/dogs-vs-cats.zip'</span>, <span class="hljs-string">'r'</span>)
+zip_ref.extractall(<span class="hljs-string">'/content'</span>)
+zip_ref.<span class="hljs-built_in">close</span>()
+</code></pre><p>import tensorflow and necessary libraries,</p>
+<pre><code><span class="hljs-keyword">import</span> tensorflow
+<span class="hljs-title">from</span> tensorflow <span class="hljs-keyword">import</span> keras
+<span class="hljs-title">from</span> keras <span class="hljs-keyword">import</span> Sequential
+<span class="hljs-title">from</span> keras.layers <span class="hljs-keyword">import</span> Dense,Flatten
+<span class="hljs-title">from</span> keras.applications.vgg16 <span class="hljs-keyword">import</span> VGG16
+</code></pre><p>create a base model,</p>
+<pre><code>conv_base = VGG16(
+    <span class="hljs-name">weights=</span>'imagenet',
+    include_top = False,
+    input_shape=(<span class="hljs-number">150</span>,<span class="hljs-number">150</span>,<span class="hljs-number">3</span>)
+)
+</code></pre><p>check the model summary,</p>
+<pre><code><span class="hljs-selector-tag">conv_base</span><span class="hljs-selector-class">.summary</span>()
+</code></pre><p><img src="/assets/images/clt/transfer-learning-in-keras/1.png" alt="1"></p>
+<p>Then create and connect the rest of the model,</p>
+<pre><code><span class="hljs-keyword">model</span> = Sequential()
+
+<span class="hljs-keyword">model</span>.add(conv_base)
+<span class="hljs-keyword">model</span>.add(Flatten())
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">256</span>,activation=<span class="hljs-string">'relu'</span>))
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">1</span>,activation=<span class="hljs-string">'sigmoid'</span>))
+</code></pre><pre><code><span class="hljs-keyword">check</span> <span class="hljs-keyword">model</span> summary,
+</code></pre><p>model.summary()</p>
+<pre><code>
+![<span class="hljs-string">2</span>](<span class="hljs-link">/assets/images/clt/transfer-learning-in-keras/2.png</span>)
+
+change the training parameter for the starting covolution layers,
+</code></pre><p>conv_base.trainable=False</p>
+<pre><code>
+<span class="hljs-built_in">add</span> <span class="hljs-keyword">the</span> generators <span class="hljs-built_in">to</span> efficiently use <span class="hljs-keyword">the</span> resources,
+</code></pre><p>train_ds = keras.utils.image_dataset_from_directory(
+    directory = &#39;/content/train&#39;,
+    labels=&#39;inferred&#39;,
+    label_mode = &#39;int&#39;,
+    batch_size=32,
+    image_size=(150,150)
+)</p>
+<p>validation_ds = keras.utils.image_dataset_from_directory(
+    directory = &#39;/content/test&#39;,
+    labels=&#39;inferred&#39;,
+    label_mode = &#39;int&#39;,
+    batch_size=32,
+    image_size=(150,150)
+)</p>
+<pre><code>
+<span class="hljs-built_in">normalize</span> the images,
+</code></pre><p>def process(image,label):
+    image = tensorflow.cast(image/255. ,tensorflow.float32)
+    return image,label</p>
+<p>train_ds = train_ds.map(process)
+validation_ds = validation_ds.map(process)</p>
+<pre><code>
+compile the <span class="hljs-keyword">model</span>,
+</code></pre><p>model.compile(optimizer=&#39;adam&#39;,loss=&#39;binary_crossentropy&#39;,metrics=[&#39;accuracy&#39;])</p>
+<pre><code>
+store <span class="hljs-keyword">the</span> history <span class="hljs-keyword">in</span> <span class="hljs-keyword">a</span> <span class="hljs-built_in">variable</span>,
+</code></pre><p>history = model.fit(train_ds,epochs=10,validation_data=validation_ds)</p>
+<pre><code>
+plot <span class="hljs-keyword">the</span> accuracy <span class="hljs-keyword">and</span> validation accuracy <span class="hljs-keyword">using</span> this history <span class="hljs-built_in">variable</span>,
+</code></pre><p>import matplotlib.pyplot as plt</p>
+<p>plt.plot(history.history[&#39;accuracy&#39;],color=&#39;red&#39;,label=&#39;train&#39;)
+plt.plot(history.history[&#39;val_accuracy&#39;],color=&#39;blue&#39;,label=&#39;validation&#39;)
+plt.legend()
+plt.show()</p>
+<pre><code>
+![<span class="hljs-string">3</span>](<span class="hljs-link">/assets/images/clt/transfer-learning-in-keras/3.png</span>)
+
+plot the loss and the validation loss,
+</code></pre><p>plt.plot(history.history[&#39;loss&#39;],color=&#39;red&#39;,label=&#39;train&#39;)
+plt.plot(history.history[&#39;val_loss&#39;],color=&#39;blue&#39;,label=&#39;validation&#39;)
+plt.legend()
+plt.show()
+```</p>
+<p><img src="/assets/images/clt/transfer-learning-in-keras/4.png" alt="4"></p>

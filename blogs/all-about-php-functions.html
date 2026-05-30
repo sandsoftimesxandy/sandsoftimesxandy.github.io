@@ -1,0 +1,225 @@
+<a href="#" class="home-link">Back to Home</a>
+
+<p>Function are one of the most important component of any programming language. Function is basically a block of code that you want to use repeatidly. Function have two major things.</p>
+<ul>
+<li>Function Declaration</li>
+<li>Function Call</li>
+</ul>
+<p>Function is declared initially and later on it is called whenever needed. There are two main types of functions,</p>
+<ul>
+<li>Built-in Functions</li>
+<li>User-defined Functions</li>
+</ul>
+<p>Built-in functions are prebuild in language and we use them by giving a simple function call. The most common example of built-in function is <code>var_dump()</code>. Secondly the user-defined functions are defined by user himself. The syntax of defining a function in php is very simple. You simple have to write <code>function</code> keyword then <code>function_name</code> and after it you write small parenthesis <code>()</code> and following it comes the pair of curly braces <code>{}</code>. </p>
+<p>There are multiple functions if you categorize them on the basis of their functionality. I&#39;m listing some of them,</p>
+<ul>
+<li>Built-in Function</li>
+<li>User-defined Function</li>
+<li>Simple Function</li>
+<li>Returning Value Function</li>
+<li>Anonymous Function</li>
+<li>Parameterize Function</li>
+<li>Variable Function</li>
+</ul>
+<p>Now let us see an example of how a user-defined function look like and how it works. Keep in mind that after function declaration, you must have to give a function call inorder to use that function. Also, you can call other functions in a function. But do condition calling else you might get stuck in infinite loop. Here is a simple example of multiple function calls and a function call within a function.</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"function test"</span>;    
+}
+
+
+test(); <span class="hljs-comment">//function call</span>
+test();
+test();
+test();
+<span class="hljs-meta">?&gt;</span></span>
+
+<span class="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">dummy</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;h1&gt;User Details&lt;/h1&gt;"</span>;
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">displayUserDetails</span><span class="hljs-params">()</span></span>{
+    dummy();
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"Username is SANDY"</span>;
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br/&gt;"</span>;
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"User age is 27"</span>;
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br/&gt;"</span>;
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"User email id is sandy@test.com"</span>;
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;hr/&gt;"</span>;
+}
+
+displayUserDetails();
+displayUserDetails();
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><h2 id="parameterized-function">Parameterized Function</h2>
+<p>Parameterized functions are used where you want to pass some value and perform operations on it. The values are recieved in the variables defined in the <code>()</code> of function. Here is a small demonstration of it.</p>
+<p><img src="/assets/images/clt/all-about-php-functions/1.png" alt="1"></p>
+<p>I&#39;ve also written some example code for better understanding.</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sum</span><span class="hljs-params">($a,$b)</span></span>{
+    <span class="hljs-keyword">echo</span> $a+$b;
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br/&gt;"</span>;
+}
+
+sum(<span class="hljs-number">20</span>,<span class="hljs-number">50</span>);
+sum(<span class="hljs-number">100</span>,<span class="hljs-number">200</span>);
+sum(<span class="hljs-number">23</span>,<span class="hljs-number">76</span>);
+
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p>Here is another example in which i&#39;m using html within php,</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">userData</span><span class="hljs-params">($name,$color)</span></span>{
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;h1 style='color:$color'&gt;$name&lt;/h1&gt;"</span>;
+}
+
+userData(<span class="hljs-string">'sandy'</span>,<span class="hljs-string">'green'</span>);
+userData(<span class="hljs-string">'andy'</span>,<span class="hljs-string">'red'</span>);
+userData(<span class="hljs-string">'peter'</span>,<span class="hljs-string">'orange'</span>);
+
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><h2 id="return-statement">Return Statement</h2>
+<p>The <code>return</code> and <code>echo</code> might works like same in some cases but they are actually different. <code>echo</code> simply displays the output while the <code>return</code> return backs the output which can be used for multiple purpose. Here is a basic code of it,</p>
+<pre><code>?&gt;
+
+<span class="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">userName</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-string">"SANDY"</span>;
+}
+
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;h1&gt;user name is"</span> .userName().<span class="hljs-string">"&lt;h1&gt;"</span>;
+
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><h2 id="passing-parameters">Passing Parameters</h2>
+<p>In a function, you can also pass parameters. Either you can refer to default parameters or you can send the parameters by yourself. In the below example i&#39;m one parameter from the function call while the other one if define as <code>default</code> parameter.</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fruit</span><span class="hljs-params">($name,$color=<span class="hljs-string">"red"</span>)</span></span>{
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"this is $name and it's color is $color"</span>;
+}
+
+fruit(<span class="hljs-string">"apple"</span>);
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p>I&#39;ve also written a bit complex example in which i&#39;ve two parameters both define by default in the function declaration but in the function call i&#39;m also passing the new values for the parameters. Take a look at it,</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">displayUser</span><span class="hljs-params">($name=<span class="hljs-string">'candy'</span>,$color=<span class="hljs-string">"orange"</span>)</span></span>{
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;h1 style='color:$color'&gt;$name&lt;h1&gt;"</span>;
+}
+
+
+displayUser(<span class="hljs-string">'SANDY'</span>,<span class="hljs-string">'blue'</span>);
+
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><h2 id="nested-function">Nested Function</h2>
+<p>Whenever a function is defined inside another function, it is called as nested function. Keep in mind that for a child function you must have to call parent function first. Else it will not work. You&#39;ll get better understanding from the code below,</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"test function called &lt;br/&gt;"</span>;
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">apple</span><span class="hljs-params">()</span></span>{
+        <span class="hljs-keyword">echo</span> <span class="hljs-string">"apple function called &lt;br/&gt;"</span>;
+}
+}
+
+test();
+apple();
+
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p>Also general syntax of it is like this,</p>
+<p><img src="/assets/images/clt/all-about-php-functions/2.png" alt="2"></p>
+<h2 id="variable-function">Variable Function</h2>
+<p>Whenever you define a function and store its call in a variable, it is called as Variable Function. Also there is a concept of <strong>callback</strong> function. When you pass a function as a parameter, it is caleld as callback function. Keep in mind that whenever you define a variable function, you simple have to write the function name in the form of string without parenthesis and store in variable. 
+The syntax of variable function look like this,</p>
+<p><img src="/assets/images/clt/all-about-php-functions/3.png" alt=""></p>
+<p>Here is a complete code for better understanding of both concepts.</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"test function called"</span>;
+}
+
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">apple</span><span class="hljs-params">()</span></span>{
+
+}
+
+$test=<span class="hljs-string">"test"</span>;
+$apple=<span class="hljs-string">"apple"</span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">main</span><span class="hljs-params">($test)</span></span>{
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"main function called"</span>;
+    $test();
+}
+
+main($test);
+main($apple);
+<span class="hljs-comment">// echo $test;</span>
+
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><h2 id="important-built-in-functions-">Important Built-in Functions:</h2>
+<p>There are some built-in functions in php which are very useful. <code>strlen()</code> function is used to calculate the length of a string stored in a variable.</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+$str=<span class="hljs-string">'SANDY'</span>;
+<span class="hljs-keyword">echo</span> strlen($str);
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p><code>var_dump()</code> function is used to check the type of a variable.</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+$var= <span class="hljs-string">"false"</span>;
+var_dump($var);
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p><code>date()</code> function is used to get the date values. You can pass multiple parameters to this function. If you pass the parameter string <code>&quot;d&quot;</code>, it will print out current date. </p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">echo</span> date(<span class="hljs-string">"d"</span>); 
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p>Similarly by passing <code>&quot;l&quot;</code> you&#39;ll get the current day.</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">echo</span> date(<span class="hljs-string">"l"</span>); 
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p>By passing <code>&quot;m&quot;</code>, you&#39;ll get the current month number.</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">echo</span> date(<span class="hljs-string">"m"</span>); 
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p>Then we&#39;ve <code>phpinfo()</code> function, it&#39;ll provide you all the details whether you want <code>php version</code>, <code>inifile location</code> e.t.c.</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">echo</span> phpinfo();
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p><code>is_string()</code> function will return 1 if the variable passed is string and return nothing is variable is of some other data-type.</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+$kar=<span class="hljs-string">"abc"</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span> .is_string($kar) . <span class="hljs-string">"&lt;br&gt;"</span>;
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p><code>is_int()</code> function will return 1 if the variable passed is integer and return nothing is variable is of some other data-type.</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+$sar=<span class="hljs-number">123</span>;
+<span class="hljs-keyword">echo</span> is_int($sar);
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p>Then we&#39;ve <code>rand()</code> function. It will generate a random number.</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">echo</span> rand();
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p><code>die</code> and <code>exit</code> are used to stop the execution of php. <code>die</code> is a bit old while the <code>exit</code> is the new one.</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"before execution"</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-keyword">die</span>;
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"after execution"</span>;
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p>Also the <code>exit</code> look like this,</p>
+<pre><code>&lt;?php
+echo <span class="hljs-string">"before executio"</span>;
+<span class="hljs-keyword">exit</span>;
+echo <span class="hljs-string">"after execution"</span>;
+?&gt;
+</code></pre><p>Function <code>substr()</code> is used to get <strong>sub-string</strong> from a <strong>string</strong>.</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+$str=<span class="hljs-string">"code step by step"</span>;
+<span class="hljs-keyword">echo</span> substr($str,<span class="hljs-number">11</span>);
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p>The above code will print out the string from the letter 11 and onwards p.s this include the spaces as well. </p>
+<p>Also if you pass parameter <code>-1</code> with the string variable. It will print out the last character of the string.</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">echo</span> substr($str,<span class="hljs-number">-1</span>);
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre>
