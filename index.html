@@ -11,10 +11,70 @@
 
 
 <!--Left Side Div Empty Container-->
-<div id="sidebar" class="myDiv"></div>
+<div class="myDiv">
+
+    <!--Left Side of Page-->
+    	
+	<h2>	Muhammad Sharjeel Akhtar <br>SandsOfTimes[SANDY]	</h2>
+	Master's Student of Informatik (Künstliche Intelligenz)
+	<br>	
+	<b><a href="https://www.b-tu.de/">Brandenburg Technische Universität</a></b>
+	<br>
+	Platz der Deutschen Einheit 1, Konrad-Wachsmann-Allee 13.
+	<br>
+	Cottbus, Brandenburg
+	<p><b>Email: </b>janeebee1092@gmail.com</p>
+	<h2>INFORMATION</h2>
+	<a href="ml-yearning-2018-05-30.pdf" target="_blank">......Resume</a>
+	<br>
+	<a href="https://github.com/sandsoftimes">......Github</a>
+	<br>
+	<a href="https://www.linkedin.com/in/muhammad-sharjeel-akhtar-sandsoftimes-sandy-52b1bb317/">......Linkedin</a>
+	<br>
+	<a href="https://www.kaggle.com/sandsoftimessandy">......Kaggle</a>
+
+	<!--
+    <h2>EDUCATION</h2>
+	BSc Computer Science - FAST NUCES
+	<h2>INTERNSHIPS</h2>
+	<h2>CERTIFICATIONS</h2>
+    -->
+
+	<hr>
+
+    <object class="pdf" data="/assets/recommendation/dr-hafeez.pdf">
+    </object>
+    <br>
+
+    <object class="pdf" data="/assets/recommendation/dr-waqas.pdf">
+    </object>
+    <br>
+
+    <object class="pdf" data="/assets/recommendation/dr-nauman.pdf">
+    </object>
+    <br>
+
+    <object class="pdf" data="/assets/recommendation/prof-usama.pdf">
+    </object>
+    <br>
+
+    <object class="pdf" data="/assets/recommendation/prof-basit.pdf">
+    </object>
+    <br>
+
+    <object class="pdf" data="/assets/pdf/data_analysis.pdf">
+    </object>
+
+	<!-- <img src="https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExdms3YzR2eDc5dWpkanFsMGpjM3U5YXQ1bm9qOTBncG40cTJ6aGJiOSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/RE6A18EFQHSP6/giphy.gif" alt="Computer man" style="width:950px;height:380px;"> -->
+	
+
+
+</div>
+
+
 
 <!--Right Side of Page-->
-<div class="myKiv">
+<div class="myKiv" id="main-content">
 	<h2>WILLKOMMEN !!!</h2>
 	<br>
 	<p>Here is my work:</p>
@@ -37,223 +97,20 @@ For Bullet Points:
 
 -->
 
-<a href="/blogs/bubble.html">Bubble Sort</a>
+<a class="blog-link" href="#bubble-sort">Bubble Sort</a>
 
-<button type="button" class="collapsible">Recurrent Neural Network (RNN)</button>
-<div class="content">
-    <p>
-        Recurrent Neural Network is a specific type of Neural Network that not only the consider the current input and predict the output instead it maintains 
-        the record of past experience by keeping a hidden state. This hidden state is passed along with the next input to the recurrent unit. There will be two 
-        weights involve, once with the input to the recurrent unit and second the weight with the hidden state comming from previous timestamp which will both 
-        contribute in predicting the output. Similarly the back propagation in RNNs is a bit different from the ordinary neural network. Here <b>"Back-Propagation-Through-Time(BPTT)"</b> 
-        occur. You can look into it in more detail from the excellent blog post of "geeksandgeeks". I've implemented a basic RNN down below, if you want to try it with 
-        different input simply change the first text sequence according to your choice and then in  the prediction pass some portion of it you will see your model will 
-        predict accordingly.
-    </p>
-    <p><object class="pdf" data="/assets/pdf/rnn.recurrent-neural-network.ipynb - Colab.pdf"></object></p>
-</div>
+<a class="blog-link" href="#recurrent-neural-network">Recurrent Neural Network (RNN)</a>
 
-<button type="button" class="collapsible">Cross Tabulation</button>
-<div class="content">
-    <p>Cross Tabulation shows the relations between two variables/features by analyzing their frequency.</p>
-    <img class="img-fluid" src="/assets/images/clt/cross-tabulation/Screenshot_2025-11-24_00-36-07.png">
-    <p>Here the two variables,</p>
-    <ul>
-        <li>Gender</li>
-        <li>Survived</li>
-    </ul>
-</div>
+<a class="blog-link" href="#cross-tabulation">Cross Tabulation</a>
+
+<a class="blog-link" href="#lstm-text-gen-using-supervised">LSTM | Text Generation using Supervised Learning</a>
 
 <!--    !!!!!!!!!!!!!!!!!!!!            MARK DOWN TO HTML CONVERTED BLOGS START HERE      !!!!!!!!!!!!!!!!!!!!          -->
 <!--    !!!!!!!!!!!!!!!!!!!!            MARK DOWN TO HTML CONVERTED BLOGS START HERE      !!!!!!!!!!!!!!!!!!!!          -->
 <!--    !!!!!!!!!!!!!!!!!!!!            MARK DOWN TO HTML CONVERTED BLOGS START HERE      !!!!!!!!!!!!!!!!!!!!          -->
 <!--    !!!!!!!!!!!!!!!!!!!!            MARK DOWN TO HTML CONVERTED BLOGS START HERE      !!!!!!!!!!!!!!!!!!!!          -->
 
-<button type="button" class="collapsible">LSTM | Text Generation using Supervised Learning</button>
-<div class="content">
-<p>LSTM are a pretty good replacement of RNNS&#39;s. I&#39;ll show the working of LSTM&#39;s with a complete project. Our final model will take an input, whether it is a word or a phrase and predict the rest of the sentence by itself. Also you can ask any type of new query from the model and it will answer you. By some tinkering, i&#39;ve made the model to act as a supervised learning model.</p>
-<p>Initially we need to create a dataset, for this purpose i&#39;m using a dummy dataset of sentences, here it is,</p>
-<pre><code>faqs = <span class="hljs-string">""</span>"
-<span class="hljs-keyword">About</span> the Training
-What is the enrollment cost <span class="hljs-keyword">for</span> the Data Analytics Guidance <span class="hljs-keyword">Program</span> (DAGP 2024)?
-The <span class="hljs-keyword">program</span> operates <span class="hljs-keyword">on</span> a subscription basis where you pay Rs 899 monthly.
-How long is the entire <span class="hljs-keyword">program</span>?
-The full duration is 6 months, making the <span class="hljs-keyword">total</span> fee Rs 899 * 6 = Rs 5400 approximately.
-What is the curriculum <span class="hljs-keyword">for</span> the training?
-We will cover the following topics:
-- Basic Python <span class="hljs-keyword">for</span> Analytics
-- Key Data Science Libraries
-- Data Cleaning Techniques
-- Database Management with SQL
-- Math Concepts <span class="hljs-keyword">for</span> Data Analytics
-- Machine Learning Models
-- Real-world <span class="hljs-keyword">ML</span> Projects
-- MLOps Overview
-- Industry Case Studies
-You can <span class="hljs-keyword">view</span> the detailed syllabus here: https:<span class="hljs-comment">//dataschool.co.in/programs/DAGP-2024/curriculum.</span>
 
-Does this <span class="hljs-keyword">program</span> cover NLP and Deep Learning?
-<span class="hljs-keyword">No</span>, Deep Learning and NLP are not part of this training.
-What <span class="hljs-keyword">if</span> I miss a live session? Will there be a recording?
-Yes, all sessions are recorded, <span class="hljs-keyword">so</span> you can access them <span class="hljs-keyword">if</span> you miss <span class="hljs-keyword">one</span>.
-Where can I find the schedule?
-You can <span class="hljs-keyword">view</span> the <span class="hljs-keyword">program</span> calendar here: https:<span class="hljs-comment">//dataschool.co.in/schedule/DAGP-2024.</span>
-How long are the live sessions?
-Each session runs <span class="hljs-keyword">for</span> <span class="hljs-keyword">about</span> 1.5 to 2 hours.
-What language will the instructor <span class="hljs-keyword">use</span>?
-The sessions are conducted <span class="hljs-keyword">in</span> Hinglish.
-How will I know <span class="hljs-keyword">about</span> upcoming classes?
-We’ll send email notifications before every scheduled session <span class="hljs-keyword">for</span> paid participants.
-Can non-technical participants join?
-Yes, this course is beginner-friendly.
-Can I join the course mid-way?
-Yes, you can enroll at any point during the <span class="hljs-keyword">program</span>.
-Will I have access to previous lectures <span class="hljs-keyword">if</span> I join late?
-Yes, once you pay, you’ll gain access to all past lectures <span class="hljs-keyword">in</span> the dashboard.
-<span class="hljs-keyword">Do</span> I need to submit assignments?
-<span class="hljs-keyword">No</span>, we provide solutions <span class="hljs-keyword">for</span> self-assessment purposes.
-Will the <span class="hljs-keyword">program</span> <span class="hljs-keyword">include</span> case studies?
-Yes, we’ll work through real case studies.
-How can I contact support?
-<span class="hljs-keyword">For</span> inquiries, email <span class="hljs-keyword">us</span> at support@dataschool.co.<span class="hljs-keyword">in</span>.
-
-Payment/Registration Questions
-Where should I make the payment?
-All payments should be made <span class="hljs-keyword">on</span> our official website: https:<span class="hljs-comment">//dataschool.co.in/payments.</span>
-Can I pay the full Rs 5400 <span class="hljs-keyword">in</span> <span class="hljs-keyword">one</span> go?
-<span class="hljs-keyword">No</span>, the payments are <span class="hljs-keyword">split</span> into monthly installments.
-<span class="hljs-keyword">If</span> I pay mid-month, when is the next payment due?
-Your next payment is due 30 days after your first payment date. <span class="hljs-keyword">For</span> example, <span class="hljs-keyword">if</span> you pay <span class="hljs-keyword">on</span> the 10th, your next payment is due <span class="hljs-keyword">on</span> the 10th of the following month.
-Is there a refund policy <span class="hljs-keyword">if</span> I don't like the course?
-Yes, you have a 7-day refund period after making the payment.
-What <span class="hljs-keyword">if</span> I live outside India and can’t make the payment online?
-Please email support@dataschool.co.<span class="hljs-keyword">in</span> <span class="hljs-keyword">for</span> assistance.
-
-<span class="hljs-keyword">Post</span>-Registration Queries
-How long can I access the paid content?
-You can access videos <span class="hljs-keyword">as</span> long <span class="hljs-keyword">as</span> your subscription is active. After completing all payments (totaling Rs 5400), you’ll have access until September 2025.
-Why isn't lifetime access available?
-Due to the low cost of the course, lifetime access is not offered.
-Where can I go <span class="hljs-keyword">for</span> <span class="hljs-keyword">help</span> after a session?
-You can fill <span class="hljs-keyword">out</span> a <span class="hljs-keyword">form</span> <span class="hljs-keyword">on</span> your dashboard, and our team will arrange a 1-<span class="hljs-keyword">on</span>-1 doubt-clearing session.
-Can I ask questions related to sessions I missed from previous weeks?
-Yes, simply select <span class="hljs-string">"previous week"</span> <span class="hljs-keyword">in</span> the doubt <span class="hljs-keyword">form</span>.
-What <span class="hljs-keyword">if</span> I face payment issues <span class="hljs-keyword">while</span> living abroad?
-You can reach <span class="hljs-keyword">out</span> to support@dataschool.co.<span class="hljs-keyword">in</span> <span class="hljs-keyword">for</span> <span class="hljs-keyword">help</span>.
-
-Certificate and Placement Queries
-How <span class="hljs-keyword">do</span> I qualify <span class="hljs-keyword">for</span> a certificate?
-<span class="hljs-keyword">Two</span> conditions apply:
-1. You must pay the full Rs 5400.
-2. You need to complete all assessments.
-I joined late—how <span class="hljs-keyword">do</span> I pay <span class="hljs-keyword">for</span> previous months?
-Once you make your first payment, you will see links <span class="hljs-keyword">in</span> your dashboard to pay <span class="hljs-keyword">for</span> the earlier months.
-Does the <span class="hljs-keyword">program</span> offer job placement services?
-<span class="hljs-keyword">While</span> we provide placement support, it is not a job guarantee. The assistance includes:
-- Sessions <span class="hljs-keyword">on</span> portfolio building
-- Soft skills workshops
-- Interaction with industry experts
-- Guidance <span class="hljs-keyword">on</span> job <span class="hljs-keyword">search</span> strategies.
-<span class="hljs-string">""</span>"
-</code></pre><p>you can check the dataset via variable,</p>
-<pre><code><span class="hljs-attribute">faqs</span>
-</code></pre><p>now this data is in textual form but we cannot feed or use textual data to our model, so we need to convert it into vectors/numbers so import tokenizer and necessary libraries,</p>
-<pre><code><span class="hljs-keyword">import</span> tensorflow <span class="hljs-keyword">as</span> tf
-from tensorflow.keras.preprocessing.<span class="hljs-keyword">text</span> <span class="hljs-keyword">import</span> Tokenizer
-</code></pre><p>create a tokenizer instance,</p>
-<pre><code><span class="hljs-attr">tokenizer</span> = Tokenizer()
-</code></pre><p>fit the tokenizer on given raw data,</p>
-<pre><code><span class="hljs-selector-tag">tokenizer</span><span class="hljs-selector-class">.fit_on_texts</span>(<span class="hljs-selector-attr">[faqs]</span>)
-</code></pre><p>you can check the token words along with their index,</p>
-<pre><code><span class="hljs-selector-tag">tokenizer</span><span class="hljs-selector-class">.word_index</span>
-</code></pre><p>split the raw data on the basis of new line character <code>\n</code> and store all in a list,</p>
-<pre><code>input_sequences=[]
-<span class="hljs-keyword">for</span> <span class="hljs-keyword">sentence</span> <span class="hljs-keyword">in</span> faqs.<span class="hljs-built_in">split</span>(<span class="hljs-string">'\n'</span>):
-  <span class="hljs-comment"># print(sentence)</span>
-  <span class="hljs-comment"># print(tokenizer.texts_to_sequences([sentence])[0])</span>
-  tokenized_sentence=tokenizer.texts_to_sequences([<span class="hljs-keyword">sentence</span>])[<span class="hljs-number">0</span>]
-
-  <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>,<span class="hljs-built_in">len</span>(tokenized_sentence)):
-    input_sequences.append(tokenized_sentence[:i+<span class="hljs-number">1</span>])
-</code></pre><p>check for the sentence/sequence for the max length for zero padding of vectors,</p>
-<pre><code>max_len=<span class="hljs-built_in">max</span>([<span class="hljs-built_in">len</span>(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> input_sequences])
-max_len
-</code></pre><p>perform the padding,</p>
-<pre><code>from tensorflow<span class="hljs-selector-class">.keras</span><span class="hljs-selector-class">.preprocessing</span><span class="hljs-selector-class">.sequence</span> import pad_sequences
-padded_input_sequences=pad_sequences(input_sequences,maxlen=max_len,<span class="hljs-attribute">padding</span>=<span class="hljs-string">'pre'</span>)
-padded_input_sequences
-</code></pre><p>split the output and output features into x and y so to make a proper dataset,</p>
-<pre><code><span class="hljs-attr">x</span>=padded_input_sequences[:,:-<span class="hljs-number">1</span>] #except last colm
-<span class="hljs-comment"># padded_input_sequences[:,-1]</span>
-<span class="hljs-attr">y</span>=padded_input_sequences[:,-<span class="hljs-number">1</span>]
-</code></pre><p>check the shape of x and y,</p>
-<pre><code><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(x.shape)</span></span>
-<span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(y.shape)</span></span>
-</code></pre><p>check the total token words,</p>
-<pre><code><span class="hljs-function"><span class="hljs-title">len</span><span class="hljs-params">(tokenizer.word_index)</span></span>
-</code></pre><p>convert the output scalar y into a vector,</p>
-<pre><code>from tensorflow<span class="hljs-selector-class">.keras</span><span class="hljs-selector-class">.utils</span> import to_categorical
-y=to_categorical(y,num_classes=<span class="hljs-number">283</span>)
-</code></pre><p>check the shape,</p>
-<pre><code><span class="hljs-selector-tag">y</span><span class="hljs-selector-class">.shape</span>
-</code></pre><p>now lets make our model, import the necessary libraries,</p>
-<pre><code>from tensorflow<span class="hljs-selector-class">.keras</span><span class="hljs-selector-class">.models</span> import Sequential
-from tensorflow<span class="hljs-selector-class">.keras</span><span class="hljs-selector-class">.layers</span> import Embedding,LSTM,Dense
-</code></pre><p>create the model,</p>
-<pre><code><span class="hljs-keyword">model</span>=Sequential()
-<span class="hljs-keyword">model</span>.add(Embedding(<span class="hljs-number">283</span>,<span class="hljs-number">100</span>,input_length=<span class="hljs-number">56</span>))
-<span class="hljs-keyword">model</span>.add(LSTM(<span class="hljs-number">150</span>))
-<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">283</span>,activation=<span class="hljs-string">'softmax'</span>))
-</code></pre><p>compile the model,</p>
-<pre><code><span class="hljs-keyword">model</span>.compile(loss=<span class="hljs-string">'categorical_crossentropy'</span>,optimizer=<span class="hljs-string">'adam'</span>,metrics=[<span class="hljs-string">'accuracy'</span>])
-</code></pre><p>check the model summary,</p>
-<pre><code><span class="hljs-selector-tag">model</span><span class="hljs-selector-class">.summary</span>()
-</code></pre><p>fit the model on x and y,</p>
-<pre><code><span class="hljs-attr">model.fit(x,y,epochs</span>=<span class="hljs-string">100)</span>
-</code></pre><p>lets take a word, tokenize it, do zero padding and predict the next word from it using the model,</p>
-<pre><code>import numpy <span class="hljs-keyword">as</span> np
-<span class="hljs-keyword">text</span>=<span class="hljs-string">"mail"</span>
-
-token_text=tokenizer.texts_to_sequences([<span class="hljs-keyword">text</span>])[<span class="hljs-number">0</span>]
-
-padded_token_text=pad_sequences([token_text],maxlen=<span class="hljs-number">56</span>,padding=<span class="hljs-string">'pre'</span>)
-pos=np.argmax(model.predict(padded_token_text))
-<span class="hljs-keyword">for</span> <span class="hljs-built_in">word</span>,index <span class="hljs-keyword">in</span> tokenizer.word_index.<span class="hljs-keyword">items</span>():
-  <span class="hljs-keyword">if</span> index==pos:
-    print(<span class="hljs-built_in">word</span>)
-</code></pre><p>inorder to predict a complete sentence, use for loop,</p>
-<pre><code><span class="hljs-keyword">import</span> <span class="hljs-built_in">time</span>
-<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
-<span class="hljs-keyword">text</span>=<span class="hljs-string">"NLP and Deep Learning both"</span>
-
-<span class="hljs-keyword">for</span> i <span class="hljs-built_in">in</span> range(<span class="hljs-number">10</span>):
-  token_text=tokenizer.texts_to_sequences([<span class="hljs-keyword">text</span>])[<span class="hljs-number">0</span>]
-  padded_token_text=pad_sequences([token_text],maxlen=<span class="hljs-number">56</span>,padding=<span class="hljs-string">'pre'</span>)
-  pos=np.argmax(model.predict(padded_token_text))
-
-  <span class="hljs-keyword">for</span> word,index <span class="hljs-built_in">in</span> tokenizer.word_index.items():
-    <span class="hljs-keyword">if</span> index==pos:
-      <span class="hljs-keyword">text</span>=<span class="hljs-keyword">text</span>+ <span class="hljs-string">" "</span>+ word
-      print(<span class="hljs-keyword">text</span>)
-      <span class="hljs-built_in">time</span>.sleep(<span class="hljs-number">2</span>)
-</code></pre><p><img src="/assets/images/clt/lstm-new-word-or-sentence-predictor/1.png" alt="1"></p>
-<p>another demo is, </p>
-<pre><code><span class="hljs-keyword">import</span> <span class="hljs-built_in">time</span>
-<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
-<span class="hljs-keyword">text</span>=<span class="hljs-string">"total duration of the course"</span>
-
-<span class="hljs-keyword">for</span> i <span class="hljs-built_in">in</span> range(<span class="hljs-number">10</span>):
-  token_text=tokenizer.texts_to_sequences([<span class="hljs-keyword">text</span>])[<span class="hljs-number">0</span>]
-  padded_token_text=pad_sequences([token_text],maxlen=<span class="hljs-number">56</span>,padding=<span class="hljs-string">'pre'</span>)
-  pos=np.argmax(model.predict(padded_token_text))
-
-  <span class="hljs-keyword">for</span> word,index <span class="hljs-built_in">in</span> tokenizer.word_index.items():
-    <span class="hljs-keyword">if</span> index==pos:
-      <span class="hljs-keyword">text</span>=<span class="hljs-keyword">text</span>+ <span class="hljs-string">" "</span>+ word
-      print(<span class="hljs-keyword">text</span>)
-      <span class="hljs-built_in">time</span>.sleep(<span class="hljs-number">2</span>)
-</code></pre><p><img src="/assets/images/clt/lstm-new-word-or-sentence-predictor/2.png" alt="2"></p>
-</div>
 
 <button type="button" class="collapsible">Transfer Learning in Keras | Fine Tuning VS Feature Extraction</button>
 <div class="content">
@@ -3609,11 +3466,61 @@ for (i = 0; i < coll.length; i++) {
   });
 }
 
-    fetch('sidebar.html')
+/**    fetch('sidebar.html')
     .then(response => response.text())
     .then(data => {
         document.getElementById('sidebar').innerHTML = data;
     });
+
+**/
+
+    // Handle blog link clicks
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('blog-link')) {
+        e.preventDefault();
+        const blogName = e.target.getAttribute('href').substring(1);
+        loadBlog(blogName);
+        history.pushState({ blog: blogName }, '', `#${blogName}`);
+    }
+});
+
+// Function to load blog content
+function loadBlog(blogName) {
+    fetch(`blogs/${blogName}.html`)
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('main-content').innerHTML = data;
+        });
+}
+
+// Handle direct URL visits
+window.addEventListener('load', function() {
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+        loadBlog(hash);
+    }
+});
+
+// Save home state when page first loads
+const mainContent = document.getElementById('main-content');
+const homeState = mainContent.innerHTML;
+
+// Handle back to home clicks
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('home-link')) {
+        e.preventDefault();
+        mainContent.innerHTML = homeState;
+        history.pushState({ blog: null }, '', window.location.pathname);
+    }
+});
+
+window.addEventListener('popstate', function(e) {
+    if (e.state && e.state.blog) {
+        loadBlog(e.state.blog);
+    } else {
+        mainContent.innerHTML = homeState;
+    }
+});
 
 </script>
 
