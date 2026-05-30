@@ -1,0 +1,49 @@
+<a href="#" class="home-link">Back to Home</a>
+
+<p>There are some problems where ordinary RNN architectures fail b/c of uncertainty. The most common example of it is the real-time voice to text recognition, we don&#39;t know what the person is going speak next i.e the problem in which we need the future information, we need bidirection rnns for it.</p>
+<p>For this purpose, we will use the <code>Bidirectional</code> built in wrapper of keras. Initially import the libraries and the wrapper,</p>
+<pre><code>import tensorflow as tf
+from tensorflow<span class="hljs-selector-class">.keras</span><span class="hljs-selector-class">.datasets</span> import imdb
+from tensorflow<span class="hljs-selector-class">.keras</span><span class="hljs-selector-class">.preprocessing</span><span class="hljs-selector-class">.sequence</span> import pad_sequences
+from tensorflow<span class="hljs-selector-class">.keras</span><span class="hljs-selector-class">.models</span> import Sequential
+from tensorflow<span class="hljs-selector-class">.keras</span><span class="hljs-selector-class">.layers</span> import Embedding,Bidirectional,SimpleRNN,LSTM,GRU,Dense
+</code></pre><p>load the dataset and do train test split</p>
+<pre><code><span class="hljs-attr">num_words=10000</span>
+(x_train,y_train),(x_test,y_test)=imdb.load_data(<span class="hljs-attr">num_words=num_words)</span>
+</code></pre><p>pad the training and testing data</p>
+<pre><code><span class="hljs-attr">maxlen</span>=<span class="hljs-number">100</span>
+<span class="hljs-attr">x_train</span>=pad_sequences(x_train,maxlen=maxlen,padding=<span class="hljs-string">'post'</span>,truncating=<span class="hljs-string">'post'</span>)
+<span class="hljs-attr">x_test</span>=pad_sequences(x_test,maxlen=maxlen,padding=<span class="hljs-string">'post'</span>,truncating=<span class="hljs-string">'post'</span>)
+</code></pre><p>set the embedding dimensions for future use,</p>
+<pre><code><span class="hljs-attr">embedding_dim</span>=<span class="hljs-number">32</span>
+</code></pre><h2 id="sequential-model-for-simplernn-with-bidirectional-wrapper">Sequential Model for SimpleRNN with Bidirectional Wrapper</h2>
+<p>Create the sequential model for simpleRNN with all the layers,</p>
+<pre><code>model=Sequential([
+    Embedding(<span class="hljs-name">input_dim=num_words</span>,output_dim=embedding_dim,input_length=maxlen),
+    Bidirectional(<span class="hljs-name">SimpleRNN</span>(<span class="hljs-number">5</span>)),
+    Dense(<span class="hljs-number">1</span>,activation='sigmoid')
+])
+</code></pre><p>compile the model and check the summary</p>
+<pre><code><span class="hljs-keyword">model</span>.compile(optimizer=<span class="hljs-string">'adam'</span>,loss=<span class="hljs-string">'binary_crossentropy'</span>,metrics=[<span class="hljs-string">'accuracy'</span>])
+<span class="hljs-keyword">model</span>.summary()
+</code></pre><h2 id="sequential-model-for-gru-with-bidirectional-wrapper">Sequential Model for GRU with Bidirectional Wrapper</h2>
+<p>Again make a sequential model for a GRU and wrap it in a bidirectional wrapper</p>
+<pre><code>mode=Sequential([
+    Embedding(<span class="hljs-name">input_dim=num_words</span>,output_dim=embedding_dim,input_length=maxlen),
+    Bidirectional(<span class="hljs-name">GRU</span>(<span class="hljs-number">5</span>)),
+    Dense(<span class="hljs-number">1</span>,activation='sigmoid')
+])
+</code></pre><p>compile the model and check its summary</p>
+<pre><code><span class="hljs-keyword">model</span>.compile(optimizer=<span class="hljs-string">'adam'</span>,loss=<span class="hljs-string">'binary_crossentropy'</span>,metrics=[<span class="hljs-string">'accuracy'</span>])
+<span class="hljs-keyword">model</span>.summary()
+</code></pre><h2 id="sequential-model-for-lstm-with-bidirectional-wrapper">Sequential Model for LSTM with Bidirectional Wrapper</h2>
+<p>One last time make a sequential model for lstm and put it in bidirectional wrapper</p>
+<pre><code>model=Sequential([
+    Embedding(<span class="hljs-name">input_dim=num_words</span>,output_dim=embedding_dim,input_length=maxlen),
+    Bidirectional(<span class="hljs-name">LSTM</span>(<span class="hljs-number">5</span>)),
+    Dense(<span class="hljs-number">1</span>,activation='sigmoid')
+])
+</code></pre><p>compiler the model and check its summary</p>
+<pre><code><span class="hljs-keyword">model</span>.compile(optimizer=<span class="hljs-string">'adam'</span>,loss=<span class="hljs-string">'binary_crossentropy'</span>,metrics=[<span class="hljs-string">'accuracy'</span>])
+<span class="hljs-keyword">model</span>.summary()
+</code></pre>

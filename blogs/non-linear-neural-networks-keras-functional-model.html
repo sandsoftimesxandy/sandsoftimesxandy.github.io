@@ -1,0 +1,156 @@
+<a href="#" class="home-link">Back to Home</a>
+
+<p>There are some problems which cannot be solved with a sequential model, therefore we need non-sequential model. Sequential model goes on with the assumption of single input and single output. What if you&#39;ve to predict two things? What if linear topology doesnot solve your problem. </p>
+<p>In order to make non-sequential model, we use keras-functional-api. First of all import the model from keras,</p>
+<pre><code><span class="hljs-keyword">from</span> keras.models <span class="hljs-keyword">import</span> Model
+</code></pre><p>Then simply create the model but don&#39;t run the cell and leave inputs and outputs empty for now,</p>
+<pre><code><span class="hljs-keyword">model</span>=<span class="hljs-keyword">Model</span>(inputs=,outputs=)
+</code></pre><p>Import all keras-layers,</p>
+<pre><code><span class="hljs-keyword">from</span> keras.layers <span class="hljs-keyword">import</span> *
+</code></pre><p>Define an input shape for your model,</p>
+<pre><code>x=Input(<span class="hljs-name">shape=</span>(<span class="hljs-number">3</span>,))
+</code></pre><p>Create hidden layers and output layers for the model,</p>
+<pre><code>hidden1=Dense(<span class="hljs-number">128</span>,activation='relu')(<span class="hljs-name">x</span>)
+hidden2=Dense(<span class="hljs-number">64</span>,activation='relu')(<span class="hljs-name">hidden1</span>)
+output1=Dense(<span class="hljs-number">1</span>,activation='linear')(<span class="hljs-name">hidden2</span>)
+output2=Dense(<span class="hljs-number">1</span>,activation='sigmoid')(<span class="hljs-name">hidden2</span>)
+</code></pre><p>You can see we&#39;ve two outputs for the above architecture one with the activation function of sigmoid and other with the linear function. Now go back to the cell which we left where we were creating the model and give the inputs and outputs,</p>
+<pre><code><span class="hljs-keyword">model</span>=<span class="hljs-keyword">Model</span>(inputs=x,outputs=[output1,output2])
+</code></pre><p>Now check the model summary,</p>
+<pre><code><span class="hljs-selector-tag">model</span><span class="hljs-selector-class">.summary</span>()
+</code></pre><p><img src="/assets/images/clt/non-linear-neural-networks/2.png" alt="2"></p>
+<p>At the end plot the model for visual demonstration of model architecture,</p>
+<pre><code>from keras<span class="hljs-selector-class">.utils</span> import plot_model
+<span class="hljs-function"><span class="hljs-title">plot_model</span><span class="hljs-params">(model,show_shapes=True)</span></span>
+</code></pre><p>Here is how it will look,</p>
+<p><img src="/assets/images/clt/non-linear-neural-networks/1.png" alt="1"></p>
+<h2 id="multi-input-model">Multi-Input Model</h2>
+<p>Simply do the imports of Model and Layers,</p>
+<pre><code><span class="hljs-keyword">from</span> keras.layers <span class="hljs-keyword">import</span> *
+<span class="hljs-keyword">from</span> keras.models <span class="hljs-keyword">import</span> Model
+</code></pre><p>Then defined two inputs,</p>
+<pre><code>inputA=Input(<span class="hljs-name">shape=</span>(<span class="hljs-number">32</span>,))
+inputB=Input(<span class="hljs-name">shape=</span>(<span class="hljs-number">128</span>,))
+</code></pre><p>Define first branch for first input,</p>
+<pre><code>x=Dense(<span class="hljs-number">8</span>,activation=<span class="hljs-string">"relu"</span>)(<span class="hljs-name">inputA</span>)
+x1=Dense(<span class="hljs-number">4</span>,activation=<span class="hljs-string">"relu"</span>)(<span class="hljs-name">x</span>)
+</code></pre><p>and second branch for second input,</p>
+<pre><code>y=Dense(<span class="hljs-number">64</span>,activation=<span class="hljs-string">"relu"</span>)(<span class="hljs-name">inputB</span>)
+y1=Dense(<span class="hljs-number">32</span>,activation=<span class="hljs-string">"relu"</span>)(<span class="hljs-name">y</span>)
+y2=Dense(<span class="hljs-number">4</span>,activation=<span class="hljs-string">"relu"</span>)(<span class="hljs-name">y1</span>)
+</code></pre><p>combine output of both branches,</p>
+<pre><code><span class="hljs-attr">combined</span>=concatenate([x1,y2])
+</code></pre><p>then apply fully connected layer on combined output,</p>
+<pre><code><span class="hljs-comment"># apply a FC layer and then a regression prediction on the</span>
+<span class="hljs-comment"># combined outputs</span>
+<span class="hljs-attr">z</span> = Dense(<span class="hljs-number">2</span>, activation=<span class="hljs-string">"relu"</span>)(combined)
+<span class="hljs-attr">z1</span> = Dense(<span class="hljs-number">1</span>, activation=<span class="hljs-string">"linear"</span>)(z)
+</code></pre><p>define the model and its input at the end,</p>
+<pre><code><span class="hljs-comment"># our model will accept the inputs of the two branches and</span>
+<span class="hljs-comment"># then output a single value</span>
+<span class="hljs-attr">model</span> = Model(<span class="hljs-attr">inputs=[inputA,</span> inputB], <span class="hljs-attr">outputs=z1)</span>
+</code></pre><p>Check the model summary,</p>
+<pre><code><span class="hljs-selector-tag">model</span><span class="hljs-selector-class">.summary</span>()
+</code></pre><p><img src="/assets/images/clt/non-linear-neural-networks/3.png" alt="3"></p>
+<p>at the end plot the model,</p>
+<pre><code>from keras<span class="hljs-selector-class">.utils</span> import plot_model
+<span class="hljs-function"><span class="hljs-title">plot_model</span><span class="hljs-params">(model)</span></span>
+</code></pre><p><img src="/assets/images/clt/non-linear-neural-networks/4.png" alt="4"></p>
+<h2 id="age-gender-project">Age Gender Project</h2>
+<p>Do necessary imports,</p>
+<pre><code>!mkdir -<span class="hljs-selector-tag">p</span> ~/<span class="hljs-selector-class">.kaggle</span>
+!cp kaggle<span class="hljs-selector-class">.json</span> ~/.kaggle/
+</code></pre><p>download the dataset on your notebook,</p>
+<pre><code>!kaggle datasets download -d jangedoo/utkface-<span class="hljs-keyword">new</span>
+</code></pre><p>unzip the dataset,</p>
+<pre><code><span class="hljs-keyword">import</span> zipfile
+<span class="hljs-built_in">zip</span> = zipfile.<span class="hljs-type">ZipFile</span>(<span class="hljs-string">"/content/utkface-new.zip"</span>,'r')
+<span class="hljs-built_in">zip</span>.extractall(<span class="hljs-string">"/content"</span>)
+<span class="hljs-built_in">zip</span>.close()
+</code></pre><p>import the datagenerator for data-augmentation,</p>
+<pre><code><span class="hljs-keyword">import</span> os
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-title">from</span> keras.preprocessing.image <span class="hljs-keyword">import</span> ImageDataGenerator
+</code></pre><p>define a path for data augmentation folder,</p>
+<pre><code><span class="hljs-attr">folder_path</span> = <span class="hljs-string">'/content/utkface_aligned_cropped/UTKFace'</span>
+</code></pre><p>define the dataframe format,</p>
+<pre><code>age=[]
+gender=[]
+img_path=[]
+<span class="hljs-keyword">for</span> <span class="hljs-keyword">file</span> in os.listdir(folder_path):
+  age.<span class="hljs-keyword">append</span>(<span class="hljs-keyword">int</span>(<span class="hljs-keyword">file</span>.<span class="hljs-keyword">split</span>(<span class="hljs-string">'_'</span>)[<span class="hljs-number">0</span>]))
+  gender.<span class="hljs-keyword">append</span>(<span class="hljs-keyword">int</span>(<span class="hljs-keyword">file</span>.<span class="hljs-keyword">split</span>(<span class="hljs-string">'_'</span>)[<span class="hljs-number">1</span>]))
+  img_path.<span class="hljs-keyword">append</span>(<span class="hljs-keyword">file</span>)
+</code></pre><p>check length of age,</p>
+<pre><code><span class="hljs-function"><span class="hljs-title">len</span><span class="hljs-params">(age)</span></span>
+</code></pre><p>create the dataframe,</p>
+<pre><code>df=pd.DataFrame({<span class="hljs-string">'age'</span><span class="hljs-symbol">:age</span>,<span class="hljs-string">'gender'</span><span class="hljs-symbol">:gender</span>,<span class="hljs-string">'img'</span><span class="hljs-symbol">:img_path</span>})
+</code></pre><p>check the shape of dataframe,</p>
+<pre><code><span class="hljs-selector-tag">df</span><span class="hljs-selector-class">.shape</span>
+</code></pre><p>dataframe will look like this,</p>
+<p><img src="/assets/images/clt/non-linear-neural-networks/5.png" alt="5"></p>
+<p>check the head,</p>
+<pre><code><span class="hljs-selector-tag">df</span><span class="hljs-selector-class">.head</span>()
+</code></pre><p>divide the data into train and test,</p>
+<pre><code><span class="hljs-attr">train_df</span>=df.sample(frac=<span class="hljs-number">1</span>,random_state=<span class="hljs-number">0</span>).iloc[:<span class="hljs-number">20000</span>]
+<span class="hljs-attr">test_df</span>=df.sample(frac=<span class="hljs-number">1</span>,random_state=<span class="hljs-number">0</span>).iloc[<span class="hljs-number">20000</span>:]
+</code></pre><p>check the train shape,</p>
+<pre><code><span class="hljs-selector-tag">train_df</span><span class="hljs-selector-class">.shape</span>
+</code></pre><p>and the test shape,</p>
+<pre><code><span class="hljs-selector-tag">test_df</span><span class="hljs-selector-class">.shape</span>
+</code></pre><p>define the imageGenerator parameters for train and test data,</p>
+<pre><code><span class="hljs-attr">train_datagen</span> = ImageDataGenerator(<span class="hljs-attr">rescale=1./255,</span>
+                                   <span class="hljs-attr">rotation_range=30,</span>
+                                   <span class="hljs-attr">width_shift_range=0.2,</span>
+                                   <span class="hljs-attr">height_shift_range=0.2,</span>
+                                   <span class="hljs-attr">shear_range=0.2,</span>
+                                   <span class="hljs-attr">zoom_range=0.2,</span>
+                                   <span class="hljs-attr">horizontal_flip=True)</span>
+
+<span class="hljs-attr">test_datagen</span> = ImageDataGenerator(<span class="hljs-attr">rescale=1./255)</span>
+</code></pre><p>generate the data with generators,</p>
+<pre><code><span class="hljs-attr">train_generator</span> = train_datagen.flow_from_dataframe(train_df,
+                                                    <span class="hljs-attr">directory=folder_path,</span>
+                                                    <span class="hljs-attr">x_col='img',</span>
+                                                    <span class="hljs-attr">y_col=['age','gender'],</span>
+                                                    <span class="hljs-attr">target_size=(200,200),</span>
+                                                    <span class="hljs-attr">class_mode='multi_output')</span>
+
+<span class="hljs-attr">test_generator</span> = test_datagen.flow_from_dataframe(test_df,
+                                                    <span class="hljs-attr">directory=folder_path,</span>
+                                                    <span class="hljs-attr">x_col='img',</span>
+                                                    <span class="hljs-attr">y_col=['age','gender'],</span>
+                                                    <span class="hljs-attr">target_size=(200,200),</span>
+                                                  <span class="hljs-attr">class_mode='multi_output')</span>
+</code></pre><p><img src="/assets/images/clt/non-linear-neural-networks/6.png" alt="6"></p>
+<p>import the resNet50 model,</p>
+<pre><code><span class="hljs-keyword">from</span> keras.applications.resnet50 <span class="hljs-keyword">import</span> ResNet50
+<span class="hljs-keyword">from</span> keras.layers <span class="hljs-keyword">import</span> *
+<span class="hljs-keyword">from</span> keras.models <span class="hljs-keyword">import</span> Model
+</code></pre><p>create the instance of resnet50 and define its parameters,</p>
+<pre><code><span class="hljs-attr">resnet</span> = ResNet50(include_top=<span class="hljs-literal">False</span>, input_shape=(<span class="hljs-number">200</span>,<span class="hljs-number">200</span>,<span class="hljs-number">3</span>))
+</code></pre><p>complete the model architecture by adding dense and flatten layers to resNet50,</p>
+<pre><code><span class="hljs-attr">resnet</span> = ResNet50(<span class="hljs-attr">include_top=False,</span> <span class="hljs-attr">input_shape=(200,200,3))</span>
+
+resnet.<span class="hljs-attr">trainable=False</span>
+
+<span class="hljs-attr">output</span> = resnet.layers[-<span class="hljs-number">1</span>].output
+
+<span class="hljs-attr">flatten</span> = Flatten()(output)
+
+<span class="hljs-attr">dense1</span> = Dense(<span class="hljs-number">512</span>, <span class="hljs-attr">activation='relu')(flatten)</span>
+<span class="hljs-attr">dense2</span> = Dense(<span class="hljs-number">512</span>,<span class="hljs-attr">activation='relu')(flatten)</span>
+
+<span class="hljs-attr">dense3</span> = Dense(<span class="hljs-number">512</span>,<span class="hljs-attr">activation='relu')(dense1)</span>
+<span class="hljs-attr">dense4</span> = Dense(<span class="hljs-number">512</span>,<span class="hljs-attr">activation='relu')(dense2)</span>
+
+<span class="hljs-attr">output1</span> = Dense(<span class="hljs-number">1</span>,<span class="hljs-attr">activation='linear',name='age')(dense3)</span>
+<span class="hljs-attr">output2</span> = Dense(<span class="hljs-number">1</span>,<span class="hljs-attr">activation='sigmoid',name='gender')(dense4)</span>
+</code></pre><p>define model with inputs and outputs,</p>
+<pre><code><span class="hljs-keyword">model</span>=<span class="hljs-keyword">Model</span>(inputs=resnet.input,outputs=[output1,output2])
+</code></pre><p>compile the model,</p>
+<pre><code>model.compile(optimizer=<span class="hljs-string">'adam'</span>,loss={<span class="hljs-string">'age'</span>:<span class="hljs-string">'mae'</span>,<span class="hljs-string">'gender'</span>:<span class="hljs-string">'binary_crossentropy'</span>},metrics={<span class="hljs-string">'age'</span>:<span class="hljs-string">'mae'</span>,<span class="hljs-string">'gender'</span>:<span class="hljs-string">'accuracy'</span>},loss_weights={<span class="hljs-string">'age'</span>:<span class="hljs-number">1</span>,<span class="hljs-string">'gender'</span>:<span class="hljs-number">99</span>})
+</code></pre><p>at the end fit the model,</p>
+<pre><code>model.fit(train_generator, <span class="hljs-attr">batch_size=32,</span> <span class="hljs-attr">epochs=10,</span> <span class="hljs-attr">validation_data=test_generator)</span>
+</code></pre><p><img src="/assets/images/clt/non-linear-neural-networks/7.png" alt="7"></p>

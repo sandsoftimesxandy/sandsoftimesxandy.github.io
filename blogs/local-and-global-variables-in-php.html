@@ -1,0 +1,38 @@
+<a href="#" class="home-link">Back to Home</a>
+
+<p>Variables can be declared <strong>locally</strong> or <strong>globally</strong>. These two words basically defines the scope of a variable. It means the region upto which you can use any declared variable. In php, you can declare the variables both locally and globally. In order to use a global variable you&#39;ve to use the keyword <code>global</code>.</p>
+<p>Here is a very basic example for the scope of variables,</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+$name=<span class="hljs-string">"anil"</span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getName</span><span class="hljs-params">()</span></span>{
+    $name=<span class="hljs-string">"peter"</span>;
+    <span class="hljs-keyword">global</span> $name;
+    $name=<span class="hljs-string">"peter"</span>;
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"local var: $name"</span>;
+}
+
+
+getName();
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br/&gt;"</span>;
+<span class="hljs-keyword">echo</span> $name;
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p>Also, you can use the global variables within the nested functions. Keep in mind only the first one globally defined variable will be used within all nested functions. Take a look at it,</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+$name=<span class="hljs-string">"anil"</span>;
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test</span><span class="hljs-params">()</span></span>{
+    $name=<span class="hljs-string">"peter"</span>;
+    <span class="hljs-keyword">echo</span> $name;
+
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">innerTest</span><span class="hljs-params">()</span></span>{
+        <span class="hljs-keyword">global</span> $name;
+        <span class="hljs-keyword">echo</span> $name;
+    }
+}
+
+test();
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;/"</span>;
+innerTest();
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;/"</span>;
+<span class="hljs-keyword">echo</span> $name;;
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre>

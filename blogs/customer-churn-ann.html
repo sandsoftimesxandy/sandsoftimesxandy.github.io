@@ -1,0 +1,85 @@
+<a href="#" class="home-link">Back to Home</a>
+
+<p>The working of a Artificial Neural Network can be observed in multiple ways. One way is to solve a practical use-case on it. The problem we are going to solve today is Customer-Churn problem of a Bank<code>(will the customer stay or go)</code>.</p>
+<p><img src="/assets/images/clt/customer-churn-prediction-using-ann/3.png" alt="3"> </p>
+<p>For this purpose, i&#39;m going to use the available dataset on kaggle. </p>
+<p>Initially we are importing the necessary libraries including numpy and pandas. Then we are obtaining the path to the dataset csv file.</p>
+<pre><code><span class="hljs-comment"># This Python 3 environment comes with many helpful analytics libraries installed</span>
+<span class="hljs-comment"># It is defined by the kaggle/python Docker image: https://github.com/kaggle/docker-python</span>
+<span class="hljs-comment"># For example, here's several helpful packages to load</span>
+
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np <span class="hljs-comment"># linear algebra</span>
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd <span class="hljs-comment"># data processing, CSV file I/O (e.g. pd.read_csv)</span>
+
+<span class="hljs-comment"># Input data files are available in the read-only "../input/" directory</span>
+<span class="hljs-comment"># For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory</span>
+
+<span class="hljs-keyword">import</span> os
+<span class="hljs-keyword">for</span> dirname, _, filenames <span class="hljs-keyword">in</span> os.walk(<span class="hljs-string">'/kaggle/input'</span>):
+    <span class="hljs-keyword">for</span> filename <span class="hljs-keyword">in</span> filenames:
+        print(os.path.join(dirname, filename))
+
+<span class="hljs-comment"># You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save &amp; Run All" </span>
+<span class="hljs-comment"># You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session</span>
+</code></pre><p>Now read the data in the form of pandas dataframe,</p>
+<pre><code><span class="hljs-attr">df</span>=pd.read_csv(<span class="hljs-string">'/kaggle/input/credit-card-customer-churn-prediction/Churn_Modelling.csv'</span>)
+</code></pre><p>Observe the dataset by using these functions,</p>
+<pre><code><span class="hljs-selector-tag">df</span><span class="hljs-selector-class">.describe</span>()
+<span class="hljs-selector-tag">df</span><span class="hljs-selector-class">.head</span>()
+</code></pre><p>Dataset information will be displayed. Also see the un-nessary columns and drop them.e.g <strong>RowNumber,CustomerId and Surname are of no use for us</strong>,</p>
+<pre><code>df.<span class="hljs-built_in">drop</span>(columns = [<span class="hljs-string">'RowNumber'</span>,<span class="hljs-string">'CustomerId'</span>,<span class="hljs-string">'Surname'</span>],inplace=<span class="hljs-literal">True</span>)
+</code></pre><p>Now count the total categorical values in <code>Geography</code> and <code>Gender</code> column </p>
+<pre><code>df[<span class="hljs-string">'Geography'</span>].<span class="hljs-keyword">value</span><span class="hljs-number">_</span>counts()
+</code></pre><pre><code>df[<span class="hljs-string">'Gender'</span>].<span class="hljs-keyword">value</span><span class="hljs-number">_</span>counts()
+</code></pre><p>The next step is to get the dummies where possible,</p>
+<pre><code><span class="hljs-attr">df</span>=pd.get_dummies(df,columns=[<span class="hljs-string">'Geography'</span>,<span class="hljs-string">'Gender'</span>],drop_first=<span class="hljs-literal">True</span>)
+</code></pre><p>You&#39;ve your dataset in useful form now, perform the initial<code>train-test-split</code>.</p>
+<pre><code>X=df.drop(<span class="hljs-attribute">columns</span>=[<span class="hljs-string">'Exited'</span>])
+y=df[<span class="hljs-string">'Exited'</span>]<span class="hljs-selector-class">.values</span>
+
+from sklearn<span class="hljs-selector-class">.model_selection</span> import train_test_split
+X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=<span class="hljs-number">0.2</span>,random_state=<span class="hljs-number">0</span>)
+</code></pre><p>Then scale the values using <code>StandardScaler library</code>,</p>
+<pre><code>from sklearn.preprocessing <span class="hljs-built_in">import</span> StandardScaler
+<span class="hljs-attr">scaler=StandardScaler()</span>
+<span class="hljs-attr">X_train_trf=scaler.fit_transform(X_train)</span>
+<span class="hljs-attr">X_test_trf=scaler.transform(X_test)</span>
+</code></pre><p>It is now time to make our first Artificial Neural Network, so do necessary importings of tensorflow and keras,</p>
+<pre><code><span class="hljs-keyword">import</span> tensorflow
+<span class="hljs-title">from</span> tensorflow <span class="hljs-keyword">import</span> keras
+<span class="hljs-title">from</span> tensorflow.keras <span class="hljs-keyword">import</span> Sequential
+<span class="hljs-title">from</span> tensorflow.keras.layers <span class="hljs-keyword">import</span> Dense
+</code></pre><p>Now make a sequential model and add hidden layers to it,</p>
+<pre><code><span class="hljs-keyword">model</span>=Sequential()
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">11</span>,activation=<span class="hljs-string">'relu'</span>,input_dim=<span class="hljs-number">11</span>))
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">11</span>,activation=<span class="hljs-string">'relu'</span>))
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">1</span>,activation=<span class="hljs-string">'sigmoid'</span>))
+</code></pre><p>Check the model summary,</p>
+<pre><code><span class="hljs-selector-tag">model</span><span class="hljs-selector-class">.summary</span>()
+</code></pre><p>The next step is to add a loss-function to your ANN. Here we are using <code>binary_crossentropy</code> with optimizer <code>Adam</code></p>
+<pre><code><span class="hljs-keyword">model</span>.compile(loss=<span class="hljs-string">'binary_crossentropy'</span>,optimizer=<span class="hljs-string">'Adam'</span>,metrics=[<span class="hljs-string">'accuracy'</span>])
+</code></pre><p>Fit the model on the training data and validate 20% of the data during training and store it in a variable. This will run for 100 epochs and we will have the perfect weights for hidden layers.</p>
+<pre><code><span class="hljs-attr">history</span>=model.fit(X_train_trf,y_train,epochs=<span class="hljs-number">100</span>,validation_split=<span class="hljs-number">0.2</span>)
+</code></pre><p>Check the weights of hidden layers,</p>
+<pre><code><span class="hljs-selector-tag">model</span><span class="hljs-selector-class">.layers</span><span class="hljs-selector-attr">[0]</span><span class="hljs-selector-class">.get_weights</span>()
+</code></pre><pre><code><span class="hljs-selector-tag">model</span><span class="hljs-selector-class">.layers</span><span class="hljs-selector-attr">[1]</span><span class="hljs-selector-class">.get_weights</span>()
+</code></pre><pre><code><span class="hljs-selector-tag">model</span><span class="hljs-selector-class">.layers</span><span class="hljs-selector-attr">[2]</span><span class="hljs-selector-class">.get_weights</span>()
+</code></pre><p>We are going to make predictions from our model now,</p>
+<pre><code><span class="hljs-attr">y_log</span>=model.predict(X_test_trf)
+</code></pre><p>As the activation function is sigmoid and relu, so it will give values b/w the range of 0 and 1. We&#39;ve to use some threshold to obtain the binary values from the results.</p>
+<pre><code>y_pred=np.where(y_log&gt;<span class="hljs-number">0.5</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>)
+</code></pre><p>Check the accuracy of the ANN,</p>
+<pre><code>from sklearn<span class="hljs-selector-class">.metrics</span> import accuracy_score
+<span class="hljs-function"><span class="hljs-title">accuracy_score</span><span class="hljs-params">(y_test,y_pred)</span></span>
+</code></pre><p>history is the object itself. So inorder to access the values use,</p>
+<pre><code><span class="hljs-keyword">history</span>.<span class="hljs-keyword">history</span>
+</code></pre><p>Now see the overfitting, compare the loss and validation loss.</p>
+<pre><code>import matplotlib<span class="hljs-selector-class">.pyplot</span> as plt
+
+plt.plot(history<span class="hljs-selector-class">.history</span>[<span class="hljs-string">'loss'</span>])
+plt.plot(history<span class="hljs-selector-class">.history</span>[<span class="hljs-string">'val_loss'</span>])
+</code></pre><p><img src="/assets/images/clt/customer-churn-prediction-using-ann/1.png" alt="1"></p>
+<p>Similarly compare the accuracy and validation accuracy.</p>
+<pre><code><span class="hljs-selector-tag">plt</span><span class="hljs-selector-class">.plot</span>(<span class="hljs-selector-tag">history</span><span class="hljs-selector-class">.history</span><span class="hljs-selector-attr">['accuracy']</span>)
+<span class="hljs-selector-tag">plt</span><span class="hljs-selector-class">.plot</span>(<span class="hljs-selector-tag">history</span><span class="hljs-selector-class">.history</span><span class="hljs-selector-attr">['val_accuracy']</span>)
+</code></pre><p><img src="/assets/images/clt/customer-churn-prediction-using-ann/2.png" alt="2"></p>

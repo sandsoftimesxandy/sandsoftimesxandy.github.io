@@ -1,0 +1,17 @@
+<a href="#" class="home-link">Back to Home</a>
+
+<p>Setting the environment for PHP is very simple in Linux. You just have to run xampp and it will install PHP plus all the requisites for it. First of all download the xampp installer from their offical <a href="https://www.apachefriends.org/download_success.html">website</a>. After the download has finished go to the download directory and run the command,</p>
+<pre><code>ls <span class="hljs-_">-l</span>
+</code></pre><p>you&#39;ll see the xampp installer has no executition permission so do this,</p>
+<pre><code><span class="hljs-selector-tag">sudo</span> <span class="hljs-selector-tag">chmod</span> +<span class="hljs-selector-tag">x</span> <span class="hljs-selector-tag">xampp-linux-x64-8</span><span class="hljs-selector-class">.2</span><span class="hljs-selector-class">.12-0-installer</span><span class="hljs-selector-class">.run</span>
+</code></pre><p>it is now executable, run the installer using this,</p>
+<pre><code>sudo ./xampp-linux-x64<span class="hljs-number">-8.2</span><span class="hljs-number">.12</span><span class="hljs-number">-0</span>-installer.run
+</code></pre><p>Simply press forward till last step and it will start the installation,</p>
+<p><img src="/assets/images/clt/linux-mint-xampp-install/1.png" alt="1"></p>
+<p>After the installation has finished open up the xampp using this command,</p>
+<pre><code>sudo /opt/lampp/manager-linux-x64.<span class="hljs-built_in">run</span>
+</code></pre><p>Press the start all button to start all the services of xampp. Also to open the dashboard or PHPMyAdmin go to this url,</p>
+<pre><code>http:<span class="hljs-regexp">//</span>localhost<span class="hljs-regexp">/dashboard/</span>
+</code></pre><p>Keep in mind, if you want to open MySQl on terminal use this command,</p>
+<pre><code><span class="hljs-symbol">sudo</span>  /<span class="hljs-meta">opt</span>/lampp/<span class="hljs-keyword">bin/mysql </span>-u root
+</code></pre>
