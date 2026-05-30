@@ -1,0 +1,78 @@
+<style>
+a:visited{
+    color: blue;
+}
+img {
+    height: auto;
+    !width: 100%;
+    max-width: 80%;
+    !border: 5px solid blue;
+}
+.pdf {
+        !width: 530;
+        width: 90%;
+        height: 750;
+        aspect-ratio: 4 / 3;
+        display: block;
+        margin:auto;
+        border: 5px solid blue;
+    }
+body {
+	!font-family: sans-serif;
+    !font-family: 'Courier New', monospace;
+}
+.wrapper {
+    display: flex;
+    justify-content: space-between; /* one goes left, another to the right*/
+    gap: 0px; /* space in between */
+  }
+.myDiv{
+	background-color: #E7CF9E;
+	!margin-right: 50%;
+	!float: left;
+	width: 30%;
+	word-wrap: break-word;
+	padding-left: 5px;
+	!padding-top: 69px;
+	!font-size: small;
+}
+.myKiv{
+	background-color: #FFE7B7;
+	!margin-left: 50%;
+	!float: right;
+	width: 70%;
+	word-wrap: break-word;
+	padding-left: 5px;
+}
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+  background-color: #FFE7B7;
+  color: blue;
+  !cursor: pointer;
+  !padding: 18px;
+  padding-left: 0px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 16px;
+  font-family: aerial;
+  text-decoration: underline;
+  !word-wrap: break-word;
+}
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .collapsible:hover {
+  background-color: #ccc;
+}
+/* Style the collapsible content. Note: hidden by default */
+.content {
+  padding-left: 3px;
+  !display: none;
+  overflow: hidden;
+  background-color: #E7CF9E;
+  !background-color: cyan;
+  !word-wrap: break-word;
+  transition: max-height 0.2s ease-out;
+  max-height: 0;
+}
+</style>
