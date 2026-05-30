@@ -1,0 +1,15 @@
+<a href="#" class="home-link">Back to Home</a>
+
+<p>Generally by default, php doesnot show error on the browser. It simply says <strong>page isn&#39;t working</strong> instead. Inorder to visualize the error in code in browser. You&#39;ve to do some basic changes. Initially create a new file with name <code>display-error.php</code>. In this file write this php function.</p>
+<pre><code>echo phpinfo()<span class="hljs-comment">;</span>
+</code></pre><p>It will display all the information related to php.
+<img src="/assets/images/clt/display-error-in-php/1.png" alt="1"></p>
+<p>Now, find the <code>Loaded Configuration File</code> and its <strong>path</strong>. In this case, it is <code>/opt/lampp/etc/php.ini</code>. Open this file on your terminal and find the keyword <strong>display_errors</strong> it will be set <strong>off</strong> initially. Write <strong>on</strong> infront of it. Then simply restart your apache-server. After the restart, write a php code in any of your file with some syntax error. Go to browser and this time, you&#39;ll see the actual error being displayed. I&#39;ve a code below:</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-comment">// echo phpinfo();</span>
+<span class="hljs-comment">// echo "Hello";</span>
+$num=<span class="hljs-number">50</span>K
+<span class="hljs-keyword">echo</span> $num*<span class="hljs-number">50</span>
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p>The above code has a syntax error and will display error on the browser like,
+<img src="/assets/images/clt/display-error-in-php/2.png" alt="2"></p>

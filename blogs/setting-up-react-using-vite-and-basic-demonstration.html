@@ -1,0 +1,74 @@
+<a href="#" class="home-link">Back to Home</a>
+
+<p>React is one of the readily used framework when it comes to <code>web</code> or <code>mobile</code>  application developmenmt. So far, i&#39;ve seen two ways of working in react. The first one is the basic one with 
+node pakage execute <code>npx</code> which will give you the all react framework files and the second one
+is with <code>vite</code>. Vite provide you the light files structure by excluding all the un-necessary react 
+files at the start.</p>
+<p>First of all, we&#39;ve to install nodejs but there is one problem here if you install it using <code>apt</code> manager it will install node version 12 point something which will cause some issues in setting up the project so you&#39;ll need a higher version of nodesjs. Here is how you can do that. First of all check the node version,</p>
+<pre><code><span class="hljs-keyword">node</span> <span class="hljs-title">-v</span>
+</code></pre><p>if it is not installed then first install the nvm,</p>
+<pre><code>curl -<span class="hljs-keyword">o</span>- http<span class="hljs-variable">s:</span>//raw.githubusercontent.<span class="hljs-keyword">com</span>/nvm-<span class="hljs-keyword">sh</span>/nvm/v0.<span class="hljs-number">39.3</span>/install.<span class="hljs-keyword">sh</span> | bash
+</code></pre><p>close and reopen your terminal or write this command,</p>
+<pre><code><span class="hljs-built_in">source</span> ~/.bashrc
+</code></pre><p>now install the latest nodejs version by writing these two commands,</p>
+<pre><code>nvm install <span class="hljs-keyword">node</span>
+<span class="hljs-title">nvm</span> use <span class="hljs-keyword">node</span><span class="hljs-title"></span>
+</code></pre><p>check the node version,</p>
+<pre><code><span class="hljs-keyword">node</span> <span class="hljs-title">-v</span>
+</code></pre><p>node is installed follow the rest of the blog to create the react project using vite. We&#39;ll focus on react via using the vite. It is much more reliable and easy to download as all the files are downloaded in few minutes. Initially write this on terminal to create the vite project.</p>
+<pre><code><span class="hljs-built_in">npm</span> create vite@latest
+</code></pre><p>It will ask you to select b/w multiple frameworks. You&#39;ve to select <code>react</code> among them. Then you&#39;ve to select from the programming languages. There will be multiple options e.g Javascript, Typescript. We will go with the Javascript. Then, mention the project name and you are good to go. You now have the vite react project in your computer. It have multiple files. Initially you have the 3 main files:</p>
+<ul>
+<li>index.html</li>
+<li>App.jsx</li>
+<li>main.jsx</li>
+</ul>
+<p>In <code>index.html</code> you have your starting root (starting of the DOM). This root will be called from <code>main.jsx</code> component. 
+The <code>index.html</code> looks like this:</p>
+<pre><code><span class="hljs-meta">&lt;!doctype html&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"icon"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"image/svg+xml"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"/vite.svg"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1.0"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Vite + React<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"root"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"module"</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"/src/main.jsx"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre><p>In the body, you&#39;ve the main <code>&lt;div id=&quot;root&quot;&gt;</code> starting root of the DOM. The div tag is then called in the <code>main.jsx</code> file 
+so that to make it the root of the DOM (before the call we&#39;ve just declared it, was not root before). The <code>main.jsx</code> file look
+like this:</p>
+<pre><code><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
+<span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom/client'</span>
+<span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">'./App.jsx'</span>
+
+
+ReactDOM.createRoot(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'root'</span>)).render(
+
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span>
+
+)</span>
+</code></pre><p>Here, you can see that we are creating the root by getting the element root from the <code>index.html</code> file. And then we are giving 
+a <code>App.jsx</code> component/function call from this main.jsx component. The <code>App.jsx</code> will be returning a basic <code>h1</code> tag with the text <strong>What is up?</strong> written in it.
+This text will be printed on the screen in the form of h1-heading. <code>App.jsx</code> code is as follow:</p>
+<pre><code><span class="hljs-keyword">import</span> Chai <span class="hljs-keyword">from</span> <span class="hljs-string">"./chai"</span>
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>{
+
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Chai</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>What is up??<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+    <span class="hljs-tag">&lt;/&gt;</span>
+  )
+
+}
+
+export default App</span>
+</code></pre><p>Now to run the project, use this command on your terminal:</p>
+<pre><code>npm <span class="hljs-keyword">run</span><span class="bash"> dev</span>
+</code></pre><p>This will be appear in front of you.</p>
+<p><img src="/assets/images/clt/react-tea/1.png" alt="A test image"></p>

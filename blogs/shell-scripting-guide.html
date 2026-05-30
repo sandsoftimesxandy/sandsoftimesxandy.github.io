@@ -1,0 +1,29 @@
+<a href="#" class="home-link">Back to Home</a>
+
+<p>Shell scripting is a powerful tool which is widely used to perform different task using the command line. Mainly it is used for the purpose of automation.Shell scripting is a highly flexible tool and it very powerful due to high support of operating system. Mainly it is used by system administrators. They used it for the purpose of system monitoring, account creating and variety of tasks. Developers and DevOps professionals also widely use shell scripting on almost daily basis.</p>
+<p>Shell scripting consist of various terminologies. Mainly of which are:</p>
+<ol>
+<li>Terminal: Establish connection with the server</li>
+<li>Shell: Interpret shell scripting commands</li>
+<li>Script: Short program that performs a specific task</li>
+<li>Shell Script: Script which runs through command-line shell</li>
+</ol>
+<h2 id="types-of-shells-">Types of Shells:</h2>
+<p>Different types of shells are used for different tasks. It totally depends upon the nature of application. Shell decides how can we execute programs and which system resources should be access. Some common tpes of shells are below:</p>
+<ol>
+<li>Bourne shell</li>
+<li>C shell</li>
+<li>Bash shell</li>
+<li>Korn shell</li>
+<li>Z shell</li>
+</ol>
+<p>We are going to look into the bash shell mainly as i&#39;m using linux and bash shell is widely used in it. Let&#39;s write some basic hello world shell script by using a hello.sh file.</p>
+<pre><code><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">"Hello Shell"</span>
+</code></pre><p>After it, we have to check the permissions of the hello.sh file so that we can execute this script. For this purpose, we will add execution permission for this <code>.sh file</code></p>
+<pre><code><span class="hljs-selector-tag">chmod</span> +<span class="hljs-selector-tag">x</span> <span class="hljs-selector-tag">hello</span><span class="hljs-selector-class">.sh</span>
+</code></pre><p>Now, confirm the permissions of the file by,</p>
+<pre><code>ls <span class="hljs-_">-l</span>
+</code></pre><p>As the file is now executable, run the file by using,</p>
+<pre><code>./hello.<span class="hljs-keyword">sh</span>
+</code></pre><p>and here you go. A message of &quot;<code>Hello Shell&quot;</code> is in front of you.</p>

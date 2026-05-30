@@ -1,0 +1,50 @@
+<a href="#" class="home-link">Back to Home</a>
+
+<p>Bubble sort is a very famous algorithm for sorting numbers. It is commonly used to sort numbers in ascending order. It works totally same here just like the other high level programming languages. Althought coding in 16-bit seems quite difficult but witha a little practice and understanding you can write any code in it. Here is the code,</p>
+<pre><code>[org <span class="hljs-number">0x0100</span>]
+
+<span class="hljs-keyword">jmp</span> start
+<span class="hljs-symbol">
+data:</span><span class="hljs-built_in">dw</span> <span class="hljs-number">60</span>,<span class="hljs-number">55</span>,<span class="hljs-number">45</span>,<span class="hljs-number">50</span>
+<span class="hljs-symbol">
+swap:</span><span class="hljs-built_in">db</span> <span class="hljs-number">0</span>
+<span class="hljs-symbol">
+bubblesort:</span>
+    <span class="hljs-keyword">dec</span> <span class="hljs-built_in">cx</span>
+    <span class="hljs-keyword">shl</span> <span class="hljs-built_in">cx</span>,<span class="hljs-number">1</span>
+<span class="hljs-symbol">
+    mainloop:</span>
+        <span class="hljs-keyword">mov</span> <span class="hljs-built_in">si</span>,<span class="hljs-number">0</span>
+        <span class="hljs-keyword">mov</span> <span class="hljs-built_in">byte</span>[swap],<span class="hljs-number">0</span>
+<span class="hljs-symbol">
+        innerloop:</span>
+            <span class="hljs-keyword">mov</span> <span class="hljs-built_in">ax</span>,[<span class="hljs-built_in">bx</span>+<span class="hljs-built_in">si</span>]
+            <span class="hljs-keyword">cmp</span> <span class="hljs-built_in">ax</span>,[<span class="hljs-built_in">bx</span>+<span class="hljs-built_in">si</span>+<span class="hljs-number">2</span>]
+            <span class="hljs-keyword">jbe</span> noswap
+
+                <span class="hljs-keyword">mov</span> <span class="hljs-built_in">dx</span>,[<span class="hljs-built_in">bx</span>+<span class="hljs-built_in">si</span>+<span class="hljs-number">2</span>]
+                <span class="hljs-keyword">mov</span> [<span class="hljs-built_in">bx</span>+<span class="hljs-built_in">si</span>],<span class="hljs-built_in">dx</span>
+                <span class="hljs-keyword">mov</span> [<span class="hljs-built_in">bx</span>+<span class="hljs-built_in">si</span>+<span class="hljs-number">2</span>],<span class="hljs-built_in">ax</span>
+                <span class="hljs-keyword">mov</span> <span class="hljs-built_in">byte</span>[swap],<span class="hljs-number">1</span>
+<span class="hljs-symbol">
+                noswap:</span>
+                <span class="hljs-keyword">add</span> <span class="hljs-built_in">si</span>,<span class="hljs-number">2</span>
+                <span class="hljs-keyword">cmp</span> <span class="hljs-built_in">si</span>,<span class="hljs-built_in">cx</span>
+                <span class="hljs-keyword">jne</span> innerloop
+
+            <span class="hljs-keyword">cmp</span> <span class="hljs-built_in">byte</span>[swap],<span class="hljs-number">1</span>
+            <span class="hljs-keyword">je</span> mainloop
+            <span class="hljs-keyword">ret</span> <span class="hljs-comment">;notice this</span>
+</code></pre><p>Here is the initialization and function call,</p>
+<pre><code><span class="hljs-symbol">start:</span>
+    <span class="hljs-keyword">mov</span> <span class="hljs-built_in">bx</span>,data
+    <span class="hljs-keyword">mov</span> <span class="hljs-built_in">cx</span>,<span class="hljs-number">4</span>
+
+    <span class="hljs-comment">;make a function call</span>
+    <span class="hljs-keyword">call</span> bubblesort
+
+    <span class="hljs-comment">;data is sorted now!</span>
+
+    <span class="hljs-keyword">mov</span> <span class="hljs-built_in">ax</span>,<span class="hljs-number">0x4c00</span>
+    <span class="hljs-keyword">int</span> <span class="hljs-number">0x21</span>
+</code></pre><p>Before running, write the complete code in a single file.</p>

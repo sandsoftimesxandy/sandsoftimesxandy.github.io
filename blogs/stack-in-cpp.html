@@ -1,0 +1,108 @@
+<a href="#" class="home-link">Back to Home</a>
+
+<p>Just like the other data structures, <strong>STACK</strong> has multiple applications. Here is one of them for the evaluation of <strong>post-fix</strong> Expression. The code is mentioned in the separate portions for better understanding. Better is you put the complete code in a single file with a <code>cpp</code> extension and run it then. Here is the code, take a look at it,</p>
+<p>Initial imports are,</p>
+<pre><code><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> size 100</span>
+</code></pre><p>Create a user-defined class with the name of <code>Stack</code> will the data-members and member-functions in it,</p>
+<pre><code><span class="hljs-keyword">class</span> Stack{
+    <span class="hljs-keyword">private</span>:
+    <span class="hljs-keyword">int</span> top;
+    <span class="hljs-keyword">int</span> arr[size];
+    <span class="hljs-keyword">public</span>:
+        Stack(){
+            top=<span class="hljs-number">-1</span>;
+            <span class="hljs-keyword">int</span> arr[size];
+        }
+        <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">push</span><span class="hljs-params">(<span class="hljs-keyword">int</span> val)</span></span>{
+            <span class="hljs-keyword">if</span>(top&gt;(size<span class="hljs-number">-1</span>)){
+                <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"Stack Overflow Occured"</span>;
+            }
+            <span class="hljs-keyword">else</span>{
+                top++;
+                arr[top]=val;
+            }
+        }
+        <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">pop</span><span class="hljs-params">()</span></span>{
+            <span class="hljs-keyword">int</span> item;
+            <span class="hljs-keyword">if</span>(top&lt;<span class="hljs-number">0</span>){
+
+                <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"Stack Overflowed Occur"</span>;
+            }
+            <span class="hljs-keyword">else</span>{
+                item=arr[top];
+                top--;
+                <span class="hljs-keyword">return</span> item;
+            }
+        }
+        <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">peek</span><span class="hljs-params">()</span></span>{
+            <span class="hljs-keyword">if</span>(top&lt;(size<span class="hljs-number">-1</span>) &amp;&amp; top&gt;=<span class="hljs-number">0</span>){
+                <span class="hljs-keyword">int</span> x=arr[top];
+                <span class="hljs-keyword">return</span> x;
+            }
+            <span class="hljs-keyword">else</span>{
+                <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"Stack is Empty"</span>;
+            }
+        }
+        <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">EvaluatePostFix</span><span class="hljs-params">(<span class="hljs-keyword">char</span> postfix[])</span></span>{
+            <span class="hljs-keyword">int</span> i;
+            <span class="hljs-keyword">char</span> ch;
+            <span class="hljs-keyword">int</span> val;
+            <span class="hljs-keyword">int</span> A,B;
+            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;postfix[i]!=<span class="hljs-string">')'</span>;i++){
+                ch=postfix[i];
+                <span class="hljs-keyword">if</span>(<span class="hljs-built_in">isdigit</span>(ch)){
+                    push(ch-<span class="hljs-string">'0'</span>);
+                }
+                <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(ch==<span class="hljs-string">'+'</span>||ch==<span class="hljs-string">'-'</span>||ch==<span class="hljs-string">'*'</span>||ch==<span class="hljs-string">'/'</span>){
+                    A=pop();
+                    B=pop();
+                    <span class="hljs-keyword">switch</span>(ch){
+                        <span class="hljs-keyword">case</span> <span class="hljs-string">'*'</span>:
+                        val=B*A;
+                        <span class="hljs-keyword">break</span>;
+                        <span class="hljs-keyword">case</span> <span class="hljs-string">'-'</span>:
+                        val=B-A;
+                        <span class="hljs-keyword">break</span>;
+                        <span class="hljs-keyword">case</span> <span class="hljs-string">'/'</span>:
+                        val=B/A;
+                        <span class="hljs-keyword">break</span>;
+                        <span class="hljs-keyword">case</span> <span class="hljs-string">'+'</span>:
+                        val=B+A;
+                        <span class="hljs-keyword">break</span>;
+                    }
+                    push(val);
+                }
+            }
+            <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"The result of the expression is: "</span>&lt;&lt;pop();
+        }
+        <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">isEmpty</span><span class="hljs-params">()</span></span>{
+            <span class="hljs-keyword">if</span>(top==<span class="hljs-number">-1</span>){
+                <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"Stack is Empty "</span>;
+            }
+        }
+        <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">display</span><span class="hljs-params">()</span></span>{
+            <span class="hljs-keyword">if</span>(top!=<span class="hljs-number">-1</span>){
+                <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=top;i&gt;<span class="hljs-number">-1</span>;i--){
+                    <span class="hljs-built_in">cout</span>&lt;&lt;arr[i]&lt;&lt;<span class="hljs-string">" "</span>;
+                }
+            }
+        }
+};
+</code></pre><p>Here is the <code>main</code> of program,</p>
+<pre><code><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{
+    Stack s1;
+    <span class="hljs-keyword">int</span> i;
+    <span class="hljs-keyword">char</span> ch[size];
+    <span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">"Enter the expression inside the character array: "</span>;
+    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;=size;i++){
+        <span class="hljs-built_in">cin</span>&gt;&gt;ch[i];
+        <span class="hljs-keyword">if</span>(ch[i]==<span class="hljs-string">')'</span>){
+            <span class="hljs-keyword">break</span>;
+        }
+    }
+    s1.EvaluatePostFix(ch);
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+}
+</code></pre>

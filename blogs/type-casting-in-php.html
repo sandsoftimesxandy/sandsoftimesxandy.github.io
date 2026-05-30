@@ -1,0 +1,28 @@
+<a href="#" class="home-link">Back to Home</a>
+
+<p><strong>Type casting is the conversion from one dataype to another.</strong> PHP also allow type casting. We can convert from various datatypes e.g int to float or int to string e.t.c. Here i&#39;ve solved various examples in which i&#39;m switching between multiple dataypes, </p>
+<pre><code>&lt;?php
+$a=<span class="hljs-literal">true</span>;
+$a=(string) $a;
+
+$b=<span class="hljs-string">"300"</span>;
+$b=(int) $b;
+
+$c=<span class="hljs-number">1</span>;
+$c= (float) $c;
+
+$d=<span class="hljs-string">"abc"</span>;
+$d=(boolean) $d;
+
+$e=<span class="hljs-number">10</span>;
+$e=(array) $e;
+
+$f=<span class="hljs-number">20</span>;
+$f=(object) $f;
+
+<span class="hljs-regexp">//</span> $x=[<span class="hljs-string">"30"</span>];
+<span class="hljs-regexp">//</span> $x=(string) $x;
+<span class="hljs-regexp">//</span> var_dump($x);
+<span class="hljs-meta">?&gt;</span>
+</code></pre><p>Also, keep in mind array to string conversion is directly not allowed in php. You&#39;ll get an error like this,</p>
+<p><img src="/assets/images/clt/type-casting-in-php/1.png" alt="1"></p>

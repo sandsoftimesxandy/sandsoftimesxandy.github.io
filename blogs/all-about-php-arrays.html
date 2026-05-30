@@ -1,0 +1,191 @@
+<a href="#" class="home-link">Back to Home</a>
+
+<p>What if you&#39;ve 1000 of users and you want to store them in a programming language. One method is to create separate variable for each user but its not possible. The solution is <strong>ARRAYS</strong>. Arrays can store multiple values. You simply have to provide two things.</p>
+<ul>
+<li>Array Name</li>
+<li>Array Size</li>
+</ul>
+<p>And you can store any types of values in an array. In some languages like c,c++ you can only store the same datatype in an array. While in php, you can store multiple datatypes in a single array. Lets first begin with the declaration of arrays in php. There are two methods, the first one is with the use of function <code>array()</code> while the second ones square brackets <code>[]</code> directly. Here is an example code for first method.</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+$users=<span class="hljs-keyword">array</span>(<span class="hljs-string">"anil"</span>,<span class="hljs-string">"sam"</span>,<span class="hljs-string">"peter"</span>,<span class="hljs-string">"bruce"</span>);
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p>While the second method is,</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+$users=[<span class="hljs-string">"anil"</span>,<span class="hljs-string">"sam"</span>,<span class="hljs-string">"peter"</span>,<span class="hljs-string">"bruce"</span>,<span class="hljs-string">"john"</span>];
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p>In order to print the array, you&#39;ve to use <strong>indexes</strong>. One way is to pass the index one by one on your own,</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+$users=[<span class="hljs-string">"anil"</span>,<span class="hljs-string">"sam"</span>,<span class="hljs-string">"peter"</span>,<span class="hljs-string">"bruce"</span>,<span class="hljs-string">"john"</span>];
+<span class="hljs-keyword">echo</span> $users[<span class="hljs-number">0</span>]; <span class="hljs-comment">//array start from zero</span>
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+<span class="hljs-keyword">echo</span> $users[<span class="hljs-number">1</span>];
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+<span class="hljs-keyword">echo</span> $users[<span class="hljs-number">2</span>];
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+<span class="hljs-keyword">echo</span> $users[<span class="hljs-number">3</span>];
+<span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p>While the more commonly used method is by <strong>loops</strong>.</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+$users=[<span class="hljs-string">"anil"</span>,<span class="hljs-string">"sam"</span>,<span class="hljs-string">"peter"</span>,<span class="hljs-string">"bruce"</span>,<span class="hljs-string">"john"</span>];
+<span class="hljs-keyword">for</span> ($user=<span class="hljs-number">0</span>;$user&lt;count($users);$user++){
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;h1 style='color=blue'&gt;"</span>.$users[user]<span class="hljs-string">"&lt;h1/&gt;"</span>;
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;/"</span>;
+}
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p>Here we are using the built-in function of <code>count()</code> which will count the total number of entites present in an array.</p>
+<h2 id="for-each-loop-with-array">For Each Loop with Array</h2>
+<p>You can use any type of loop with array. Lets talk about the <strong>for-each</strong> loop. Unlike the <strong>for-loop</strong>, in which you&#39;ve to provide the length of array, here simply provide the array and the loop will run until the last member of the array. Here is an example,</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+$users=[<span class="hljs-string">"anil"</span>,<span class="hljs-string">"peter"</span>,<span class="hljs-string">"bruce"</span>,<span class="hljs-string">"tony"</span>];
+<span class="hljs-keyword">foreach</span>($users <span class="hljs-keyword">as</span> $x){
+    <span class="hljs-keyword">echo</span> $x;
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br/&gt;"</span>;
+}
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p>The loop will run and print all the entities in <code>users</code> array. We can also use the <code>break</code> and <code>continue</code> statements with this loop. You can see here,</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+$users=[<span class="hljs-string">"anil"</span>,<span class="hljs-string">"peter"</span>,<span class="hljs-string">"bruce"</span>,<span class="hljs-string">"tony"</span>,<span class="hljs-string">"sam"</span>,<span class="hljs-string">"bhaskar"</span>];
+<span class="hljs-keyword">foreach</span>($users <span class="hljs-keyword">as</span> $x){
+    <span class="hljs-keyword">if</span> ($x==<span class="hljs-string">"peter"</span>){
+        <span class="hljs-keyword">continue</span>;
+    }
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;h3&gt;"</span>.$x.<span class="hljs-string">"&lt;h3&gt;"</span>;
+    <span class="hljs-keyword">if</span> ($x==<span class="hljs-string">"bruce"</span>){
+        <span class="hljs-keyword">break</span>;
+    }
+}
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p>You can also define the scope of <strong>for-each</strong> loop by using the keyword <code>endforeach</code>. Here is an example,</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">foreach</span>($users <span class="hljs-keyword">as</span> $x):
+    <span class="hljs-keyword">echo</span> $x;
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>
+<span class="hljs-keyword">endforeach</span>
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><h2 id="associative-array">Associative Array</h2>
+<p>One of the type of php array is <strong>associative array</strong>. It works on the basis of key-value pair. It don&#39;t have the index like normal arrays. Here is a basic dummy look of this array,</p>
+<p><img src="/assets/images/clt/all-about-php-arrays/3.png" alt=""></p>
+<p>Also for some testing purpose, i&#39;ve written a very basic code. Here it is,</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+$userDetails=[
+    <span class="hljs-string">"name"</span>=&gt;<span class="hljs-string">"sandy"</span>,
+    <span class="hljs-string">"age"</span>=&gt;<span class="hljs-number">39</span>,
+    <span class="hljs-string">"city"</span>=&gt;<span class="hljs-string">"lahore"</span>,
+    <span class="hljs-string">"email"</span>=&gt;<span class="hljs-string">"ghz@latest.com"</span>,
+    <span class="hljs-string">"state"</span>=&gt;<span class="hljs-string">"DAMP"</span>
+];
+
+<span class="hljs-keyword">echo</span> $userDetails[<span class="hljs-string">"name"</span>];
+<span class="hljs-keyword">echo</span> $userDetails[<span class="hljs-string">"age"</span>];
+<span class="hljs-keyword">echo</span> $userDetails[<span class="hljs-string">"city"</span>];
+<span class="hljs-keyword">echo</span> $userDetails[<span class="hljs-string">"state"</span>];
+<span class="hljs-keyword">echo</span> $userDetails[<span class="hljs-string">"email"</span>];
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p>You can also use <code>foreach</code> loop with associative arrays,</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+<span class="hljs-keyword">foreach</span>($userDetails <span class="hljs-keyword">as</span> $key =&gt; $data){
+    <span class="hljs-keyword">echo</span> $key. <span class="hljs-string">"is "</span>.$data;
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br&gt;"</span>;
+}
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><h2 id="multi-dimensional-array">Multi Dimensional Array</h2>
+<p>Nested arrays are also called as <strong>multi dimensional arrays</strong> in php. You can write an array within an array. In order to go through the multi dimensional arrays, you&#39;ve to use for nested loops as well. Here is an example for the better understanding of how a multi dimensional array look like and how to transverse through it,</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+$users=[
+    [<span class="hljs-number">1</span>,<span class="hljs-string">"anil"</span>,<span class="hljs-string">"noida"</span>,<span class="hljs-string">"anil@test.com"</span>],
+    [<span class="hljs-number">2</span>,<span class="hljs-string">"sam"</span>,<span class="hljs-string">"delhi"</span>,<span class="hljs-string">"sam@test.com"</span>],
+    [<span class="hljs-number">3</span>,<span class="hljs-string">"peter"</span>,<span class="hljs-string">"handy"</span>,<span class="hljs-string">"peter@test.com"</span>]
+];
+
+<span class="hljs-keyword">for</span>($i=<span class="hljs-number">0</span>,$i&lt;count(users);$i++){
+    <span class="hljs-keyword">for</span>($j=<span class="hljs-number">0</span>;j&lt;count($users[i]);$j++){
+        <span class="hljs-keyword">echo</span> $users[$i][$j];
+    }
+}
+
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><h2 id="display-data-from-an-array-in-table-form">Display Data From an Array in Table Form</h2>
+<p>You can create and display data in a very simple way in <code>HTML</code>. For this purpose, you&#39;ve to use specific html tags. Here is an example code,</p>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">table</span>&gt;</span>Table<span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">table</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>S.N.<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>Name<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>Email<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+
+            <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>1<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>Ali<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>Ali@latest<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+
+            <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>2<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>Ahmad<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>Ahmad@latest<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre><p>Let&#39;s assume you&#39;ve a multi-dimensional array in php and you want to display its data in tabular form. You can also do that, you simply have to use <strong>html-tags</strong> and <strong>nested-loop</strong>. Here is an example code,</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+        $users=[
+            [<span class="hljs-number">1</span>,<span class="hljs-string">"Ali"</span>,<span class="hljs-string">"Ali@latest.com"</span>],
+            [<span class="hljs-number">2</span>,<span class="hljs-string">"Ahmad"</span>,<span class="hljs-string">"Faisal@latest.com"</span>],
+            [<span class="hljs-number">3</span>,<span class="hljs-string">"Faisal"</span>,<span class="hljs-string">"Faisal@latest.com"</span>],
+            [<span class="hljs-number">4</span>,<span class="hljs-string">"Rehman"</span>,<span class="hljs-string">"Rehman@latest.com"</span>],
+        ];
+        <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;table border=1&gt;"</span>;
+        <span class="hljs-keyword">for</span>($i=<span class="hljs-number">0</span>;$i&lt;count($users);$i++){
+            <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;tr&gt;"</span>;
+            <span class="hljs-keyword">for</span>($j=<span class="hljs-number">0</span>;$j&lt;count($users[$i]);$j++){
+                <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;td&gt;"</span>;
+                <span class="hljs-keyword">echo</span> $users[$i][$j];
+                <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;/td&gt;"</span>;
+            }
+            <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;/tr&gt;"</span>;
+        }
+        <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;/table&gt;"</span>;
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p>The output will look like this,</p>
+<p><img src="/assets/images/clt/all-about-php-arrays/5.png" alt="5"></p>
+<h2 id="multidimensional-associative-array">Multidimensional Associative Array</h2>
+<p>In multidimensional associative arrays you&#39;ve both the behaviours of nesting and keys. There will be arrays within array and keys attached to the entries in such type. Here is an example code of this type of Arrays,</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+$users=[
+    [<span class="hljs-string">"name"</span>=&gt;<span class="hljs-string">"anil"</span>,<span class="hljs-string">"age"</span>=&gt;<span class="hljs-string">"29"</span>,<span class="hljs-string">"city"</span>=&gt;<span class="hljs-string">"noida"</span>],
+    [<span class="hljs-string">"name"</span>=&gt;<span class="hljs-string">"sam"</span>,<span class="hljs-string">"age"</span>=&gt;<span class="hljs-string">"30"</span>,<span class="hljs-string">"city"</span>=&gt;<span class="hljs-string">"guargaon"</span>],
+    [<span class="hljs-string">"name"</span>=&gt;<span class="hljs-string">"bhasker"</span>,<span class="hljs-string">"age"</span>=&gt;<span class="hljs-string">"32"</span>,<span class="hljs-string">"city"</span>=&gt;<span class="hljs-string">"delhi"</span>],
+    [<span class="hljs-string">"name"</span>=&gt;<span class="hljs-string">"peter"</span>,<span class="hljs-string">"age"</span>=&gt;<span class="hljs-string">"34"</span>,<span class="hljs-string">"city"</span>=&gt;<span class="hljs-string">"noida"</span>],
+];
+
+<span class="hljs-keyword">foreach</span>($users <span class="hljs-keyword">as</span> $user){
+    <span class="hljs-keyword">foreach</span>($user <span class="hljs-keyword">as</span> $key=&gt;$item){
+        <span class="hljs-keyword">echo</span> <span class="hljs-string">"$key is $item"</span>;
+        <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br/&gt;"</span>;
+    }
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br/&gt;"</span>; <span class="hljs-keyword">echo</span> <span class="hljs-string">"&lt;br/&gt;"</span>;
+}
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p>You can see we&#39;ve <strong>nesting of arrays</strong> and <strong>keys</strong> attached in the above example. If you run this code on php-server, it will look like this,</p>
+<p><img src="/assets/images/clt/all-about-php-arrays/6.png" alt="6"></p>
+<h2 id="remove-and-add-element-in-array">Remove and Add Element in Array</h2>
+<p>You can also <strong>add</strong> and <strong>remove</strong> elements from an array in php. There are multiple ways for it but most essayist are the use of <strong>php-functions</strong>. In order to do some extra entries in an array, use the <code>push</code> function and it will do entries at the end of the array. Similarly, if you want to remove something simply use the <code>pop</code> function and the last element of the array  will be removed. What if we want to remove multiple values from a single call? In this case, we will use <code>splice</code> function. The splice function takes a numeric value in parameter and removes the last total of that values from the array. Here is a practical code of this,</p>
+<pre><code><span class="php"><span class="hljs-meta">&lt;?php</span>
+$users=[<span class="hljs-string">"anil"</span>,<span class="hljs-string">"sam"</span>,<span class="hljs-string">"bhasker"</span>,<span class="hljs-string">"praveen"</span>];
+
+array_push($users,<span class="hljs-string">"peter"</span>,<span class="hljs-string">"bruce"</span>,<span class="hljs-string">"tony"</span>);
+
+array_splice($users,<span class="hljs-number">-4</span>);
+print_r($users);
+<span class="hljs-meta">?&gt;</span></span>
+</code></pre><p>Before splice function call, </p>
+<p><img src="/assets/images/clt/all-about-php-arrays/7.png" alt="7"></p>
+<p>After splice function call,</p>
+<p><img src="/assets/images/clt/all-about-php-arrays/8.png" alt="8"></p>

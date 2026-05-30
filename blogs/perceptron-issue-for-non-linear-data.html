@@ -1,0 +1,42 @@
+<a href="#" class="home-link">Back to Home</a>
+
+<p>Perceptron is no doubt the core-component of Deep-Learning. When it comes to single-perceptron. It is best suited for the Linear-Data. Linear-Data means which can be classified into two classes easily by a single-line or classifier. </p>
+<p>For this purpose, showing the classification results using multiple python codes. Initially import all the necessary libraries:</p>
+<pre><code><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt
+<span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns
+</code></pre><p>Then making 3-empty datasets using pandas-dataframe.</p>
+<pre><code>
+<span class="hljs-attr">or_data</span>=pd.DataFrame()
+<span class="hljs-attr">and_data</span>=pd.DataFrame()
+<span class="hljs-attr">xor_data</span>=pd.DataFrame()
+</code></pre><p>Then fill-in the Dataframes:</p>
+<pre><code>
+or_data['input1']=[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>]
+or_data['input2']=[<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>]
+or_data['output']=[<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>]
+</code></pre><p>Then import the simple perceptron model from sklearn and make 3 instances of it:</p>
+<pre><code>from sklearn.linear_model <span class="hljs-built_in">import</span> Perceptron
+<span class="hljs-attr">clf1=Perceptron()</span>
+<span class="hljs-attr">clf2=Perceptron()</span>
+<span class="hljs-attr">clf3=Perceptron()</span>
+</code></pre><p>Then fit-in the data using our datasets:</p>
+<pre><code><span class="hljs-selector-tag">clf1</span><span class="hljs-selector-class">.fit</span>(<span class="hljs-selector-tag">and_data</span><span class="hljs-selector-class">.iloc</span><span class="hljs-selector-attr">[:,0:2]</span><span class="hljs-selector-class">.values</span>,<span class="hljs-selector-tag">and_data</span><span class="hljs-selector-class">.iloc</span><span class="hljs-selector-attr">[:,-1]</span><span class="hljs-selector-class">.values</span>)
+<span class="hljs-selector-tag">clf2</span><span class="hljs-selector-class">.fit</span>(<span class="hljs-selector-tag">or_data</span><span class="hljs-selector-class">.iloc</span><span class="hljs-selector-attr">[:,0:2]</span><span class="hljs-selector-class">.values</span>,<span class="hljs-selector-tag">or_data</span><span class="hljs-selector-class">.iloc</span><span class="hljs-selector-attr">[:,-1]</span><span class="hljs-selector-class">.values</span>)
+<span class="hljs-selector-tag">clf3</span><span class="hljs-selector-class">.fit</span>(<span class="hljs-selector-tag">xor_data</span><span class="hljs-selector-class">.iloc</span><span class="hljs-selector-attr">[:,0:2]</span><span class="hljs-selector-class">.values</span>,<span class="hljs-selector-tag">xor_data</span><span class="hljs-selector-class">.iloc</span><span class="hljs-selector-attr">[:,-1]</span><span class="hljs-selector-class">.values</span>)
+</code></pre><p>If you plot the the clf1 and as it is trained on linearly separable data, it will look like this:</p>
+<pre><code><span class="hljs-selector-tag">plt</span><span class="hljs-selector-class">.plot</span>(x,y)
+<span class="hljs-selector-tag">sns</span><span class="hljs-selector-class">.scatterplot</span>(x=<span class="hljs-string">'input1'</span>,y=<span class="hljs-string">'input2'</span>,data=and_data,hue=<span class="hljs-string">'output'</span>,s=<span class="hljs-number">200</span>)
+</code></pre><!-- ![A test image](/assets/images/clt/image.png) -->
+<p><img src="/assets/images/clt/perceptron-for-non-linear-data/perceptron-linear-data1.png" alt="Perceptron on linear-data image"></p>
+<p>Similarly if you plot the second perceptron classifier instance, which was trained on <code>or</code> data. It will look like this:</p>
+<pre><code><span class="hljs-selector-tag">plt</span><span class="hljs-selector-class">.plot</span>(x,y)
+<span class="hljs-selector-tag">sns</span><span class="hljs-selector-class">.scatterplot</span>(x=<span class="hljs-string">'input1'</span>,y=<span class="hljs-string">'input2'</span>,hue=<span class="hljs-string">'output'</span>,data=or_data,s=<span class="hljs-number">200</span>)
+</code></pre><p><img src="/assets/images/clt/perceptron-for-non-linear-data/perceptron-linear-data2.png" alt="Perceptron on linear-data OR image">
+You can also get the idea of it by a visul representation from <a href="https://playground.tensorflow.org/#activation=sigmoid&amp;batchSize=10&amp;dataset=gauss&amp;regDataset=reg-plane&amp;learningRate=0.01&amp;regularizationRate=0&amp;noise=10&amp;networkShape=&amp;seed=0.71127&amp;showTestData=false&amp;discretize=false&amp;percTrainData=50&amp;x=true&amp;y=true&amp;xTimesY=false&amp;xSquared=false&amp;ySquared=false&amp;cosX=false&amp;sinX=false&amp;cosY=false&amp;sinY=false&amp;collectStats=false&amp;problem=classification&amp;initZero=false&amp;hideText=false">PlayGround.Tensorflow</a></p>
+<p><img src="/assets/images/clt/perceptron-for-non-linear-data/playgrountensorflow.png" alt="playgroundtensorflow"></p>
+<p>Now if you apply the same single perceptron model on non-linearly separable data. It will look like this:</p>
+<p><img src="/assets/images/clt/perceptron-for-non-linear-data/perceptron-non-linear-data3.png" alt="Perceptron-non-linear-issue"></p>
+<p><img src="/assets/images/clt/perceptron-for-non-linear-data/perceptron-linear-data4.png" alt="Per-non-linear-issue-2nd-image"></p>
+<p>Here you can see that our <code>Perceptron-Model</code> doesnot work for non-linear data. This was the issue with the use of single-perceptron.</p>

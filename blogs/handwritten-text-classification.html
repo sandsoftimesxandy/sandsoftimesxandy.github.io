@@ -1,0 +1,62 @@
+<a href="#" class="home-link">Back to Home</a>
+
+<p>Today, we are going to build anther Artificial Neural Network for one of the famous dataset known as <strong>MNIST</strong>. It is use to classify digits(0-9).</p>
+<p><img src="/assets/images/clt/handwritten-digit-classification-using-ann/4.png" alt="4"></p>
+<p>Initially we did all the necessary importings,</p>
+<pre><code><span class="hljs-keyword">import</span> tensorflow
+<span class="hljs-title">from</span> tensorflow <span class="hljs-keyword">import</span> keras
+<span class="hljs-title">from</span> tensorflow.keras <span class="hljs-keyword">import</span> Sequential
+<span class="hljs-title">from</span> tensorflow.keras.layers <span class="hljs-keyword">import</span> Dense,Flatten
+</code></pre><p>Then simply load the dataset using keras, it will automatically do the train and test split.</p>
+<pre><code>(X_train,y_train),(X_test,y_test)=keras<span class="hljs-selector-class">.datasets</span><span class="hljs-selector-class">.mnist</span><span class="hljs-selector-class">.load_data</span>()
+</code></pre><p>Visualize the shape of train and test,</p>
+<pre><code>X_test<span class="hljs-selector-class">.shape</span>
+`
+</code></pre><pre><code>y_test<span class="hljs-selector-class">.shape</span>
+`
+</code></pre><pre><code>X_train<span class="hljs-selector-class">.shape</span>
+`
+</code></pre><pre><code>y_train<span class="hljs-selector-class">.shape</span>
+`
+</code></pre><p><strong>y_train</strong> will be the labels array.</p>
+<p>Then import plotting library and do some plotting of training data to acutually visualize the digits.</p>
+<pre><code><span class="hljs-selector-tag">import</span> <span class="hljs-selector-tag">matplotlib</span><span class="hljs-selector-class">.pyplot</span> <span class="hljs-selector-tag">as</span> <span class="hljs-selector-tag">plt</span>
+<span class="hljs-selector-tag">plt</span><span class="hljs-selector-class">.imshow</span>(<span class="hljs-selector-tag">X_train</span><span class="hljs-selector-attr">[2]</span>)
+</code></pre><p>Now scale the data to better calculate the parameters e.g weight and bias.</p>
+<pre><code><span class="hljs-attr">X_train</span>=X_train/<span class="hljs-number">255</span>
+<span class="hljs-attr">X_test</span>=X_test/<span class="hljs-number">255</span>
+</code></pre><p>Lets make our ANN now with keras sequential() model, </p>
+<pre><code><span class="hljs-keyword">model</span> = Sequential()
+
+<span class="hljs-keyword">model</span>.add(Flatten(input_shape=(<span class="hljs-number">28</span>,<span class="hljs-number">28</span>)))
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">128</span>,activation=<span class="hljs-string">'relu'</span>))
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">32</span>,activation=<span class="hljs-string">'relu'</span>))
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">10</span>,activation=<span class="hljs-string">'softmax'</span>))
+</code></pre><p><strong>Flatten</strong> will convert the 28x28 matrix into single long array.</p>
+<p>View the model summary using,</p>
+<pre><code>model.summary()
+`
+</code></pre><p>Add the loss function to our model, </p>
+<pre><code><span class="hljs-keyword">model</span>.compile(loss=<span class="hljs-string">'sparse_categorical_crossentropy'</span>,optimizer=<span class="hljs-string">'Adam'</span>,metrics=[<span class="hljs-string">'accuracy'</span>])
+</code></pre><p>Now fit the model on our training data to calculate the weight and bias,</p>
+<pre><code>history=model.fit(X_train,y_train,epochs=<span class="hljs-number">25</span>,validation_split=<span class="hljs-number">0.2</span>)
+# history = model.fit(X_train,y_train,epochs=<span class="hljs-number">25</span>,validation_split=<span class="hljs-number">0.2</span>)
+</code></pre><p>The model will run for 25 epochs. It is now time to make some predictions from our model,</p>
+<pre><code><span class="hljs-attr">y_prob=model.predict(X_test)</span>
+<span class="hljs-attr">y_pred</span> = y_prob.argmax(<span class="hljs-attr">axis=1)</span>
+y_pred
+</code></pre><p>Inorder to check accuracy of our model <strong>import accuracy_score</strong></p>
+<pre><code>from sklearn<span class="hljs-selector-class">.metrics</span> import accuracy_score
+<span class="hljs-function"><span class="hljs-title">accuracy_score</span><span class="hljs-params">(y_test,y_pred)</span></span>
+</code></pre><p>Also we will check the overfitting by plotting the loss and validation_loss,</p>
+<pre><code><span class="hljs-selector-tag">plt</span><span class="hljs-selector-class">.plot</span>(<span class="hljs-selector-tag">history</span><span class="hljs-selector-class">.history</span><span class="hljs-selector-attr">['loss']</span>)
+<span class="hljs-selector-tag">plt</span><span class="hljs-selector-class">.plot</span>(<span class="hljs-selector-tag">history</span><span class="hljs-selector-class">.history</span><span class="hljs-selector-attr">['val_loss']</span>)
+</code></pre><p><img src="/assets/images/clt/handwritten-digit-classification-using-ann/1.png" alt="1"></p>
+<p>Now compare the accuracy with the validation_accuracy</p>
+<pre><code><span class="hljs-selector-tag">plt</span><span class="hljs-selector-class">.plot</span>(<span class="hljs-selector-tag">history</span><span class="hljs-selector-class">.history</span><span class="hljs-selector-attr">['accuracy']</span>)
+<span class="hljs-selector-tag">plt</span><span class="hljs-selector-class">.plot</span>(<span class="hljs-selector-tag">history</span><span class="hljs-selector-class">.history</span><span class="hljs-selector-attr">['val_accuracy']</span>)
+</code></pre><p><img src="/assets/images/clt/handwritten-digit-classification-using-ann/2.png" alt="2"></p>
+<p>Lets test our model on a random value from the testing data,</p>
+<pre><code><span class="hljs-selector-tag">plt</span><span class="hljs-selector-class">.imshow</span>(<span class="hljs-selector-tag">X_test</span><span class="hljs-selector-attr">[9]</span>)
+</code></pre><pre><code>model.predict(X_test[<span class="hljs-number">9</span>].reshape(<span class="hljs-number">1</span>,<span class="hljs-number">28</span>,<span class="hljs-number">28</span>)).argmax(axis=<span class="hljs-number">1</span>)
+</code></pre><p><img src="/assets/images/clt/handwritten-digit-classification-using-ann/3.png" alt="3"></p>
