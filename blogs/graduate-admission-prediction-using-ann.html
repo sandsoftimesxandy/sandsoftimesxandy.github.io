@@ -1,0 +1,78 @@
+<a href="#" class="home-link">Back to Home</a>
+
+<p>Today we are going to solve a regression problem using an <strong>Artificial Neural Network</strong>. The dataset i&#39;m using contains the information about the students, their GRE score, TOEFL score, CGPA e.t.c.</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/14.png" alt="14"></p>
+<p>First of all import the <code>numpy</code> and <code>pandas</code> libraries,</p>
+<pre><code><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+</code></pre><p>Next import the dataset we want to work on,</p>
+<pre><code><span class="hljs-attr">df</span>=pd.read_csv(<span class="hljs-string">'/kaggle/input/graduate-admissions/Admission_Predict_Ver1.1.csv'</span>)
+</code></pre><p>Have a look at the dataset using the <code>head()</code> function,</p>
+<pre><code><span class="hljs-selector-tag">df</span><span class="hljs-selector-class">.head</span>()
+</code></pre><p>Here is how it will look like,</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/1.png" alt="1"></p>
+<p>Then checkout the shape of dataset,</p>
+<pre><code><span class="hljs-selector-tag">df</span><span class="hljs-selector-class">.shape</span>
+</code></pre><p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/2.png" alt="2"></p>
+<p>Then use the info() function to get more details,</p>
+<pre><code><span class="hljs-selector-tag">df</span><span class="hljs-selector-class">.info</span>()
+</code></pre><p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/3.png" alt="3"></p>
+<p>Next is, we will check if there are any duplicate rows present or not,</p>
+<pre><code><span class="hljs-selector-tag">df</span><span class="hljs-selector-class">.duplicated</span>()<span class="hljs-selector-class">.sum</span>()
+</code></pre><p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/4.png" alt="4"></p>
+<p>Now drop the <code>Serial No.</code> column because it is of no use for us,</p>
+<pre><code>df.<span class="hljs-built_in">drop</span>(columns=[<span class="hljs-string">'Serial No.'</span>],inplace=<span class="hljs-literal">True</span>)
+</code></pre><p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/5.png" alt="5"></p>
+<p>Have a look at the dataset,</p>
+<pre><code><span class="hljs-selector-tag">df</span><span class="hljs-selector-class">.head</span>()
+</code></pre><p>Here is how it looks like,</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/6.png" alt="6"></p>
+<p>Now separate the columns for testing and training data,</p>
+<pre><code><span class="hljs-attr">X</span>=df.iloc[:,<span class="hljs-number">0</span>:-<span class="hljs-number">1</span>]
+<span class="hljs-attr">y</span>=df.iloc[:,-<span class="hljs-number">1</span>]
+</code></pre><p>Here is how the features looks like,</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/7.png" alt="7"></p>
+<p>Here is a view of target label,</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/8.png" alt="8"></p>
+<p>Now import the <code>train_test_split</code> and divide the data into 4-parts,</p>
+<pre><code><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split
+X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=<span class="hljs-number">0.2</span>,random_state=<span class="hljs-number">1</span>)
+</code></pre><p><code>X_train</code> will look like this,</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/9.png" alt="9"></p>
+<p>Now it is time to scale the values so that the weights can converge in a better way,</p>
+<pre><code>from sklearn.preprocessing <span class="hljs-built_in">import</span> MinMaxScaler
+<span class="hljs-attr">scaler=MinMaxScaler()</span>
+<span class="hljs-attr">X_train_scaled=scaler.fit_transform(X_train)</span>
+<span class="hljs-attr">X_test_scaled=scaler.transform(X_test)</span>
+</code></pre><p>Scaled values will look like this,</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/10.png" alt="10"></p>
+<p>Now it is time to build our <strong>NEURAL NETWORK</strong>. For this purpose import all the necessary libraries,</p>
+<pre><code><span class="hljs-keyword">import</span> tensorflow
+<span class="hljs-title">from</span> tensorflow <span class="hljs-keyword">import</span> keras
+<span class="hljs-title">from</span> keras <span class="hljs-keyword">import</span> Sequential 
+<span class="hljs-title">from</span> keras.layers <span class="hljs-keyword">import</span> Dense
+</code></pre><p>Create a sequential model and add layers to it,</p>
+<pre><code><span class="hljs-keyword">model</span>=Sequential()
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">7</span>,activation=<span class="hljs-string">'relu'</span>,input_dim=<span class="hljs-number">7</span>))
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">7</span>,activation=<span class="hljs-string">'relu'</span>))
+<span class="hljs-keyword">model</span>.add(Dense(<span class="hljs-number">1</span>,activation=<span class="hljs-string">'linear'</span>))
+</code></pre><p>Check out the model summary,</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/11.png" alt="11"></p>
+<p>Then compile the model,</p>
+<pre><code><span class="hljs-keyword">model</span>.compile(loss=<span class="hljs-string">'mean_squared_error'</span>,optimizer=<span class="hljs-string">'Adam'</span>)
+</code></pre><p>Now fit the model with the training data and provide epochs,</p>
+<pre><code>history=model.fit(X_train_scaled,y_train,epochs=<span class="hljs-number">100</span>,validation_split=<span class="hljs-number">0.2</span>)
+`
+</code></pre><p>Our model is trained now, it&#39;s time to make some predictions now,</p>
+<pre><code><span class="hljs-attr">y_pred</span>=model.predict(X_test_scaled)
+</code></pre><p>Calculate the <code>r2_score</code> of the predictions,</p>
+<pre><code>from sklearn<span class="hljs-selector-class">.metrics</span> import r2_score
+<span class="hljs-function"><span class="hljs-title">r2_score</span><span class="hljs-params">(y_test,y_pred)</span></span>
+</code></pre><p>Have a look at it,</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/12.png" alt="12"></p>
+<p>Now import the plotting libraries and make a plot between <code>loss</code> and <code>validaton_loss</code> of our model,</p>
+<pre><code>import matplotlib<span class="hljs-selector-class">.pyplot</span> as plt
+plt.plot(history<span class="hljs-selector-class">.history</span>[<span class="hljs-string">'loss'</span>])
+plt.plot(history<span class="hljs-selector-class">.history</span>[<span class="hljs-string">'val_loss'</span>])
+</code></pre><p>Here is the plot,</p>
+<p><img src="/assets/images/clt/graduation-admission-prediction-using-ann/13.png" alt="13"></p>
