@@ -110,3 +110,28 @@ body {
         transform: translateX(-130%);
     }
 }
+
+pre {
+    background-color: #2b2b2b;
+    border-left: 4px solid #c0392b;
+    border-left: 4px solid blue;
+    border-radius: 6px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    margin: 16px 0;
+}
+
+code {
+    background-color: #2b2b2b;
+    color: #f8f8f2;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    border-radius: 4px;
+    padding: 2px 5px;
+}
+
+pre code {
+    background-color: transparent;
+    padding: 0;
+    color: #f8f8f2;
+}
