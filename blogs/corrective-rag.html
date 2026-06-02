@@ -22,7 +22,7 @@
 
     from langchain_community.document_loaders import PyPDFLoader
     from langchain_community.vectorstores import FAISS
-    #from langchain_openai import OpenAIEmbeddings, ChatOpenAI
+    #from langchain_openai import OllamaEmbeddings, ChatOllama
     from langchain_text_splitters import RecursiveCharacterTextSplitter
     from langchain_core.documents import Document
     from langchain_core.prompts import ChatPromptTemplate
@@ -33,9 +33,8 @@
     from langchain_community.tools.tavily_search import TavilySearchResults
 </code></pre>
 
-<p>
-    Loading the pdf documents using <code>pypdf</code> loader
-</p>
+<p>Loading the pdf documents using </p><code>pypdfloader</code> 
+
 
 <pre><code>
     docs = (
@@ -63,9 +62,8 @@
 vectore_store = FAISS.from_documents(chunks, embeddings)
 retriever = vector_store.as_retriever(search_type="similarity", search_kwargs={"k": 4})</code></pre>
 
-<p>
-    Loading the LLM using <code>Ollama</code>
-</p>
+<p>Loading the LLM using Ollama</p>
+
 
 <pre><code>llm = ChatOllama(model="gemma4:31b-cloud")</code></pre>
 
