@@ -1,0 +1,118 @@
+<a href="#" class="home-link">Back to Home</a>
+
+<p>I'm going to setup continuous monitoring pipeline using Prometheus and Grafana. Configuration files will be in the form of code blocks. Use the same configuration to reproduce the outcome.</p>
+
+<p>Below is the main prometheus configuration file, it comes with the name of prometheus.yml</p> 
+
+<pre><code># my global config
+global:
+  scrape_interval: 15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+  # scrape_timeout is set to the global default (10s).
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+           - alertmanager:9093
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+  - "prometheus_rules.yml"
+  # - "prometheus_rules.yml"
+  # - "first_rules.yml"
+  # - "second_rules.yml"
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: "prometheus"
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+    static_configs:
+      - targets: ["localhost:9090", "localhost:9100"]
+       # The label name is added as a label `label_name=<label_value>` to any timeseries scraped from this config.
+        labels:
+          app: "prometheus"
+  
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['localhost:9100']</code></pre>
+
+
+<p>You can see the prometheus is running on localhost on port 9090. Right now the prometheus is monitoring or you can say scraping the info from itself by sending request to port 9090 and there is another service which is started on port 9100 which is node-exporter. Btw I've added two methods of getting the data from services. First is you right the ports directly in the list one after another, second is writing a separate job name and assigning target to it. Both are mentioned in the above code.</p>
+
+<p>Apart from the built in prometheus queries, you can make custom queries. It can be done directly through the dashboard or via creating a prometheus_rules.yml file.</p>
+
+<pre><code>#groups: 
+  #- name: custom_rules 
+    #rules:
+      #- record: node_memory_MemFree_in_percent
+    #  expr: 100 - (100 * node_memory_MemFree_bytes / node_memory_MemTotal_byte>
+        #expr: node_memory_MemTotal_bytes
+groups:
+  - name: custom_rules
+    rules:
+      - record: node_memory_MemFree_in_percent
+        expr: 100 - (100 * node_memory_MemFree_bytes / node_memory_MemTotal_bytes)
+        #expr: node_memory_MemTotal_bytes
+
+  - name: alert_rules 
+    rules:
+      - alert: InstanceDown 
+        expr: up == 0 
+        for: 1m 
+        labels: 
+          severity: critical 
+        annotations: 
+          summary: "Instance [{{ $labels.instance }}] down "
+          description: "[{{$labels.instance}}] of job [{{$labels.job}}] has been down for more than 1 minute"</code></pre>
+
+<p>I have also attached an alert service to the prometheus which will continuously track the uptime of services running. Just in case a service went down e.g node-exporter service. An alert will be fired according to the configurations mentioned in the alertmanager.yml file. Also you can see the alert visually from prometheus dashboard</p>
+
+<pre><code>global: 
+  resolve_timeout: 5m
+route:
+ # group_by: ['alertname']
+  group_by: [Alertname]
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 1h
+  #receiver: 'web.hook'
+  receiver: email-me
+receivers:
+  #- name: 'web.hook'
+    #webhook_configs:
+      #- url: 'http://127.0.0.1:5001/'
+  - name: email-me
+    email_configs:
+    - send_resolved: true 
+      to: mailid@gmail.com
+      from: mailid@gmail.com 
+      smarthost: smtp.gmail.com:587 
+      auth_username: "mailid@gmail.com"
+      auth_identity: "mailid@gmail.com"
+      auth_password: "****"
+inhibit_rules:
+  - source_matchers: [severity="critical"]
+    target_matchers: [severity="warning"]
+    equal: ['alertname', 'dev', 'instance']
+    # Apply inhibition if the alertname is the same.
+    # CAUTION:
+    #   If all label names listed in `equal` are missing
+    #   from both the source and target alerts,
+    #   the inhibition rule will apply!
+    #equal: [alertname, dev, instance]
+</code></pre>
+
+<p>In the end simply start the grafana server and make it listen to the prometheus running on port 9090. Also, install the dashboard template for node-exporter using id: 1860 for better visualization. Here is the complete monitoring visually in the snippet of grafana</p>
+
+<img src="/assets/images/clt/prometheus-plus-grafana-intro/image.png" alt="image.png">
+
+<p>Also here is a snippet from prometheus showing status of services prometheus and node-exported, the two entities in the prometheus endpoint is because as i told you the method of adding servies in the same list.</p>
+
+<img src="/assets/images/clt/prometheus-plus-grafana-intro/image2.png" alt="image2.png">
